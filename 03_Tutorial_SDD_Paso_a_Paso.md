@@ -292,13 +292,118 @@ Deberias ver la documentacion Swagger de la API. Si la ves, la API esta lista.
 
 ### Crear la carpeta del proyecto
 
+Si la carpeta ya existe (porque clonaste el repo de GitHub), simplemente entra a ella. Si no existe, creala:
+
 ```bash
-# Volver al escritorio
+# Opcion A: Si ya clonaste el repo de GitHub
+cd ~/Desktop/SDD/FrontFlaskSDD
+
+# Opcion B: Si empiezas desde cero
+mkdir -p ~/Desktop/SDD/FrontFlaskSDD
 cd ~/Desktop/SDD/FrontFlaskSDD
 
 # Verificar que estas en la carpeta correcta
 pwd
 # Debe mostrar: .../SDD/FrontFlaskSDD
+```
+
+### Crear el entorno virtual de Python (venv)
+
+> **Que es un entorno virtual:** Es una "burbuja" aislada donde instalas las librerias de tu proyecto sin afectar al Python del sistema ni a otros proyectos. Cada proyecto tiene su propio venv con sus propias versiones de librerias.
+
+**Por que hacerlo ahora y no despues:** Las fases de documentacion (constitution, specify, plan, tasks) no necesitan el venv. Pero la fase de implementacion si, y es mejor tenerlo listo desde el inicio para no interrumpir el flujo despues.
+
+```bash
+# Crear el entorno virtual (esto crea una carpeta llamada "venv")
+python -m venv venv
+```
+
+> **Que acaba de pasar:** Python creo una carpeta `venv/` dentro de tu proyecto con una copia aislada de Python y pip. Todo lo que instales a partir de ahora se guarda ahi, no en tu sistema.
+
+```bash
+# Activar el entorno virtual
+
+# En Windows (CMD):
+venv\Scripts\activate
+
+# En Windows (PowerShell):
+venv\Scripts\Activate.ps1
+
+# En Windows (Git Bash):
+source venv/Scripts/activate
+
+# En Mac/Linux:
+source venv/bin/activate
+```
+
+> **Como saber que se activo:** Tu terminal mostrara `(venv)` al inicio de la linea. Ejemplo:
+> ```
+> (venv) C:\Users\fcl\Desktop\SDD\FrontFlaskSDD>
+> ```
+> Si no ves `(venv)`, el entorno no esta activo. Vuelve a ejecutar el comando de activacion.
+
+### Instalar las dependencias del proyecto
+
+Con el venv activo, instala las librerias que necesita el frontend Flask:
+
+```bash
+pip install flask requests pytest
+```
+
+> **Que es cada libreria:**
+>
+> | Libreria | Que hace |
+> |----------|---------|
+> | `flask` | El framework web — maneja rutas, templates, sesiones |
+> | `requests` | Cliente HTTP — para llamar a la API REST desde Python |
+> | `pytest` | Framework de testing — para verificar que el codigo funciona |
+
+Verifica que se instalaron correctamente:
+
+```bash
+pip list
+# Debe mostrar flask, requests, pytest y sus dependencias
+```
+
+Genera el archivo `requirements.txt` para que otros puedan instalar las mismas librerias:
+
+```bash
+pip freeze > requirements.txt
+```
+
+> **Que es requirements.txt:** Es la "lista de compras" del proyecto. Cuando alguien clone tu repo, ejecuta `pip install -r requirements.txt` y tiene exactamente las mismas librerias que tu.
+
+### Agregar venv al .gitignore
+
+La carpeta `venv/` pesa mucho y no se debe subir a GitHub. Creemos un archivo `.gitignore` para excluirla:
+
+```bash
+echo "venv/" > .gitignore
+echo "__pycache__/" >> .gitignore
+echo "*.pyc" >> .gitignore
+```
+
+> **Que es .gitignore:** Le dice a Git cuales archivos NO debe incluir en el repositorio. El venv y los archivos de cache de Python no se suben porque son locales de cada maquina.
+
+### Verificar el estado final de la preparacion
+
+Tu carpeta deberia verse asi:
+
+```
+FrontFlaskSDD/
+├── .gitignore              # Archivos excluidos de Git
+├── requirements.txt        # Dependencias Python
+├── venv/                   # Entorno virtual (NO se sube a GitHub)
+├── 01_Guia_SDD_SpecKit.md  # Documento de conceptos (si clonaste el repo)
+├── 02_Comandos_SDD_FrontFlaskSDD.md  # Prompts exactos
+└── 03_Tutorial_SDD_Paso_a_Paso.md    # Este tutorial
+```
+
+Verifica con:
+
+```bash
+ls -la
+# Debes ver: .gitignore, requirements.txt, venv/, y los archivos .md
 ```
 
 ### Competencias adquiridas en esta seccion
@@ -307,6 +412,9 @@ pwd
 - [x] Verificar que una instalacion funciona desde la terminal
 - [x] Clonar un repositorio de GitHub
 - [x] Arrancar una API y verificar que responde
+- [x] Crear y activar un entorno virtual de Python (venv)
+- [x] Instalar librerias con pip y generar requirements.txt
+- [x] Configurar .gitignore para excluir archivos innecesarios
 
 ---
 
@@ -1195,22 +1303,14 @@ Marca cuales criterios ya se cumplen en el proyecto existente (FrontFlaskTutoria
 
 ### Antes de ejecutar: conceptos que necesitas entender
 
-#### Que es un entorno virtual de Python (venv)
+> **Nota:** El entorno virtual (venv) y las dependencias (flask, requests, pytest) ya los creaste en la Seccion 2. Si no lo hiciste, regresa a la seccion "Crear el entorno virtual de Python" y completala antes de continuar.
 
-**Analogia:** Imagina que tienes dos proyectos. Uno necesita Flask version 2 y otro Flask version 3. Si los dos usan el mismo Python del sistema, entran en conflicto. Un **entorno virtual** es como una "burbuja" donde cada proyecto tiene sus propias librerias sin afectar al otro.
+Verifica que tu venv esta activo antes de empezar:
 
 ```bash
-# Crear entorno virtual
-python -m venv venv
-
-# Activar (Windows)
-venv\Scripts\activate
-
-# Activar (Mac/Linux)
-source venv/bin/activate
-
-# Instalar dependencias dentro de la burbuja
-pip install flask requests pytest
+# Debes ver (venv) al inicio de tu terminal. Si no:
+# Windows: venv\Scripts\activate
+# Mac/Linux: source venv/bin/activate
 ```
 
 #### Que es Flask y como arranca
@@ -1303,10 +1403,10 @@ graph TB
 **Como verificar que funciona:**
 
 ```bash
-# 1. Activar entorno virtual
-venv\Scripts\activate
+# 1. Verificar que el venv esta activo (debes ver "(venv)" en tu terminal)
+# Si no esta activo: venv\Scripts\activate (Windows) o source venv/bin/activate (Mac/Linux)
 
-# 2. Instalar dependencias
+# 2. Si /implement actualizo el requirements.txt, reinstalar dependencias
 pip install -r requirements.txt
 
 # 3. Arrancar Flask
