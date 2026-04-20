@@ -696,6 +696,100 @@ dir .specify
 
 **Si pegas el prompt de `/speckit-constitution` directamente en PowerShell, da error.** PowerShell interpreta cada línea como un comando del sistema operativo. Los comandos SDD van dentro de Claude Code (ya sea en el CLI o en la extensión de VS Code).
 
+### Abrir Claude Code CLI (primera vez)
+
+La primera vez que abres Claude Code CLI, te hace varias preguntas de configuración. Las siguientes veces se abre directamente.
+
+**Paso 1 — Abrir Claude Code CLI:**
+
+En PowerShell, estando en la carpeta del proyecto, ejecuta:
+
+```bash
+claude
+```
+
+**Paso 2 — Elegir tema visual:**
+
+```
+Choose the text style that looks best with your terminal
+  1. Auto (match terminal)
+❯ 2. Dark mode ✔
+  3. Light mode
+  ...
+```
+
+Selecciona `2. Dark mode` (o el que prefieras) y presiona Enter.
+
+**Paso 3 — Seleccionar método de login:**
+
+```
+Select login method:
+❯ 1. Claude account with subscription · Pro, Max, Team, or Enterprise
+  2. Anthropic Console account · API usage billing
+  3. 3rd-party platform · Amazon Bedrock, Microsoft Foundry, or Vertex AI
+```
+
+Selecciona `1. Claude account with subscription` y presiona Enter.
+
+> **Nota:** Necesitas una suscripción a Claude (Pro, Max, Team o Enterprise) para usar Claude Code CLI. Si no la tienes, puedes usar la opción 2 con una cuenta de Anthropic Console (pago por uso de API).
+
+**Paso 4 — Autorizar en el navegador:**
+
+Se abre una página web en tu navegador que dice "Claude Code desea conectarse a su Claude chat account". Haz clic en **Autorizar**.
+
+Verás el mensaje: "Ya estás listo para Claude Code. Ahora puedes cerrar esta ventana."
+
+Vuelve a la terminal de PowerShell.
+
+**Paso 5 — Configuración de terminal:**
+
+```
+Use Claude Code's terminal setup?
+❯ 1. Yes, use recommended settings
+  2. No, maybe later with /terminal-setup
+```
+
+Selecciona `1. Yes, use recommended settings` y presiona Enter.
+
+**Paso 6 — Confirmar confianza en la carpeta:**
+
+```
+Quick safety check: Is this a project you created or one you trust?
+❯ 1. Yes, I trust this folder
+  2. No, exit
+```
+
+Selecciona `1. Yes, I trust this folder` y presiona Enter.
+
+**Paso 7 — Notas de seguridad:**
+
+```
+Security notes:
+1. Claude can make mistakes
+2. Due to prompt injection risks, only use it with code you trust
+Press Enter to continue…
+```
+
+Presiona Enter.
+
+**Paso 8 — Claude Code CLI está listo:**
+
+Verás algo como esto:
+
+```
+Claude Code v2.1.x
+Opus 4.x · Claude Max
+~\OneDrive\Desktop\SDD\FrontFlaskSDD
+
+❯
+```
+
+El símbolo `❯` es el prompt de Claude Code CLI. **Ahí es donde pegas los comandos de Spec Kit** (`/speckit-constitution`, `/speckit-specify`, etc.).
+
+> **Las siguientes veces:** Cuando vuelvas a ejecutar `claude` en la misma carpeta, se abre directamente en el prompt `❯` sin repetir las preguntas de configuración.
+
+> **Para salir de Claude Code CLI:** Escribe `/exit` o presiona `Ctrl+C`.
+
 ### Verificar el estado final de la preparación
 
 Tu carpeta debería verse así:
