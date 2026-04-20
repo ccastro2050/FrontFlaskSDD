@@ -225,13 +225,13 @@ graph TB
 
 Antes de empezar cuálquier fase, tu computador necesita estás herramientas:
 
-| Herramienta | Qué es | Para que la usamos | Cómo instalar |
+| Herramienta | Qué es | Para qué la usamos | Cómo instalar |
 |-------------|--------|-------------------|---------------|
 | **Python 3.12+** | Lenguaje de programación | El frontend Flask está escrito en Python | [python.org/downloads](https://python.org/downloads) |
 | **Git** | Control de versiones | Guardar el progreso y subir a GitHub | [git-scm.com](https://git-scm.com) |
 | **VS Code** | Editor de código | Escribir y leer archivos del proyecto | [code.visualstudio.com](https://code.visualstudio.com) |
-| **Claude Code** | Extension de IA para VS Code | Ejecutar los comandos SDD (/speckit-constitution, /speckit-specify, etc.) | Buscar "Claude Code" en las extensiones de VS Code |
-| **Node.js** (opcional) | Runtime de JavaScript | Solo si usas GitHub Copilot | [nodejs.org](https://nodejs.org) |
+| **Node.js** | Runtime de JavaScript | Necesario para instalar Claude Code CLI | [nodejs.org](https://nodejs.org) |
+| **Claude Code CLI** | Asistente de IA en la terminal | Ejecutar los comandos SDD (/speckit-constitution, /speckit-specify, etc.) | `npm install -g @anthropic-ai/claude-code` |
 
 ### Extensiones de VS Code recomendadas
 
@@ -476,65 +476,106 @@ venv/
 __pycache__/
 *.pyc
 .specify/
+.claude/
 ```
 
 Guarda el archivo.
 
-> **Nota:** El nombre del archivo es exactamente `.gitignore` (con el punto al inicio, sin extension). En VS Code: File → New File → escribir `.gitignore` → guardar.
+> **Nota:** El nombre del archivo es exactamente `.gitignore` (con el punto al inicio, sin extensión). En VS Code: File → New File → escribir `.gitignore` → guardar.
 
-### Instalar Spec Kit y configurar Claude Code
+> **Por qué se excluyen `.specify/` y `.claude/`:**
+> - `.specify/` contiene los templates y scripts de Spec Kit. Se regeneran con `specify init`.
+> - `.claude/` contiene configuración y credenciales de Claude Code. Spec Kit advierte que puede tener tokens de autenticación que no deben subirse a GitHub.
 
-> **Qué es Spec Kit:** Es un toolkit open-source de GitHub qué proporciona los comandos SDD (como `/speckit-constitution`, `/speckit-specify`, `/speckit-plan`, etc.) para usar con asístentes de IA. Sin instalarlo, esos comandos no existen.
+### Instalar Node.js y Claude Code CLI
 
-> **Qué es Claude Code:** Es la extension de IA de Anthropic para VS Code. Es donde ejecutas los comandos de Spec Kit. Los comandos se escriben en el panel de chat de Claude Code, NO en la terminal de PowerShell.
+> **Qué es Claude Code CLI:** Es el asistente de IA de Anthropic que se ejecuta desde la terminal. Es diferente a la extensión de VS Code — el CLI se usa directamente en PowerShell/terminal y es el que Spec Kit necesita para funcionar.
 
-> **Diferencia importante:**
-> - **PowerShell / Terminal:** Es donde ejecutas comandos del sistema operativo (`python`, `git`, `pip`, `dotnet run`)
-> - **Claude Code (panel de chat en VS Code):** Es donde ejecutas los comandos de Spec Kit (`/speckit-constitution`, `/speckit-specify`, etc.)
->
-> Si pegas el prompt de `/speckit-constitution` en PowerShell, va a dar error porque PowerShell no entiende esos comandos. Deben ir en el panel de Claude Code.
+> **Nota:** Si ya tienes la extensión Claude Code en VS Code, esta ya tiene los skills de Spec Kit integrados. Pero el camino estándar (que funciona con cualquier asistente de IA) es instalar el CLI y Spec Kit por separado. Este tutorial enseña el camino estándar.
 
-**Paso 1 — Instalar la extension Claude Code en VS Code:**
+**Paso 1 — Instalar Node.js:**
 
-1. Abrir VS Code
-2. Ir a Extensiones (icono de cuadrados en la barra lateral izquierda, o `Ctrl+Shift+X`)
-3. Buscar "Claude Code" o "Claude" de Anthropic
-4. Clic en "Install"
-5. Reiniciar VS Code si lo pide
+Si no lo tienes, descárgalo de [nodejs.org](https://nodejs.org) (versión LTS recomendada). Instálalo con las opciones por defecto.
 
-**Paso 2 — Abrir el panel de Claude Code:**
-
-1. En VS Code, presionar `Ctrl+Shift+P` (paleta de comandos)
-2. Escribir "Claude" y seleccionar "Claude Code: Open Chat"
-3. Se abre un panel de chat a la derecha del editor
-4. Ahi es donde vas a escribir los comandos `/speckit-constitution`, `/speckit-specify`, etc.
-
-**Paso 3 — Instalar Spec Kit en el proyecto:**
-
-En la **terminal de PowerShell** (no en Claude Code), ejecuta:
+Verifica que se instaló:
 
 ```bash
-# Instalar uv (gestor de paquetes rápido para Python) si no lo tienes
-pip install uv
+node --version
+# Debe mostrar: v20.x.x o superior
 
-# Instalar Spec Kit e inicializar en el proyecto actual
+npm --version
+# Debe mostrar: 10.x.x o superior
+```
+
+**Paso 2 — Instalar Claude Code CLI:**
+
+En PowerShell (Windows):
+
+```powershell
+npm install -g @anthropic-ai/claude-code
+```
+
+> **Nota para Linux/Mac:**
+> ```bash
+> npm install -g @anthropic-ai/claude-code
+> ```
+> Es el mismo comando. Si da error de permisos en Linux/Mac, usar `sudo npm install -g @anthropic-ai/claude-code`.
+
+Verifica que se instaló:
+
+```bash
+claude --version
+# Debe mostrar la versión de Claude Code CLI
+```
+
+> **Si `claude` no se reconoce después de instalar:** Cierra y abre PowerShell para que recargue el PATH.
+
+### Instalar Spec Kit en el proyecto
+
+> **Qué es Spec Kit:** Es un toolkit open-source de GitHub que proporciona la estructura y los comandos SDD (como `/speckit-constitution`, `/speckit-specify`, `/speckit-plan`, etc.) para usar con asistentes de IA. Sin instalarlo, esos comandos no existen en el CLI.
+
+**Paso 1 — Instalar uv (gestor de paquetes de Python):**
+
+```bash
+pip install uv
+```
+
+**Paso 2 — Inicializar Spec Kit en el proyecto:**
+
+```bash
 uvx --from git+https://github.com/github/spec-kit.git specify init .
 ```
 
-Durante la inicializacion, el wizard pregunta:
-1. **Que asístente de IA usaras** — seleccionar Claude Code (o GitHub Copilot si prefieres)
-2. Se crea la carpeta `.specify/` con templates y scripts
-3. Se configuran los slash commands para tu asístente
+**Paso 3 — El wizard hace dos preguntas:**
 
-> **Si el comando `uvx` no funciona:** Es posible qué `uv` no este en el PATH. Ejecuta:
-> ```bash
-> python -m pip install uv
-> ```
-> Y luego reintenta el comando `uvx`.
+Primera pregunta — La carpeta no está vacía:
+```
+Warning: Current directory is not empty (10 items)
+Template files will be merged with existing content
+and may overwrite existing files
+Do you want to continue? [y/N]:
+```
+Escribe `y` y presiona Enter. Es normal porque ya tenemos archivos .md en la carpeta.
 
-**Paso 4 — Verificar qué Spec Kit se instalo:**
+Segunda pregunta — Elegir asistente de IA:
+```
+Choose your AI assistant:
+    agy (Antigravity)
+    amp (Amp)
+    ...
+    claude (Claude Code)        ← SELECCIONAR ESTE
+    copilot (GitHub Copilot)
+    cursor-agent (Cursor)
+    gemini (Gemini CLI)
+    ...
+```
+Usa las flechas arriba/abajo para llegar a `claude (Claude Code)` y presiona Enter.
 
-Deberias ver una nueva carpeta `.specify/` en tu proyecto:
+> **Si da error "claude not found":** Significa que Claude Code CLI no se instaló correctamente en el Paso 2. Verifica con `claude --version`. Si no funciona, cierra y abre PowerShell y reintenta.
+
+**Paso 4 — Verificar que Spec Kit se instaló:**
+
+Deberías ver una nueva carpeta `.specify/` en tu proyecto:
 
 ```
 FrontFlaskSDD/
@@ -547,27 +588,47 @@ FrontFlaskSDD/
 └── venv/
 ```
 
-**Paso 5 — Verificar que los comandos funcionan en Claude Code:**
+Verifica con:
 
-Abre el panel de Claude Code en VS Code y escribe:
+```powershell
+# En PowerShell:
+dir .specify
+
+# Debe mostrar las subcarpetas templates, scripts y el archivo config.yaml
+```
+
+### Dónde se ejecutan los comandos SDD
+
+> **Esto es importante:** Los comandos de Spec Kit (`/speckit-constitution`, `/speckit-specify`, etc.) se ejecutan en **Claude Code CLI** (en la terminal), NO directamente en PowerShell.
+>
+> Primero abres Claude Code CLI y luego dentro de él escribes los comandos.
 
 ```
-/speckit-
+┌─────────────────────────────────────────────────────────────┐
+│  VS Code                                                    │
+│  ┌──────────────────────────┐ ┌──────────────────────────┐  │
+│  │                          │ │  CLAUDE CODE              │  │
+│  │   Editor de código       │ │  (extensión VS Code       │  │
+│  │   (archivos .py, .html)  │ │   o CLI en terminal)      │  │
+│  │                          │ │                            │  │
+│  │                          │ │  /speckit-constitution     │  │
+│  │                          │ │  /speckit-specify          │  │
+│  │                          │ │  /speckit-plan             │  │
+│  ├──────────────────────────┤ │                            │  │
+│  │  TERMINAL (PowerShell)   │ │  Aquí van los comandos    │  │
+│  │                          │ │  de Spec Kit              │  │
+│  │  python app.py           │ │                            │  │
+│  │  pip install flask       │ │                            │  │
+│  │  git push                │ │                            │  │
+│  │  dotnet run              │ │                            │  │
+│  │                          │ │                            │  │
+│  │  Aquí van los comandos   │ │                            │  │
+│  │  del sistema operativo   │ │                            │  │
+│  └──────────────────────────┘ └──────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-Deberia autocompletar mostrando los comandos disponibles:
-- `/speckit-constitution`
-- `/speckit-specify`
-- `/speckit-clarify`
-- `/speckit-plan`
-- `/speckit-tasks`
-- `/speckit-analyze`
-- `/speckit-checklist`
-- `/speckit-implement`
-
-Si los ves, Spec Kit está listo.
-
-> **Si los comandos no aparecen:** Cierra y abre VS Code. Si sigue sin funcionar, verifica que la carpeta `.specify/` existe en tu proyecto.
+**Si pegas el prompt de `/speckit-constitution` directamente en PowerShell, da error.** PowerShell interpreta cada línea como un comando del sistema operativo. Los comandos SDD van dentro de Claude Code (ya sea en el CLI o en la extensión de VS Code).
 
 ### Verificar el estado final de la preparación
 
