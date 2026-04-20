@@ -3,7 +3,7 @@
 > **Autor:** Carlos Arturo Castro Castro
 > **Fecha:** Abril 2026
 > **Nivel:** Principiante — no se asume experiencia previa en desarrollo web
-> **Duracion estimada:** 4-6 horas (ejecutando cada fase con calma)
+> **Duración estimada:** 4-6 horas (ejecutando cada fase con calma)
 > **Repositorio API:** [https://github.com/ccastro2050/ApiGenericaCsharp](https://github.com/ccastro2050/ApiGenericaCsharp)
 > **Repositorio SDD:** [https://github.com/ccastro2050/FrontFlaskSDD](https://github.com/ccastro2050/FrontFlaskSDD)
 
@@ -11,78 +11,78 @@
 
 ## Tabla de Contenidos
 
-- [1. Para quien es este tutorial](#1-para-quien-es-este-tutorial)
-- [2. Preparacion del entorno](#2-preparacion-del-entorno)
+- [1. Para quién es este tutorial](#1-para-quien-es-este-tutorial)
+- [2. Preparación del entorno](#2-preparación-del-entorno)
 - [3. FASE 0: /constitution — Las reglas del juego](#3-fase-0-constitution--las-reglas-del-juego)
 - [4. FASE 1: /specify — El contrato de lo que vamos a construir](#4-fase-1-specify--el-contrato-de-lo-que-vamos-a-construir)
 - [5. FASE 2: /clarify — Las preguntas que no te hiciste](#5-fase-2-clarify--las-preguntas-que-no-te-hiciste)
 - [6. FASE 3: /plan — El plano de la casa](#6-fase-3-plan--el-plano-de-la-casa)
 - [7. FASE 4: /tasks — La lista de trabajo](#7-fase-4-tasks--la-lista-de-trabajo)
-- [8. FASE 5: /analyze — La auditoria](#8-fase-5-analyze--la-auditoria)
+- [8. FASE 5: /analyze — La auditoría](#8-fase-5-analyze--la-auditoria)
 - [9. FASE 6: /checklist — La lista del inspector](#9-fase-6-checklist--la-lista-del-inspector)
 - [10. FASE 7: /implement — Manos a la obra](#10-fase-7-implement--manos-a-la-obra)
 - [11. Mapa completo de competencias](#11-mapa-completo-de-competencias)
-- [12. Que hacer despues](#12-que-hacer-despues)
+- [12. Qué hacer después](#12-que-hacer-después)
 - [13. Glosario](#13-glosario)
 
 ---
 
-## 1. Para quien es este tutorial
+## 1. Para quién es este tutorial
 
 ### Perfil del estudiante
 
-Este tutorial esta disenado para personas que:
+Este tutorial está diseñado para personas que:
 
 - Quieren aprender a desarrollar software de forma profesional
-- Han escuchado sobre IA para programar pero no saben como usarla con metodologia
-- Quieren entender **por que** se hacen las cosas, no solo copiar/pegar comandos
+- Han escuchado sobre IA para programar pero no saben cómo usarla con metodología
+- Quieren entender **por qué** se hacen las cosas, no solo copiar/pegar comandos
 
 ### Que NO necesitas saber (mitos)
 
 | Mito | Realidad |
 |------|----------|
-| "Necesito saber programar para empezar" | No. El flujo SDD empieza con documentacion, no con codigo |
+| "Necesito saber programar para empezar" | No. El flujo SDD empieza con documentación, no con código |
 | "Necesito saber usar la terminal como experto" | No. Solo necesitas escribir un comando a la vez y leer la salida |
 | "Necesito entender toda la API antes de empezar" | No. Iremos entendiendo cada parte conforme la necesitemos |
-| "La IA hace todo sola" | No. Tu defines que hacer, la IA genera, tu revisas y corriges |
+| "La IA hace todo sola" | No. Tu defines qué hacer, la IA genera, tu revisas y corriges |
 
-### Que SI necesitas saber (minimos)
+### Que SI necesitas saber (mínimos)
 
-| Competencia | Nivel | Como verificarlo |
+| Competencia | Nivel | Cómo verificarlo |
 |-------------|-------|-----------------|
-| Usar un computador | Basico | Puedes abrir programas, crear carpetas, copiar archivos |
-| Escribir en la terminal | Basico | Puedes abrir una terminal y escribir `python --version` |
-| Saber que es una pagina web | Basico | Entiendes que un navegador muestra paginas y que hay un "servidor" detras |
-| Ingles tecnico basico | Basico | Puedes leer palabras como `install`, `run`, `error`, `success` |
-| Ganas de aprender | Alto | Estas leyendo esto, asi que ya lo tienes |
+| Usar un computador | Basíco | Puedes abrir programas, crear carpetas, copiar archivos |
+| Escribir en la terminal | Basíco | Puedes abrir una terminal y escribir `python --version` |
+| Saber qué es una página web | Basíco | Entiendes que un navegador muestra páginas y qué hay un "servidor" detras |
+| Ingles técnico básico | Basíco | Puedes leer palabras como `install`, `run`, `error`, `success` |
+| Ganas de aprender | Alto | Estas leyendo esto, así qué ya lo tienes |
 
 ### Tu nuevo rol: Desarrollador con IA
 
-Antes de empezar, es importante que entiendas algo: en este tutorial **no vas a programar de la forma tradicional**. No vas a escribir cada linea de codigo manualmente. Vas a trabajar como un **Desarrollador con IA** — un rol que la industria llama la ["Clase Supervisora"](https://fortune.com/2026/03/31/fortune-com-2026-03-26-ai-agents-vibe-coding-developer-skills-supervisor-class/).
+Antes de empezar, es importante que entiendas algo: en este tutorial **no vas a programar de la forma tradicional**. No vas a escribir cada línea de código manualmente. Vas a trabajar como un **Desarrollador con IA** — un rol que la industria llama la ["Clase Supervisora"](https://fortune.com/2026/03/31/fortune-com-2026-03-26-ai-agents-vibe-coding-developer-skills-supervisor-class/).
 
 **Que significa esto en la practica:**
 
-| Lo que hacias antes | Lo que haras ahora |
+| Lo qué hacías antes | Lo qué harás ahora |
 |---------------------|--------------------|
-| Memorizar sintaxis de Python, HTML, CSS | Definir especificaciones claras de lo que quieres construir |
-| Escribir cada linea de codigo | Dirigir a la IA con prompts precisos |
-| Debuggear buscando el error tu solo | Revisar lo que la IA genero y decidir si es correcto |
+| Memorizar sintaxis de Python, HTML, CSS | Definir especificaciónes claras de lo que quieres construir |
+| Escribir cada línea de código | Dirigir a la IA con prompts precisos |
+| Debuggear buscando el error tu solo | Revisar lo que la IA generó y decidir si es correcto |
 | Documentar al final (o nunca) | Documentar ANTES de codificar — eso es SDD |
 
 > *"La IA produce volumen. Los humanos aseguran calidad."*
 > — [DEV Community, 2026](https://dev.to/austinwdigital/ai-assisted-development-in-2026-best-practices-real-risks-and-the-new-bar-for-engineers-3fom)
 
-**Las 5 competencias que vas a desarrollar en este tutorial:**
+**Las 5 competencias qué vas a desarrollar en este tutorial:**
 
-| Competencia | Que significa | En que fase la practicas |
+| Competencia | Que significa | En qué fase la prácticas |
 |-------------|--------------|--------------------------|
 | **Especificacion** | Definir QUE construir con precision | Fase 0 (constitution) y Fase 1 (specify) |
-| **Juicio critico** | Evaluar si lo que genero la IA es correcto | Todas las fases (checklist de revision) |
-| **Revision de codigo** | Leer codigo generado como si fuera de un junior | Fase 7 (implement) |
-| **Arquitectura** | Decidir como se conectan las piezas | Fase 3 (plan) |
+| **Juicio crítico** | Evaluar si lo que generó la IA es correcto | Todas las fases (checklist de revisión) |
+| **Revision de código** | Leer código generado como si fuera de un junior | Fase 7 (implement) |
+| **Arquitectura** | Decidir cómo se conectan las piezas | Fase 3 (plan) |
 | **Iteracion** | Refinar cuando el resultado no es satisfactorio | Todas las fases |
 
-**Esto NO significa que no necesitas entender el codigo.** Necesitas entenderlo para juzgar si es correcto — pero no necesitas memorizarlo ni escribirlo desde cero. Segun [Gartner (citado por Shift Asia)](https://shiftasia.com/column/ai-in-software-development-the-rise-of-the-ai-augmented-developer/), para finales de 2026 el **75% de los desarrolladores** orquestaran agentes de IA en vez de codificar manualmente.
+**Esto NO significa que no necesitas entender el código.** Necesitas entenderlo para juzgar si es correcto — pero no necesitas memorizarlo ni escribirlo desde cero. Segun [Gartner (citado por Shift Asia)](https://shiftasía.com/column/ai-in-software-development-the-rise-of-the-ai-augmented-developer/), para finales de 2026 el **75% de los desarrolladores** orquestaran agentes de IA en vez de codificar manualmente.
 
 ### Que hacer cuando la IA NO genera lo que esperabas
 
@@ -92,11 +92,11 @@ Esto te va a pasar en CADA fase. La IA no es perfecta. A veces genera documentos
 graph TB
     START["El resultado de la IA
     no es lo que esperabas"]
-    Q1{"Esta mas del 80%
+    Q1{"Esta más del 80%
     bien?"}
     Q2{"El problema es que
     TU no fuiste claro
-    o que la IA fallo?"}
+    o que la IA falló?"}
 
     A["OPCION A: Editar manualmente
     ━━━
@@ -112,7 +112,7 @@ graph TB
 
     C["OPCION C: Combinar ambos
     ━━━
-    Editar lo que esta bien
+    Editar lo que está bien
     (para no perderlo) y re-ejecutar
     para que la IA complete lo que falta."]
 
@@ -134,19 +134,19 @@ graph TB
 
 | Situacion | Opcion | Que hacer |
 |-----------|--------|-----------|
-| La constitution dice Flask pero tambien menciona Django | **A** (editar) | Abrir `constitution.md`, borrar la linea de Django, guardar |
-| La spec no menciona facturas ni stored procedures | **B** (re-ejecutar) | Rehacer el prompt de `/specify` agregando toda la seccion de facturas |
-| El plan tiene buena estructura de carpetas pero los servicios estan vacios | **C** (ambos) | Mantener la estructura editada, re-ejecutar `/plan` pidiendo detalle en servicios |
-| El codigo compila pero usa SQLAlchemy (prohibido en la constitution) | **B** (re-ejecutar) | Decirle a la IA: "El codigo viola la constitution. No usar ORM. Corregir" |
+| La constitution dice Flask pero también menciona Django | **A** (editar) | Abrir `constitution.md`, borrar la línea de Django, guardar |
+| La spec no menciona facturas ni stored procedures | **B** (re-ejecutar) | Rehacer el prompt de `/specify` agregando toda la sección de facturas |
+| El plan tiene buena estructura de carpetas pero los servicios están vacios | **C** (ambos) | Mantener la estructura editada, re-ejecutar `/plan` pidiendo detalle en servicios |
+| El código compila pero usa SQLAlchemy (prohibido en la constitution) | **B** (re-ejecutar) | Decirle a la IA: "El código viola la constitution. No usar ORM. Corregir" |
 | Al tasks.md le falta 1 tarea para el email service | **A** (editar) | Agregar la tarea manualmente en la posicion correcta del tasks.md |
 
 **La regla de oro:**
 
-> Los documentos SDD son **tuyos**, no de la IA. La IA los genera pero tu eres el dueno. Puedes editarlos, reordenarlos, agregar o quitar lo que quieras. **Nunca aceptes un resultado sin revisarlo.** En cada fase de este tutorial hay una checklist — usala.
+> Los documentos SDD son **tuyos**, no de la IA. La IA los genera pero tu eres el dueño. Puedes editarlos, reordenarlos, agregar o quitar lo que quieras. **Nunca aceptes un resultado sin revisarlo.** En cada fase de este tutorial hay una checklist — úsala.
 
-> Para mayor detalle sobre estrategias de correccion por fase, consulta la [Seccion 2 del documento 02](02_Comandos_SDD_FrontFlaskSDD.md#2-que-hacer-cuando-el-resultado-no-cumple-las-expectativas).
+> Para mayor detalle sobre estrategias de corrección por fase, consulta la [Sección 2 del documento 02](02_Comandos_SDD_FrontFlaskSDD.md#2-que-hacer-cuando-el-resultado-no-cumple-las-expectativas).
 
-### Mapa de competencias: que vas a aprender
+### Mapa de competencias: qué vas a aprender
 
 ```mermaid
 graph TB
@@ -156,29 +156,29 @@ graph TB
     end
 
     subgraph FASE0["Fase 0: /constitution"]
-        C1["Que es una arquitectura de software"]
-        C2["Que es un framework"]
-        C3["Que es un patron de diseno"]
+        C1["Qué es una arquitectura de software"]
+        C2["Qué es un framework"]
+        C3["Qué es un patrón de diseño"]
         C4["Que son JWT, BCrypt y RBAC"]
     end
 
     subgraph FASE1["Fase 1: /specify"]
-        C5["Que es un requisito funcional"]
-        C6["Que es un CRUD"]
-        C7["Que es un stored procedure"]
-        C8["Que es un flujo de usuario"]
+        C5["Qué es un requisito funcional"]
+        C6["Qué es un CRUD"]
+        C7["Qué es un stored procedure"]
+        C8["Qué es un flujo de usuario"]
     end
 
     subgraph FASE2["Fase 2: /clarify"]
-        C9["Identificar ambiguedades"]
+        C9["Identificar ambigüedades"]
         C10["Hacer preguntas con criterio"]
     end
 
     subgraph FASE3["Fase 3: /plan"]
         C11["Leer una arquitectura de carpetas"]
-        C12["Que es una API REST"]
-        C13["Que es un middleware"]
-        C14["Que es un template engine"]
+        C12["Qué es una API REST"]
+        C13["Qué es un middleware"]
+        C14["Qué es un template engine"]
     end
 
     subgraph FASE4["Fase 4: /tasks"]
@@ -187,14 +187,14 @@ graph TB
     end
 
     subgraph FASE56["Fases 5-6: /analyze + /checklist"]
-        C17["Auditar documentacion tecnica"]
+        C17["Auditar documentación técnica"]
         C18["Definir criterios de calidad"]
     end
 
     subgraph FASE7["Fase 7: /implement"]
         C19["Configurar un proyecto Flask"]
-        C20["Crear un servicio que consume API"]
-        C21["Implementar autenticacion JWT"]
+        C20["Crear un servicio qué consume API"]
+        C21["Implementar autenticación JWT"]
         C22["Construir CRUDs completos"]
         C23["Maestro-detalle con SPs"]
     end
@@ -219,28 +219,29 @@ graph TB
 
 ---
 
-## 2. Preparacion del entorno
+## 2. Preparación del entorno
 
-### Que necesitas instalar
+### Qué necesitas instalar
 
-Antes de empezar cualquier fase, tu computador necesita estas herramientas:
+Antes de empezar cuálquier fase, tu computador necesita estás herramientas:
 
-| Herramienta | Que es | Para que la usamos | Como instalar |
+| Herramienta | Qué es | Para que la usamos | Cómo instalar |
 |-------------|--------|-------------------|---------------|
-| **Python 3.12+** | Lenguaje de programacion | El frontend Flask esta escrito en Python | [python.org/downloads](https://python.org/downloads) |
+| **Python 3.12+** | Lenguaje de programación | El frontend Flask está escrito en Python | [python.org/downloads](https://python.org/downloads) |
 | **Git** | Control de versiones | Guardar el progreso y subir a GitHub | [git-scm.com](https://git-scm.com) |
-| **VS Code** | Editor de codigo | Escribir y leer archivos del proyecto | [code.visualstudio.com](https://code.visualstudio.com) |
+| **VS Code** | Editor de código | Escribir y leer archivos del proyecto | [code.visualstudio.com](https://code.visualstudio.com) |
+| **Claude Code** | Extension de IA para VS Code | Ejecutar los comandos SDD (/speckit-constitution, /speckit-specify, etc.) | Buscar "Claude Code" en las extensiones de VS Code |
 | **Node.js** (opcional) | Runtime de JavaScript | Solo si usas GitHub Copilot | [nodejs.org](https://nodejs.org) |
 
 ### Extensiones de VS Code recomendadas
 
-| Extension | Para que |
+| Extension | Para qué |
 |-----------|---------|
 | Python (Microsoft) | Resaltado de sintaxis y autocompletado Python |
-| Markdown Preview Mermaid | Ver los diagramas Mermaid de este tutorial |
-| GitHub Copilot (opcional) | Si vas a comparar con Copilot despues |
+| Markdown Preview Mermaid | Ver los diagramás Mermaid de este tutorial |
+| GitHub Copilot (opcional) | Si vas a comparar con Copilot después |
 
-### Verificar que todo funciona
+### Verificar qué todo funciona
 
 Abre una terminal (en VS Code: `Ctrl+Ñ` o `Ctrl+backtick`) y ejecuta:
 
@@ -251,18 +252,18 @@ python --version
 
 # Verificar Git
 git --version
-# Debe mostrar: git version 2.x.x
+# Debe mostrar: git versión 2.x.x
 
 # Verificar pip (instalador de paquetes Python)
 pip --version
 # Debe mostrar: pip 24.x.x
 ```
 
-> **Si algun comando falla:** significa que la herramienta no esta instalada o no esta en el PATH. Busca en YouTube "instalar Python en Windows" o "instalar Git en Windows" segun el caso.
+> **Si algún comando falla:** significa que la herramienta no está instalada o no está en el PATH. Busca en YouTube "instalar Python en Windows" o "instalar Git en Windows" según el caso.
 
 ### Clonar el repositorio de la API
 
-La API es el "backend" que nuestro frontend va a consumir. Necesitamos tenerla corriendo.
+La API es el "backend" qué nuestro frontend va a consumir. Necesitamos tenerla corriendo.
 
 ```bash
 # Ir al escritorio
@@ -279,7 +280,7 @@ cd ApiGenericaCsharp
 
 La API necesita una base de datos para funcionar. Sin ella, la API arranca pero todos los endpoints dan error porque no hay tablas, datos ni stored procedures.
 
-> **Que base de datos usar:** La API soporta 3 motores. Elige el que tengas instalado:
+> **Que base de datos usar:** La API soporta 3 motores. Elige el qué tengas instalado:
 >
 > | Motor | Cuando usarlo |
 > |-------|--------------|
@@ -287,7 +288,7 @@ La API necesita una base de datos para funcionar. Sin ella, la API arranca pero 
 > | **PostgreSQL** | Si prefieres un motor open-source robusto |
 > | **MySQL/MariaDB** | Si tienes XAMPP, Laragon o MariaDB instalado |
 
-Los scripts de creacion de la base de datos estan dentro de la API, en la carpeta `script_bd/`:
+Los scripts de creación de la base de datos están dentro de la API, en la carpeta `script_bd/`:
 
 ```
 ApiGenericaCsharp/
@@ -297,7 +298,7 @@ ApiGenericaCsharp/
     └── bdfacturas_mysql_mariadb.sql   # Para MySQL/MariaDB
 ```
 
-**Paso 1 — Ejecutar el script segun tu motor de base de datos:**
+**Paso 1 — Ejecutar el script según tu motor de base de datos:**
 
 Para **SQL Server** (desde SQL Server Management Studio o sqlcmd):
 ```bash
@@ -317,7 +318,7 @@ psql -U postgres -d bdfacturas_postgres_local -f script_bd/bdfacturas_postgres.s
 
 Para **MySQL/MariaDB** (desde la terminal o phpMyAdmin):
 ```bash
-# El script crea la base de datos automaticamente
+# El script crea la base de datos automáticamente
 mysql -u root < script_bd/bdfacturas_mysql_mariadb.sql
 ```
 
@@ -327,7 +328,7 @@ mysql -u root < script_bd/bdfacturas_mysql_mariadb.sql
 
 Abre el archivo `appsettings.json` dentro de la carpeta `ApiGenericaCsharp` con tu editor y verifica dos cosas:
 
-1. Que la **connection string** de tu motor tenga los datos correctos (servidor, usuario, contrasena)
+1. Que la **connection string** de tu motor tenga los datos correctos (servidor, usuario, contraseña)
 2. Que el campo `"DatabaseProvider"` apunte a tu motor:
 
 ```json
@@ -357,19 +358,19 @@ Con la API corriendo, abre el navegador y visita:
 http://localhost:5035/swagger
 ```
 
-Deberias ver la documentacion Swagger de la API. Si la ves, la API esta lista.
+Deberias ver la documentación Swagger de la API. Si la ves, la API está lista.
 
-> **Que es Swagger:** Es una pagina web automatica que muestra todos los "endpoints" (URLs) que la API ofrece. Es como el menu de un restaurante — te dice que puedes pedir.
+> **Qué es Swagger:** Es una página web automática qué muestra todos los "endpoints" (URLs) que la API ofrece. Es como el menú de un restaurante — te dice que puedes pedir.
 
 **Verificar que la base de datos funciona:**
 
-En el navegador, visita tambien:
+En el navegador, visita también:
 
 ```
-http://localhost:5035/api/diagnostico/conexion
+http://localhost:5035/api/diagnostico/conexión
 ```
 
-Debe responder con informacion de la base de datos (servidor, version, estado). Si da error, revisa la connection string en `appsettings.json`.
+Debe responder con información de la base de datos (servidor, version, estado). Si da error, revisa la connection string en `appsettings.json`.
 
 Tambien puedes probar:
 
@@ -377,7 +378,7 @@ Tambien puedes probar:
 http://localhost:5035/api/producto
 ```
 
-Debe retornar una lista de productos en JSON. Si la ves, la base de datos esta funcionando correctamente.
+Debe retornar una lista de productos en JSON. Si la ves, la base de datos está funcionando correctamente.
 
 ### Crear la carpeta del proyecto
 
@@ -391,23 +392,23 @@ cd ~/Desktop/SDD/FrontFlaskSDD
 mkdir -p ~/Desktop/SDD/FrontFlaskSDD
 cd ~/Desktop/SDD/FrontFlaskSDD
 
-# Verificar que estas en la carpeta correcta
+# Verificar qué estás en la carpeta correcta
 pwd
 # Debe mostrar: .../SDD/FrontFlaskSDD
 ```
 
 ### Crear el entorno virtual de Python (venv)
 
-> **Que es un entorno virtual:** Es una "burbuja" aislada donde instalas las librerias de tu proyecto sin afectar al Python del sistema ni a otros proyectos. Cada proyecto tiene su propio venv con sus propias versiones de librerias.
+> **Qué es un entorno virtual:** Es una "burbuja" aislada donde instalas las librerías de tu proyecto sin afectar al Python del sistema ni a otros proyectos. Cada proyecto tiene su propio venv con sus propias versiones de librerías.
 
-**Por que hacerlo ahora y no despues:** Las fases de documentacion (constitution, specify, plan, tasks) no necesitan el venv. Pero la fase de implementacion si, y es mejor tenerlo listo desde el inicio para no interrumpir el flujo despues.
+**Por qué hacerlo ahora y no después:** Las fases de documentación (constitution, specify, plan, tasks) no necesitan el venv. Pero la fase de implementación si, y es mejor tenerlo listo desde el inicio para no interrumpir el flujo después.
 
 ```bash
 # Crear el entorno virtual (esto crea una carpeta llamada "venv")
 python -m venv venv
 ```
 
-> **Que acaba de pasar:** Python creo una carpeta `venv/` dentro de tu proyecto con una copia aislada de Python y pip. Todo lo que instales a partir de ahora se guarda ahi, no en tu sistema.
+> **Que acaba de pasar:** Python creó una carpeta `venv/` dentro de tu proyecto con una copia aislada de Python y pip. Todo lo que instales a partir de ahora se guarda ahí, no en tu sistema.
 
 ```bash
 # Activar el entorno virtual
@@ -425,27 +426,27 @@ source venv/Scripts/activate
 source venv/bin/activate
 ```
 
-> **Como saber que se activo:** Tu terminal mostrara `(venv)` al inicio de la linea. Ejemplo:
+> **Cómo saber que se activo:** Tu terminal mostrará `(venv)` al inicio de la línea. Ejemplo:
 > ```
 > (venv) C:\Users\fcl\Desktop\SDD\FrontFlaskSDD>
 > ```
-> Si no ves `(venv)`, el entorno no esta activo. Vuelve a ejecutar el comando de activacion.
+> Si no ves `(venv)`, el entorno no está activo. Vuelve a ejecutar el comando de activacion.
 
 ### Instalar las dependencias del proyecto
 
-Con el venv activo, instala las librerias que necesita el frontend Flask:
+Con el venv activo, instala las librerías qué necesita el frontend Flask:
 
 ```bash
 pip install flask requests pytest
 ```
 
-> **Que es cada libreria:**
+> **Qué es cada libreria:**
 >
 > | Libreria | Que hace |
 > |----------|---------|
-> | `flask` | El framework web — maneja rutas, templates, sesiones |
+> | `flask` | El framework web — maneja rutas, templates, sesiónes |
 > | `requests` | Cliente HTTP — para llamar a la API REST desde Python |
-> | `pytest` | Framework de testing — para verificar que el codigo funciona |
+> | `pytest` | Framework de testing — para verificar que el código funciona |
 
 Verifica que se instalaron correctamente:
 
@@ -454,19 +455,19 @@ pip list
 # Debe mostrar flask, requests, pytest y sus dependencias
 ```
 
-Genera el archivo `requirements.txt` para que otros puedan instalar las mismas librerias:
+Genera el archivo `requirements.txt` para que otros puedan instalar las mismas librerías:
 
 ```bash
 pip freeze > requirements.txt
 ```
 
-> **Que es requirements.txt:** Es la "lista de compras" del proyecto. Cuando alguien clone tu repo, ejecuta `pip install -r requirements.txt` y tiene exactamente las mismas librerias que tu.
+> **Qué es requirements.txt:** Es la "lista de compras" del proyecto. Cuando alguien clone tu repo, ejecuta `pip install -r requirements.txt` y tiene exactamente las mismas librerías qué tu.
 
 ### Agregar venv al .gitignore
 
 La carpeta `venv/` pesa mucho y no se debe subir a GitHub. Crea un archivo `.gitignore` para excluirla.
 
-> **Que es .gitignore:** Le dice a Git cuales archivos NO debe incluir en el repositorio. El venv y los archivos de cache de Python no se suben porque son locales de cada maquina.
+> **Qué es .gitignore:** Le dice a Git cuáles archivos NO debe incluir en el repositorio. El venv y los archivos de cache de Python no se suben porque son locales de cada maquína.
 
 Abre tu editor (VS Code) y crea un archivo nuevo llamado `.gitignore` en la raiz de `FrontFlaskSDD/`. Escribe dentro:
 
@@ -474,24 +475,115 @@ Abre tu editor (VS Code) y crea un archivo nuevo llamado `.gitignore` en la raiz
 venv/
 __pycache__/
 *.pyc
+.specify/
 ```
 
 Guarda el archivo.
 
 > **Nota:** El nombre del archivo es exactamente `.gitignore` (con el punto al inicio, sin extension). En VS Code: File → New File → escribir `.gitignore` → guardar.
 
-### Verificar el estado final de la preparacion
+### Instalar Spec Kit y configurar Claude Code
 
-Tu carpeta deberia verse asi:
+> **Qué es Spec Kit:** Es un toolkit open-source de GitHub qué proporciona los comandos SDD (como `/speckit-constitution`, `/speckit-specify`, `/speckit-plan`, etc.) para usar con asístentes de IA. Sin instalarlo, esos comandos no existen.
+
+> **Qué es Claude Code:** Es la extension de IA de Anthropic para VS Code. Es donde ejecutas los comandos de Spec Kit. Los comandos se escriben en el panel de chat de Claude Code, NO en la terminal de PowerShell.
+
+> **Diferencia importante:**
+> - **PowerShell / Terminal:** Es donde ejecutas comandos del sistema operativo (`python`, `git`, `pip`, `dotnet run`)
+> - **Claude Code (panel de chat en VS Code):** Es donde ejecutas los comandos de Spec Kit (`/speckit-constitution`, `/speckit-specify`, etc.)
+>
+> Si pegas el prompt de `/speckit-constitution` en PowerShell, va a dar error porque PowerShell no entiende esos comandos. Deben ir en el panel de Claude Code.
+
+**Paso 1 — Instalar la extension Claude Code en VS Code:**
+
+1. Abrir VS Code
+2. Ir a Extensiones (icono de cuadrados en la barra lateral izquierda, o `Ctrl+Shift+X`)
+3. Buscar "Claude Code" o "Claude" de Anthropic
+4. Clic en "Install"
+5. Reiniciar VS Code si lo pide
+
+**Paso 2 — Abrir el panel de Claude Code:**
+
+1. En VS Code, presionar `Ctrl+Shift+P` (paleta de comandos)
+2. Escribir "Claude" y seleccionar "Claude Code: Open Chat"
+3. Se abre un panel de chat a la derecha del editor
+4. Ahi es donde vas a escribir los comandos `/speckit-constitution`, `/speckit-specify`, etc.
+
+**Paso 3 — Instalar Spec Kit en el proyecto:**
+
+En la **terminal de PowerShell** (no en Claude Code), ejecuta:
+
+```bash
+# Instalar uv (gestor de paquetes rápido para Python) si no lo tienes
+pip install uv
+
+# Instalar Spec Kit e inicializar en el proyecto actual
+uvx --from git+https://github.com/github/spec-kit.git specify init .
+```
+
+Durante la inicializacion, el wizard pregunta:
+1. **Que asístente de IA usaras** — seleccionar Claude Code (o GitHub Copilot si prefieres)
+2. Se crea la carpeta `.specify/` con templates y scripts
+3. Se configuran los slash commands para tu asístente
+
+> **Si el comando `uvx` no funciona:** Es posible qué `uv` no este en el PATH. Ejecuta:
+> ```bash
+> python -m pip install uv
+> ```
+> Y luego reintenta el comando `uvx`.
+
+**Paso 4 — Verificar qué Spec Kit se instalo:**
+
+Deberias ver una nueva carpeta `.specify/` en tu proyecto:
 
 ```
 FrontFlaskSDD/
+├── .specify/               # Carpeta de Spec Kit (templates, scripts, config)
+│   ├── templates/
+│   ├── scripts/
+│   └── config.yaml
+├── .gitignore
+├── requirements.txt
+└── venv/
+```
+
+**Paso 5 — Verificar que los comandos funcionan en Claude Code:**
+
+Abre el panel de Claude Code en VS Code y escribe:
+
+```
+/speckit-
+```
+
+Deberia autocompletar mostrando los comandos disponibles:
+- `/speckit-constitution`
+- `/speckit-specify`
+- `/speckit-clarify`
+- `/speckit-plan`
+- `/speckit-tasks`
+- `/speckit-analyze`
+- `/speckit-checklist`
+- `/speckit-implement`
+
+Si los ves, Spec Kit está listo.
+
+> **Si los comandos no aparecen:** Cierra y abre VS Code. Si sigue sin funcionar, verifica que la carpeta `.specify/` existe en tu proyecto.
+
+### Verificar el estado final de la preparación
+
+Tu carpeta debería verse así:
+
+```
+FrontFlaskSDD/
+├── .specify/               # Spec Kit (templates y config)
 ├── .gitignore              # Archivos excluidos de Git
 ├── requirements.txt        # Dependencias Python
 ├── venv/                   # Entorno virtual (NO se sube a GitHub)
 ├── 01_Guia_SDD_SpecKit.md  # Documento de conceptos (si clonaste el repo)
 ├── 02_Comandos_SDD_FrontFlaskSDD.md  # Prompts exactos
-└── 03_Tutorial_SDD_Paso_a_Paso.md    # Este tutorial
+├── 03_Glosario_Conceptos.md          # Glosario de terminos
+├── 04_Tutorial_SDD_Paso_a_Paso.md    # Este tutorial
+└── Manual_de_Marca_Zenith.md         # Identidad visual de la empresa
 ```
 
 Verifica abriendo la carpeta `FrontFlaskSDD` en el explorador de archivos o en la terminal:
@@ -506,27 +598,29 @@ ls -la
 
 Debes ver: `.gitignore`, `requirements.txt`, `venv/` y los archivos `.md`.
 
-### Competencias adquiridas en esta seccion
+### Competencias adquiridas en está sección
 
 - [x] Saber instalar herramientas de desarrollo
-- [x] Verificar que una instalacion funciona desde la terminal
+- [x] Verificar que una instalación funciona desde la terminal
 - [x] Clonar un repositorio de GitHub
 - [x] Crear una base de datos y ejecutar scripts SQL
 - [x] Configurar una API para conectarse a la base de datos
-- [x] Arrancar una API y verificar que responde (Swagger + datos reales)
+- [x] Arrancar una API y verificar qué responde (Swagger + datos reales)
 - [x] Crear y activar un entorno virtual de Python (venv)
-- [x] Instalar librerias con pip y generar requirements.txt
+- [x] Instalar librerías con pip y generar requirements.txt
 - [x] Configurar .gitignore para excluir archivos innecesarios
+- [x] Instalar Spec Kit y verificar que los slash commands funcionan en Claude Code
+- [x] Saber la diferencia entre PowerShell (comandos del sistema) y Claude Code (comandos SDD)
 
 ---
 
 ## 3. FASE 0: /constitution — Las reglas del juego
 
-### Antes de ejecutar: conceptos que necesitas entender
+### Antes de ejecutar: conceptos qué necesitas entender
 
-#### Que es una arquitectura de software
+#### Qué es una arquitectura de software
 
-**Analogia:** Imagina que vas a construir una casa. Antes de poner el primer ladrillo, necesitas decidir:
+**Analogía:** Imagina que vas a construir una casa. Antes de poner el primer ladrillo, necesitas decidir:
 - Cuantos pisos tendra (estructura)
 - Donde va la cocina y donde el bano (organizacion)
 - Que materiales usaras — ladrillo, madera, concreto (tecnologia)
@@ -534,56 +628,56 @@ Debes ver: `.gitignore`, `requirements.txt`, `venv/` y los archivos `.md`.
 
 La **arquitectura de software** es exactamente eso, pero para programas. Define:
 - Como se organizan los archivos (estructura de carpetas)
-- Que tecnologias se usan (lenguajes, frameworks, librerias)
-- Como se comunican las partes entre si (patrones)
+- Que tecnologías se usan (lenguajes, frameworks, librerías)
+- Como se comunican las partes entre si (patrónes)
 
-#### Que es un framework
+#### Qué es un framework
 
-**Analogia:** Un framework es como un kit de construccion de LEGO. En vez de fabricar cada pieza desde cero, usas piezas prefabricadas que encajan entre si.
+**Analogía:** Un framework es como un kit de construccion de LEGO. En vez de fabricar cada pieza desde cero, usas piezas prefabricadas qué encajan entre si.
 
 | Sin framework | Con framework (Flask) |
 |---------------|----------------------|
-| Tienes que programar como recibir una peticion HTTP | Flask lo hace por ti con `@app.route("/ruta")` |
-| Tienes que programar como enviar HTML al navegador | Flask lo hace por ti con `render_template()` |
-| Tienes que programar como manejar sesiones | Flask lo hace por ti con `session["usuario"]` |
+| Tienes qué programar como recibir una petición HTTP | Flask lo hace por ti con `@app.route("/ruta")` |
+| Tienes qué programar como enviar HTML al navegador | Flask lo hace por ti con `render_template()` |
+| Tienes qué programar como manejar sesiónes | Flask lo hace por ti con `session["usuario"]` |
 
-**Por que Flask y no otros:**
+**Por qué Flask y no otros:**
 
-| Framework | Tipo | Por que NO lo usamos |
+| Framework | Tipo | Por qué NO lo usamos |
 |-----------|------|---------------------|
 | Django | Python, pesado | Viene con ORM y admin. Nosotros no usamos BD directa |
 | FastAPI | Python, APIs | Es para hacer APIs, no frontends con HTML |
 | React | JavaScript | Es frontend SPA. Nosotros usamos server-side rendering |
-| **Flask** | **Python, ligero** | **Perfecto: solo lo que necesitamos, nada mas** |
+| **Flask** | **Python, ligero** | **Perfecto: solo lo que necesitamos, nada más** |
 
-#### Que es un patron de diseno
+#### Qué es un patrón de diseño
 
-**Analogia:** Un patron es una solucion probada a un problema comun. Como una receta de cocina — no inventas como hacer arroz cada vez, sigues la receta que funciona.
+**Analogía:** Un patrón es una solucion probada a un problema comun. Como una receta de cocina — no inventas como hacer arroz cada vez, sigues la receta qué funciona.
 
-Patrones que usaremos:
+Patrones qué usaremos:
 
 | Patron | Que resuelve | En nuestro proyecto |
 |--------|-------------|-------------------|
-| **Blueprint** | Organizar un proyecto grande en modulos | Cada pagina (producto, cliente, factura) es un modulo independiente |
-| **Servicio generico** | No repetir el mismo codigo en cada modulo | Un solo `ApiService` con `listar()`, `crear()`, `actualizar()`, `eliminar()` que todos los modulos reutilizan |
-| **Middleware** | Ejecutar verificaciones antes de cada peticion | Verificar que el usuario esta logueado y tiene permiso para ver esa pagina |
+| **Blueprint** | Organizar un proyecto grande en módulos | Cada página (producto, cliente, factura) es un módulo independiente |
+| **Servicio genérico** | No repetir el mismo código en cada módulo | Un solo `ApiService` con `listar()`, `crear()`, `actualizar()`, `eliminar()` qué todos los módulos reutilizan |
+| **Middleware** | Ejecutar verificaciones antes de cada petición | Verificar que el usuario está logueado y tiene permiso para ver esa página |
 
 #### Seguridad en una frase
 
-| Concepto | Que es (una frase) |
+| Concepto | Qué es (una frase) |
 |----------|-------------------|
-| **JWT** (JSON Web Token) | Una "credencial digital" que el servidor te da cuando haces login y que debes presentar en cada peticion |
-| **BCrypt** | Un algoritmo que convierte tu contrasena en un codigo irreversible para guardarla de forma segura en la BD |
-| **RBAC** (Role-Based Access Control) | Un sistema donde los permisos se asignan a roles (Administrador, Vendedor) y los roles se asignan a usuarios |
+| **JWT** (JSON Web Token) | Una "credencial digital" que el servidor te da cuando haces login y que debes presentar en cada petición |
+| **BCrypt** | Un algoritmo qué convierte tu contraseña en un código irreversible para guardarla de forma segura en la BD |
+| **RBAC** (Role-Based Access Control) | Un sistema donde los permisos se asígnan a roles (Administrador, Vendedor) y los roles se asígnan a usuarios |
 
 ### Ejecutar el comando
 
-Ahora si. Abre tu asistente de IA y escribe:
+Ahora si. Abre tu asístente de IA y escribe:
 
 ```
 /speckit-constitution
 
-El proyecto FrontFlaskSDD es un frontend web que consume una API REST genérica en C#.
+El proyecto FrontFlaskSDD es un frontend web qué consume una API REST genérica en C#.
 Repositorio de la API: https://github.com/ccastro2050/ApiGenericaCsharp
 
 PRINCIPIOS DE TECNOLOGÍA:
@@ -599,7 +693,7 @@ PRINCIPIOS DE ARQUITECTURA:
 - Servicio genérico centralizado (ApiService) para operaciones CRUD (listar, crear, actualizar, eliminar)
 - Servicio genérico centralizado para ejecución de stored procedures (ejecutar_sp)
 - Servicio de autenticación separado (AuthService) con descubrimiento dinámico de PKs y FKs
-- Middleware de autenticación con @app.before_request que verifica sesión y permisos
+- Middleware de autenticación con @app.before_request qué verifica sesión y permisos
 - Context processor para inyectar variables de sesión (usuario, roles, rutas_permitidas) en todas las templates
 
 PRINCIPIOS DE SEGURIDAD:
@@ -607,25 +701,25 @@ PRINCIPIOS DE SEGURIDAD:
 - Control de acceso RBAC: las rutas permitidas por rol se consultan a la BD y se verifican en cada request
 - Contraseñas encriptadas con BCrypt (la API lo maneja vía parámetro camposEncriptar)
 - Secret key de Flask para encriptar cookies de sesión
-- Rutas públicas: /login, /logout, /recuperar-contrasena, /static
+- Rutas públicas: /login, /logout, /recuperar-contraseña, /static
 - Recuperación de contraseña vía SMTP (Gmail) con contraseña temporal
 - Las facturas NO se borran físicamente. Se anulan (borrado lógico con campo estado: 'activa'/'anulada'). El borrado físico (DELETE) solo lo puede hacer el administrador
 
 PRINCIPIOS DE IDENTIDAD VISUAL (ver Manual_de_Marca_Zenith.md):
 - Color primario: Azul Zenith #0A2647 (sidebar, encabezados de tabla, fondo login)
-- Color secundario: Dorado Zenith #E8AA2E (botones primarios, hover del menú, links activos, focus de inputs)
+- Color secundario: Dorado Zenith #E8AA2E (botónes primarios, hover del menú, links activos, focus de inputs)
 - Color de acento: Azul Medio #144272 (hover sidebar, bordes activos)
 - Tipografía principal: Inter (Google Fonts) para títulos y cuerpo
 - Tipografía monoespaciada: JetBrains Mono para códigos de producto, números de factura y precios
 - Todas las variables de color, tipografía, bordes y sombras deben estar en CSS custom properties (:root) en app.css
 - NO usar los colores por defecto de Bootstrap. Sobrescribirlos con las variables de la marca Zenith
-- Iconos: Bootstrap Icons (bi bi-*). Cada módulo del menú tiene su icono asignado en el manual de marca
+- Iconos: Bootstrap Icons (bi bi-*). Cada módulo del menú tiene su icono asígnado en el manual de marca
 - Alertas/flash messages: borde izquierdo de 4px con color de estado (verde éxito, rojo error, ámbar advertencia, azul info)
 - Login: fondo gradiente azul oscuro (#0A2647 → #144272), tarjeta blanca centrada, botón dorado 100% ancho
 
 PRINCIPIOS DE CÓDIGO:
 - Archivos en español (nombres de variables, comentarios, mensajes flash)
-- snake_case para variables y funciones Python
+- snake_case para variables y funciónes Python
 - Cada Blueprint en su propio archivo dentro de routes/
 - Templates organizadas en templates/pages/, templates/layout/, templates/components/
 - Un solo archivo CSS personalizado en static/css/app.css
@@ -640,21 +734,21 @@ PRINCIPIOS DE TESTING:
 PRINCIPIOS DE DOCUMENTACIÓN:
 - Docstrings en cada archivo Python explicando qué hace y cómo se relaciona con otros archivos
 - Comentarios extensos tipo tutorial (el proyecto es educativo)
-- Diagramas Mermaid en documentación Markdown
+- Diagramás Mermaid en documentación Markdown
 ```
 
 ### Despues de ejecutar: como revisar el resultado
 
-La IA generara un archivo `constitution.md`. Abrelo y verifica con esta checklist:
+La IA generara un archivo `constitution.md`. Abrelo y verifica con está checklist:
 
-#### Checklist de revision
+#### Checklist de revisión
 
 - [ ] **Tecnologias correctas:** Menciona Flask, Jinja2, Bootstrap 5, Python 3.12?
 - [ ] **Sin ORM:** Dice explicitamente que no se usa SQLAlchemy ni acceso directo a BD?
-- [ ] **Blueprint:** Menciona el patron Blueprint para organizar modulos?
-- [ ] **Servicio generico:** Menciona ApiService centralizado?
+- [ ] **Blueprint:** Menciona el patrón Blueprint para organizar módulos?
+- [ ] **Servicio genérico:** Menciona ApiService centralizado?
 - [ ] **JWT + BCrypt + RBAC:** Menciona los 3 conceptos de seguridad?
-- [ ] **Espanol:** Dice que el codigo y comentarios son en espanol?
+- [ ] **Espanol:** Dice que el código y comentarios son en español?
 - [ ] **Sin React/Vue:** Dice que no se usa JavaScript frameworks?
 - [ ] **Tests reales:** Dice que los tests son contra la API real, no mocks?
 
@@ -662,49 +756,49 @@ La IA generara un archivo `constitution.md`. Abrelo y verifica con esta checklis
 
 | Error | Causa | Solucion |
 |-------|-------|----------|
-| La IA incluyo Django | No leyo bien los principios | Editar constitution.md y cambiar Django por Flask. O re-ejecutar con mas enfasis |
-| Faltan principios de seguridad | El prompt fue muy largo y la IA se salto partes | Re-ejecutar solo la seccion de seguridad |
-| El archivo esta en ingles | No especificaste el idioma | Agregar al prompt: "Todo el documento debe estar en espanol" |
+| La IA incluyo Django | No leyo bien los principios | Editar constitution.md y cambiar Django por Flask. O re-ejecutar con más enfasís |
+| Faltan principios de seguridad | El prompt fue muy largo y la IA se salto partes | Re-ejecutar solo la sección de seguridad |
+| El archivo está en inglés | No específicaste el idioma | Agregar al prompt: "Todo el documento debe estar en español" |
 
 #### Ejercicio practico
 
 Agrega un principio propio a la constitution. Ejemplo:
 
 ```
-- Toda pagina debe tener un titulo descriptivo en la pestana del navegador
+- Toda página debe tener un titulo descriptivo en la pestana del navegador
 ```
 
 Edita el archivo `constitution.md` directamente y guardalo. Este principio ahora sera respetado por todos los comandos siguientes.
 
 ### Competencia adquirida
 
-> **Despues de completar esta fase, ya sabes:**
-> Definir las reglas fundamentales de un proyecto de software — que tecnologias usar, como organizar el codigo, que practicas seguir. Esto es lo que hace un **arquitecto de software** al inicio de cada proyecto.
+> **Despues de completar está fase, ya sabes:**
+> Definir las reglas fundamentales de un proyecto de software — qué tecnologías usar, como organizar el código, qué prácticas seguir. Esto es lo que hace un **arquitecto de software** al inicio de cada proyecto.
 
 ---
 
 ## 4. FASE 1: /specify — El contrato de lo que vamos a construir
 
-### Antes de ejecutar: conceptos que necesitas entender
+### Antes de ejecutar: conceptos qué necesitas entender
 
-#### Que es un requisito funcional vs no funcional
+#### Qué es un requisito funcional vs no funcional
 
-**Analogia:** Si estas construyendo un carro:
+**Analogía:** Si estás construyendo un carro:
 
 | Tipo | Ejemplo carro | Ejemplo software |
 |------|---------------|-----------------|
 | **Funcional** (que hace) | "Debe tener 4 puertas" | "El usuario puede crear un producto" |
-| **No funcional** (como lo hace) | "Debe ir a 200 km/h" | "La pagina debe cargar en menos de 2 segundos" |
+| **No funcional** (cómo lo hace) | "Debe ir a 200 km/h" | "La página debe cargar en menos de 2 segúndos" |
 
 Los requisitos funcionales describen **que puede hacer el usuario**. Los no funcionales describen **como debe comportarse el sistema**.
 
-#### Que es un CRUD
+#### Qué es un CRUD
 
-CRUD son las 4 operaciones basicas sobre datos. Casi todo en software es un CRUD:
+CRUD son las 4 operaciones básicas sobre datos. Casí todo en software es un CRUD:
 
 ```mermaid
 graph LR
-    subgraph CRUD["Las 4 operaciones basicas"]
+    subgraph CRUD["Las 4 operaciones básicas"]
         C["CREATE
         Crear un registro nuevo
         Ejemplo: Agregar un producto"]
@@ -725,69 +819,69 @@ graph LR
     style D fill:#ef4444,stroke:#dc2626,color:#fff
 ```
 
-En nuestro proyecto hay **7 CRUDs simples** (producto, persona, empresa, cliente, vendedor, rol, ruta). Todos funcionan igual: una tabla con datos, un formulario para crear/editar, un boton para eliminar.
+En nuestro proyecto hay **7 CRUDs simples** (producto, persona, empresa, cliente, vendedor, rol, ruta). Todos funcionan igual: una tabla con datos, un formulario para crear/editar, un botón para eliminar.
 
-#### Que es un stored procedure (y por que facturas lo necesita)
+#### Qué es un stored procedure (y por qué facturas lo necesita)
 
-**Analogia:** Imagina que en un restaurante, en vez de pedirle al mesero "traeme pan, luego mantequilla, luego un cuchillo", le dices "traeme el combo desayuno". El combo es un **procedimiento almacenado**: una instruccion que ejecuta varios pasos en la base de datos como una sola operacion.
+**Analogía:** Imagina que en un restaurante, en vez de pedirle al mesero "traeme pan, luego mantequilla, luego un cuchillo", le dices "traeme el combo desayuno". El combo es un **procedimiento almacenado**: una instruccion qué ejecuta varios pasos en la base de datos como una sola operación.
 
-**Por que facturas lo necesita:** Crear una factura implica:
+**Por qué facturas lo necesita:** Crear una factura implica:
 
-1. Insertar la factura (numero, cliente, vendedor)
+1. Insertar la factura (número, cliente, vendedor)
 2. Insertar cada producto de la factura (producto, cantidad)
 3. Calcular subtotales por producto
 4. Descontar stock de cada producto
 5. Calcular el total de la factura
 
-Si alguno de estos pasos falla (por ejemplo, no hay stock suficiente), **todos** deben revertirse. Esto se llama **transaccion** y los stored procedures lo manejan automaticamente.
+Si alguno de estos pasos falla (por ejemplo, no hay stock suficiente), **todos** deben revertirse. Esto se llama **transacción** y los stored procedures lo manejan automáticamente.
 
-#### Que es un flujo de usuario
+#### Qué es un flujo de usuario
 
-Es la secuencia de pasos que sigue un usuario para completar una tarea. Ejemplo del login:
+Es la secuencia de pasos qué sigue un usuario para completar una tarea. Ejemplo del login:
 
 ```mermaid
 graph TB
-    A["Usuario abre /login"] --> B["Escribe email y contrasena"]
-    B --> C["Presiona 'Iniciar sesion'"]
+    A["Usuario abre /login"] --> B["Escribe email y contraseña"]
+    B --> C["Presiona 'Iniciar sesión'"]
     C --> D{"La API verifica
     con BCrypt"}
     D -->|Correcto| E["Cargar roles y rutas"]
     D -->|Incorrecto| F["Mostrar error
     'Credenciales incorrectas'"]
     F --> A
-    E --> G["Guardar en sesion:
+    E --> G["Guardar en sesión:
     token, roles, rutas_permitidas"]
     G --> H["Redirigir a Home /"]
     H --> I["El middleware verifica
-    permisos en cada pagina"]
+    permisos en cada página"]
 
     style D fill:#f59e0b,stroke:#d97706,color:#fff
     style F fill:#ef4444,stroke:#dc2626,color:#fff
     style H fill:#22c55e,stroke:#16a34a,color:#fff
 ```
 
-#### Que es un criterio de aceptacion
+#### Qué es un criterio de aceptación
 
-Es la respuesta a la pregunta: **"Como se que esto esta terminado y funciona?"**
+Es la respuestá a la pregunta: **"Como se qué esto está terminado y funciona?"**
 
-| Funcionalidad | Criterio de aceptacion |
+| Funcionalidad | Criterio de aceptación |
 |---------------|----------------------|
-| Login | Al ingresar email y contrasena correctos, se redirige al home con mensaje de bienvenida |
+| Login | Al ingresar email y contraseña correctos, se redirige al home con mensaje de bienvenida |
 | Crear producto | Al llenar el formulario y presionar guardar, el producto aparece en la lista |
-| Eliminar factura | Al confirmar la eliminacion, la factura desaparece y el stock de los productos se restaura |
+| Eliminar factura | Al confirmar la eliminación, la factura desaparece y el stock de los productos se restaura |
 
 ### Ejecutar el comando
 
 ```
 /speckit-specify
 
-El proyecto FrontFlaskSDD es un frontend Flask que consume la API REST genérica ApiGenericaCsharp.
+El proyecto FrontFlaskSDD es un frontend Flask qué consume la API REST genérica ApiGenericaCsharp.
 Repositorio de la API: https://github.com/ccastro2050/ApiGenericaCsharp
 
 FUNCIONALIDADES DEL SISTEMA:
 
 1. AUTENTICACIÓN Y SEGURIDAD
-   - Login con email y contraseña (POST a /api/autenticacion/token)
+   - Login con email y contraseña (POST a /api/autenticación/token)
    - La API valida credenciales con BCrypt y retorna JWT
    - Almacenar token JWT en session de Flask
    - Logout (limpiar sesión)
@@ -801,7 +895,7 @@ FUNCIONALIDADES DEL SISTEMA:
    - Middleware @app.before_request verifica en cada request:
      a) Si es ruta pública (/login, /static) → dejar pasar
      b) Si no hay sesión → redirigir a /login
-     c) Si debe cambiar contraseña → redirigir a /cambiar-contrasena
+     c) Si debe cambiar contraseña → redirigir a /cambiar-contraseña
      d) Si la ruta no está en rutas_permitidas → mostrar página 403
    - Menú de navegación dinámico: solo muestra las rutas permitidas para el usuario
    - La consulta de roles y rutas se hace con UNA sola consulta SQL vía ConsultasController
@@ -811,9 +905,9 @@ FUNCIONALIDADES DEL SISTEMA:
 3. CRUDS SIMPLES (7 módulos)
    Cada módulo tiene: listado con tabla, formulario crear, formulario editar, eliminar con confirmación.
    Todos usan el ApiService genérico (mismos 4 métodos: listar, crear, actualizar, eliminar).
-   - Producto: codigo (PK), nombre, stock, valorunitario
-   - Persona: codigo (PK), nombre, email, telefono
-   - Empresa: codigo (PK), nombre
+   - Producto: código (PK), nombre, stock, valorunitario
+   - Persona: código (PK), nombre, email, telefono
+   - Empresa: código (PK), nombre
    - Cliente: id (PK auto), credito, fkcodpersona (FK→persona), fkcodempresa (FK→empresa)
    - Vendedor: id (PK auto), carnet, dirección, fkcodpersona (FK→persona)
    - Rol: id (PK auto), nombre
@@ -858,33 +952,33 @@ FLUJOS DE USUARIO CRÍTICOS:
 
 ### Despues de ejecutar: como revisar el resultado
 
-La IA generara un archivo `spec.md`. Este es el documento mas importante del proyecto — es el "contrato" de lo que se va a construir.
+La IA generara un archivo `spec.md`. Este es el documento más importante del proyecto — es el "contrato" de lo que se va a construir.
 
-#### Como leer spec.md seccion por seccion
+#### Cómo leer spec.md sección por sección
 
-| Seccion del spec.md | Que buscar | Pregunta clave |
+| Sección del spec.md | Que buscar | Pregunta clave |
 |---------------------|-----------|----------------|
-| Descripcion del proyecto | Resumen general | Alguien que no conoce el proyecto, lo entenderia con esta descripcion? |
-| Requisitos funcionales | Lista numerada (RF-001, RF-002...) | Cada funcionalidad que pedimos en el prompt tiene un requisito? |
+| Descripción del proyecto | Resumen general | Alguien que no conoce el proyecto, lo entendería con está descripción? |
+| Requisitos funcionales | Lista numerada (RF-001, RF-002...) | Cada funcionalidad qué pedimos en el prompt tiene un requisito? |
 | Requisitos no funcionales | Rendimiento, seguridad, usabilidad | Se menciona JWT, BCrypt, RBAC? |
-| Flujos de usuario | Secuencias paso a paso | El flujo de login esta completo? El de factura? |
-| Criterios de aceptacion | Condiciones de "terminado" | Cada requisito tiene al menos 1 criterio de aceptacion? |
+| Flujos de usuario | Secuencias paso a paso | El flujo de login está completo? El de factura? |
+| Criterios de aceptación | Condiciones de "terminado" | Cada requisito tiene al menos 1 criterio de aceptación? |
 
-#### Checklist de revision
+#### Checklist de revisión
 
 - [ ] Hay al menos 7 requisitos para los CRUDs simples?
 - [ ] Hay requisitos para los 15 stored procedures?
-- [ ] El flujo de login incluye: verificar BCrypt, cargar roles, cargar rutas, guardar en sesion?
+- [ ] El flujo de login incluye: verificar BCrypt, cargar roles, cargar rutas, guardar en sesión?
 - [ ] El flujo de factura incluye: seleccionar cliente, vendedor, agregar N productos, enviar SP?
 - [ ] Se menciona el middleware RBAC?
-- [ ] Se menciona el menu dinamico?
-- [ ] Se menciona la recuperacion de contrasena por email SMTP?
+- [ ] Se menciona el menú dinámico?
+- [ ] Se menciona la recuperación de contraseña por email SMTP?
 
 #### Ejercicio practico
 
-Busca algo que falte en el spec.md. Ejemplo:
+Busca algo qué falte en el spec.md. Ejemplo:
 
-- "No menciona que el formulario de crear producto debe validar que el stock sea un numero positivo"
+- "No menciona que el formulario de crear producto debe validar que el stock sea un número positivo"
 - "No dice que pasa si el usuario intenta crear una factura sin productos"
 
 Agrega esos requisitos faltantes al spec.md manualmente. **Esto es lo que hace un analista de requisitos en la vida real.**
@@ -893,41 +987,41 @@ Agrega esos requisitos faltantes al spec.md manualmente. **Esto es lo que hace u
 
 | Problema | Opcion | Que hacer |
 |----------|--------|-----------|
-| Faltan requisitos completos (ej: no menciono facturas) | **B** (re-ejecutar) | Mejorar el prompt agregando las funcionalidades faltantes con mas detalle |
-| Los requisitos son vagos (ej: "gestionar productos") | **A** (editar) | Reemplazar en spec.md por requisitos especificos: "listar en tabla, crear con formulario, editar, eliminar con confirmacion" |
+| Faltan requisitos completos (ej: no menciono facturas) | **B** (re-ejecutar) | Mejorar el prompt agregando las funcionalidades faltantes con más detalle |
+| Los requisitos son vagos (ej: "gestionar productos") | **A** (editar) | Reemplazar en spec.md por requisitos específicos: "listar en tabla, crear con formulario, editar, eliminar con confirmación" |
 | La IA invento funcionalidades que no pediste | **A** (editar) | Eliminar los requisitos inventados directamente del spec.md |
-| Los flujos de usuario estan incompletos | **A** (editar) o **B** (ejecutar `/clarify`) | Agregar pasos faltantes manualmente o ejecutar `/clarify` para que la IA pregunte |
+| Los flujos de usuario están incompletos | **A** (editar) o **B** (ejecutar `/clarify`) | Agregar pasos faltantes manualmente o ejecutar `/clarify` para que la IA pregunte |
 
 ### Competencia adquirida
 
-> **Despues de completar esta fase, ya sabes:**
+> **Despues de completar está fase, ya sabes:**
 > Escribir requisitos de software formales. Sabes la diferencia entre requisito funcional y no funcional. Sabes que es un CRUD, un stored procedure y un flujo de usuario. Esto es lo que hace un **analista de requisitos** o **product owner**.
 
 ---
 
 ## 5. FASE 2: /clarify — Las preguntas que no te hiciste
 
-### Antes de ejecutar: conceptos que necesitas entender
+### Antes de ejecutar: conceptos qué necesitas entender
 
-#### Que es ambiguedad en requisitos
+#### Qué es ambigüedad en requisitos
 
-**Analogia:** Si alguien te dice "hazme una torta grande", eso es ambiguo:
+**Analogía:** Si alguien te dice "hazme una torta grande", eso es ambiguo:
 - Grande para cuantas personas? 10? 50?
-- De que sabor? Chocolate? Vainilla?
+- De qué sabor? Chocolate? Vainilla?
 - Con decoracion o sin ella?
 
-En software pasa lo mismo. Si el requisito dice "el usuario puede recuperar su contrasena", queda la duda:
-- Se envia un link por email o una contrasena temporal?
+En software pasa lo mismo. Si el requisito dice "el usuario puede recuperar su contraseña", queda la duda:
+- Se envía un link por email o una contraseña temporal?
 - El link expira? En cuanto tiempo?
 - Cuantos intentos puede hacer por hora?
 
-**La ambiguedad es cara.** Si no la resuelves ahora, la resolveras despues con retrabajos, bugs y tiempo perdido.
+**La ambigüedad es cara.** Si no la resuelves ahora, la resolveras después con retrabajos, bugs y tiempo perdido.
 
-#### Por que las preguntas son mas valiosas que las respuestas
+#### Por que las preguntas son más valiosas que las respuestas
 
 > *"Un problema bien definido es un problema medio resuelto."*
 
-La fase `/clarify` no es un paso burocratico — es donde se evitan los errores mas costosos. Un programador experimentado pasa mas tiempo preguntando que codificando.
+La fase `/clarify` no es un paso burocratico — es donde se evitan los errores más costosos. Un programador experimentado pasa más tiempo preguntando qué codificando.
 
 ### Ejecutar el comando
 
@@ -937,32 +1031,32 @@ La fase `/clarify` no es un paso burocratico — es donde se evitan los errores 
 
 La IA leera tu `spec.md` y generara entre 3 y 5 preguntas sobre puntos ambiguos.
 
-### Despues de ejecutar: como responder las preguntas
+### Despues de ejecutar: cómo responder las preguntas
 
 **Regla de oro:** No respondas "si" o "no" a todo. Responde con contexto y razon.
 
 | Forma incorrecta | Forma correcta |
 |-------------------|----------------|
-| "Si" | "Si, la encriptacion la hace la API C# via el parametro `?camposEncriptar=contrasena` en el query string. El frontend NUNCA maneja hashes directamente." |
-| "No se" | "No estoy seguro. En el proyecto existente se cachea en sesion al login. Prefiero mantener ese enfoque para no hacer consultas en cada request." |
+| "Si" | "Si, la encriptacion la hace la API C# vía el parámetro `?camposEncriptar=contraseña` en el query string. El frontend NUNCA maneja hashes directamente." |
+| "No se" | "No estoy seguro. En el proyecto existente se cachea en sesión al login. Prefiero mantener ese enfoque para no hacer consultas en cada request." |
 
-#### Preguntas que la IA probablemente hara (y como responder)
+#### Preguntas que la IA probablemente hará (y cómo responder)
 
-| Pregunta probable | Tu respuesta |
+| Pregunta probable | Tu respuestá |
 |-------------------|-------------|
-| *"La encriptacion BCrypt se hace en el frontend o en la API?"* | En la API C#. El frontend envia la contrasena en texto plano por HTTPS, la API la encripta con BCrypt via `?camposEncriptar=contrasena`. |
-| *"El menu de navegacion se genera en cada request?"* | No. Se cachea en la sesion de Flask al login. `session["rutas_permitidas"]` se carga una vez y el `context_processor` lo inyecta en todas las templates. |
-| *"Como se agregan los N productos al formulario de factura?"* | Con campos HTML `prod_codigo[]` y `prod_cantidad[]`. Flask los recoge con `request.form.getlist()`. Se construye un JSON array y se pasa al SP como `p_productos`. |
-| *"La recuperacion de contrasena usa link o contrasena temporal?"* | Contrasena temporal. Se genera un string aleatorio de 8 caracteres, se guarda encriptada en la BD, se envia por SMTP Gmail, y se fuerza el cambio al siguiente login. |
-| *"El descubrimiento de PKs y FKs es dinamico?"* | Si. AuthService consulta `GET /api/estructuras/{tabla}/modelo` para descubrir PKs y FKs. Los resultados se cachean en `_fk_cache` en memoria. |
+| *"La encriptacion BCrypt se hace en el frontend o en la API?"* | En la API C#. El frontend envía la contraseña en texto plano por HTTPS, la API la encripta con BCrypt vía `?camposEncriptar=contraseña`. |
+| *"El menú de navegación se genera en cada request?"* | No. Se cachea en la sesión de Flask al login. `session["rutas_permitidas"]` se carga una vez y el `context_processor` lo inyecta en todas las templates. |
+| *"Como se agregan los N productos al formulario de factura?"* | Con campos HTML `prod_código[]` y `prod_cantidad[]`. Flask los recoge con `request.form.getlist()`. Se construye un JSON array y se pasa al SP como `p_productos`. |
+| *"La recuperación de contraseña usa link o contraseña temporal?"* | Contrasena temporal. Se genera un string aleatorio de 8 caracteres, se guarda encriptada en la BD, se envía por SMTP Gmail, y se fuerza el cambio al siguiente login. |
+| *"El descubrimiento de PKs y FKs es dinámico?"* | Si. AuthService consulta `GET /api/estructuras/{tabla}/modelo` para descubrir PKs y FKs. Los resultados se cachean en `_fk_cache` en memoria. |
 
 ### Ejercicio practico
 
-Piensa en 3 preguntas que la IA **no hizo** pero deberia haber hecho. Ejemplo:
+Piensa en 3 preguntas que la IA **no hizo** pero debería haber hecho. Ejemplo:
 
 1. "Que pasa si el usuario intenta acceder a una ruta que no existe (404)?"
-2. "Cuanto tiempo dura la sesion de Flask antes de expirar?"
-3. "Que pasa si la API no esta corriendo cuando el frontend intenta conectarse?"
+2. "Cuanto tiempo dura la sesión de Flask antes de expirar?"
+3. "Que pasa si la API no está corriendo cuando el frontend intenta conectarse?"
 
 Respondelas tu mismo y agrega las respuestas al `spec.md`.
 
@@ -970,41 +1064,41 @@ Respondelas tu mismo y agrega las respuestas al `spec.md`.
 
 | Problema | Opcion | Que hacer |
 |----------|--------|-----------|
-| La IA hizo preguntas irrelevantes o demasiado obvias | **A** (editar) | Ignorar esas preguntas. Agregar tus propias preguntas y respuestas al spec.md |
-| La IA no pregunto sobre aspectos criticos (seguridad, rendimiento) | **A** (editar) | Agregar las preguntas y respuestas que faltan directamente al spec.md |
+| La IA hizo preguntas irrelevantes o demasíado obvias | **A** (editar) | Ignorar esas preguntas. Agregar tus propias preguntas y respuestas al spec.md |
+| La IA no pregunto sobre aspectos críticos (seguridad, rendimiento) | **A** (editar) | Agregar las preguntas y respuestas qué faltan directamente al spec.md |
 | Las respuestas que la IA integro al spec.md son incorrectas | **A** (editar) | Corregir las respuestas en el spec.md. Tu conoces tu proyecto mejor que la IA |
 
 ### Competencia adquirida
 
-> **Despues de completar esta fase, ya sabes:**
-> Identificar puntos ambiguos en un documento de requisitos y resolverlos con preguntas especificas. Sabes que las preguntas correctas previenen bugs y retrabajos. Esto es lo que hace un **analista senior** o un **tech lead** en las reuniones de refinamiento.
+> **Despues de completar está fase, ya sabes:**
+> Identificar puntos ambiguos en un documento de requisitos y resolverlos con preguntas específicas. Sabes que las preguntas correctas previenen bugs y retrabajos. Esto es lo que hace un **analista senior** o un **tech lead** en las reuniones de refinamiento.
 
 ---
 
 ## 6. FASE 3: /plan — El plano de la casa
 
-### Antes de ejecutar: conceptos que necesitas entender
+### Antes de ejecutar: conceptos qué necesitas entender
 
-#### Que es una arquitectura de carpetas
+#### Qué es una arquitectura de carpetas
 
-**Analogia:** En una oficina, los documentos no se guardan todos en un solo cajon. Hay carpetas para "Finanzas", "Recursos Humanos", "Ventas". Cada carpeta tiene subcarpetas. Si alguien nuevo llega, sabe donde buscar.
+**Analogía:** En una oficina, los documentos no se guardan todos en un solo cajon. Hay carpetas para "Finanzas", "Recursos Humanos", "Ventas". Cada carpeta tiene subcarpetas. Si alguien nuevo llega, sabe donde buscar.
 
 En software es igual:
 
 ```
 mi-proyecto/
-├── routes/          <- Las "paginas" del sitio (producto, cliente, factura)
-├── services/        <- La logica de negocio (conectarse a la API, autenticar)
-├── templates/       <- Los archivos HTML que ve el usuario
+├── routes/          <- Las "páginas" del sitio (producto, cliente, factura)
+├── services/        <- La lógica de negocio (conectarse a la API, autenticar)
+├── templates/       <- Los archivos HTML qué ve el usuario
 ├── static/          <- Imagenes, CSS, JavaScript
-└── middleware/      <- Codigo que se ejecuta ANTES de cada pagina
+└── middleware/      <- Código que se ejecuta ANTES de cada página
 ```
 
-**Por que importa:** Si un proyecto no tiene buena estructura de carpetas, se vuelve un caos cuando crece. No sabes donde esta cada cosa.
+**Por qué importa:** Si un proyecto no tiene buena estructura de carpetas, se vuelve un caos cuando crece. No sabes donde está cada cosa.
 
-#### Que es una API REST
+#### Qué es una API REST
 
-**Analogia:** Imagina un restaurante. Tu (el cliente/frontend) no entras a la cocina. Le dices al mesero (la API) lo que quieres y el te trae la comida (los datos).
+**Analogía:** Imagina un restaurante. Tu (el cliente/frontend) no entras a la cocina. Le dices al mesero (la API) lo que quieres y el te trae la comida (los datos).
 
 ```mermaid
 graph LR
@@ -1028,21 +1122,21 @@ graph LR
 
 Los 4 "pedidos" que puedes hacer:
 
-| Metodo HTTP | Analogia restaurante | Que hace |
+| Metodo HTTP | Analogía restaurante | Que hace |
 |-------------|---------------------|----------|
 | **GET** | "Traeme el menu" | Leer/consultar datos |
 | **POST** | "Quiero ordenar un plato nuevo" | Crear un registro |
 | **PUT** | "Cambiale la salsa a mi plato" | Actualizar un registro |
 | **DELETE** | "Ya no quiero ese plato, retiremelo" | Eliminar un registro |
 
-#### Que es un middleware
+#### Qué es un middleware
 
-**Analogia:** Es el guardia de seguridad en la puerta de un edificio. Antes de que entres a cualquier oficina (pagina), el guardia verifica:
+**Analogía:** Es el guardia de seguridad en la puerta de un edificio. Antes de qué entres a cuálquier oficina (página), el guardia verifica:
 
-1. Tienes credencial? (sesion activa)
-2. Tienes permiso para esta oficina? (ruta permitida)
+1. Tienes credencial? (sesión activa)
+2. Tienes permiso para está oficina? (ruta permitida)
 3. Si no tienes credencial, te manda a recepcion (login)
-4. Si no tienes permiso, te dice "acceso denegado" (pagina 403)
+4. Si no tienes permiso, te dice "acceso denegado" (página 403)
 
 ```mermaid
 graph TB
@@ -1050,13 +1144,13 @@ graph TB
     (guardia de seguridad)"}
 
     MW -->|"Es /login o /static?"| PUB["Dejar pasar
-    (ruta publica)"]
-    MW -->|"No tiene sesion?"| LOGIN["Redirigir a /login"]
-    MW -->|"Debe cambiar contrasena?"| CAMBIAR["Redirigir a
-    /cambiar-contrasena"]
+    (ruta pública)"]
+    MW -->|"No tiene sesión?"| LOGIN["Redirigir a /login"]
+    MW -->|"Debe cambiar contraseña?"| CAMBIAR["Redirigir a
+    /cambiar-contraseña"]
     MW -->|"Tiene permiso?"| OK["Dejar pasar
     a /producto"]
-    MW -->|"NO tiene permiso?"| DENY["Mostrar pagina
+    MW -->|"NO tiene permiso?"| DENY["Mostrar página
     'Acceso Denegado' (403)"]
 
     style MW fill:#f59e0b,stroke:#d97706,color:#fff
@@ -1065,19 +1159,19 @@ graph TB
     style LOGIN fill:#3b82f6,stroke:#1d4ed8,color:#fff
 ```
 
-#### Que es un template engine (Jinja2)
+#### Qué es un template engine (Jinja2)
 
-**Analogia:** Imagina una carta modelo con espacios en blanco:
+**Analogía:** Imagina una carta modelo con espacios en blanco:
 
 ```
-Estimado __________, su pedido #________ por $________ esta listo.
+Estimado __________, su pedido #________ por $________ está listo.
 ```
 
 Jinja2 funciona igual, pero con HTML:
 
 ```html
 <h1>Bienvenido, {{ nombre_usuario }}</h1>
-<p>Tienes {{ roles|length }} roles asignados.</p>
+<p>Tienes {{ roles|length }} roles asígnados.</p>
 
 {% if "/producto" in rutas_permitidas %}
     <a href="/producto">Ver productos</a>
@@ -1090,7 +1184,7 @@ Jinja2 funciona igual, pero con HTML:
 | `{% if condicion %}` | Condicional (mostrar u ocultar algo) |
 | `{% for item in lista %}` | Repetir un bloque para cada elemento |
 | `{% include 'archivo.html' %}` | Incluir otro archivo HTML dentro de este |
-| `{% block content %}{% endblock %}` | Definir una seccion que las paginas hijas pueden llenar |
+| `{% block content %}{% endblock %}` | Definir una sección que las páginas hijas pueden llenar |
 
 ### Ejecutar el comando
 
@@ -1098,24 +1192,24 @@ Jinja2 funciona igual, pero con HTML:
 /speckit-plan
 ```
 
-(No necesita prompt adicional — lee `constitution.md` y `spec.md` automaticamente)
+(No necesita prompt adicional — lee `constitution.md` y `spec.md` automáticamente)
 
 ### Despues de ejecutar: como revisar el resultado
 
-#### Checklist de revision
+#### Checklist de revisión
 
 - [ ] **Arquitectura de carpetas:** El plan define donde va cada archivo?
 - [ ] **Componentes:** Lista todos los archivos Python (app.py, routes/*.py, services/*.py)?
 - [ ] **Dependencias:** Menciona Flask, requests, pytest en un requirements.txt?
-- [ ] **ApiService:** Define los metodos listar, crear, actualizar, eliminar, ejecutar_sp?
-- [ ] **AuthService:** Define login, obtener_roles, obtener_rutas, cambiar_contrasena?
+- [ ] **ApiService:** Define los métodos listar, crear, actualizar, eliminar, ejecutar_sp?
+- [ ] **AuthService:** Define login, obtener_roles, obtener_rutas, cambiar_contraseña?
 - [ ] **Middleware:** Define before_request y context_processor?
-- [ ] **Templates:** Define base.html, nav_menu.html y las 14 paginas?
+- [ ] **Templates:** Define base.html, nav_menu.html y las 14 páginas?
 - [ ] **Respeta constitution:** No sugiere Django, React, ORM ni nada prohibido?
 
 #### Ejercicio practico
 
-Dibuja en un papel (si, papel fisico) la arquitectura del plan:
+Dibuja en un papel (si, papel físico) la arquitectura del plan:
 - Cajas para cada componente (ApiService, AuthService, Middleware, Blueprints)
 - Flechas mostrando quien llama a quien
 - Colores para diferenciar frontend, servicios, API
@@ -1126,53 +1220,53 @@ Comparalo con el diagrama del plan.md. Son iguales? Falta algo?
 
 | Problema | Opcion | Que hacer |
 |----------|--------|-----------|
-| La estructura de carpetas no es la que quieres | **A** (editar) | Corregir plan.md con tu estructura. El plan es TU diseno |
-| Sugiere librerias prohibidas (ej: SQLAlchemy, React) | **C** (ambos) | Verificar que la constitution lo prohibe. Editar plan.md y re-ejecutar reforzando: "Respetar estrictamente la constitution" |
-| Los componentes estan listados pero sin detalle | **B** (re-ejecutar) | Agregar al prompt: "Detallar los metodos de cada servicio y los endpoints que consume" |
-| La arquitectura no coincide con la spec | **B** (re-ejecutar) | Algo se perdio entre spec y plan. Re-ejecutar `/plan` verificando que spec.md esta completo |
+| La estructura de carpetas no es la qué quieres | **A** (editar) | Corregir plan.md con tu estructura. El plan es TU diseño |
+| Sugiere librerías prohibidas (ej: SQLAlchemy, React) | **C** (ambos) | Verificar que la constitution lo prohibe. Editar plan.md y re-ejecutar reforzando: "Respetar estrictamente la constitution" |
+| Los componentes están listados pero sin detalle | **B** (re-ejecutar) | Agregar al prompt: "Detallar los métodos de cada servicio y los endpoints qué consume" |
+| La arquitectura no coincide con la spec | **B** (re-ejecutar) | Algo se perdio entre spec y plan. Re-ejecutar `/plan` verificando qué spec.md está completo |
 
 ### Competencia adquirida
 
-> **Despues de completar esta fase, ya sabes:**
-> Leer un plan tecnico de implementacion. Entiendes que es una API REST, un middleware, un template engine y una arquitectura de carpetas. Sabes como se organizan los componentes de un proyecto web. Esto es lo que hace un **desarrollador full-stack** cuando planifica una feature.
+> **Despues de completar está fase, ya sabes:**
+> Leer un plan técnico de implementación. Entiendes qué es una API REST, un middleware, un template engine y una arquitectura de carpetas. Sabes cómo se organizan los componentes de un proyecto web. Esto es lo que hace un **desarrollador full-stack** cuando planifica una feature.
 
 ---
 
 ## 7. FASE 4: /tasks — La lista de trabajo
 
-### Antes de ejecutar: conceptos que necesitas entender
+### Antes de ejecutar: conceptos qué necesitas entender
 
-#### Que es una dependencia entre tareas
+#### Qué es una dependencia entre tareas
 
-**Analogia:** No puedes pintar una pared que no existe. Primero construyes la pared, luego la pintas.
+**Analogía:** No puedes pintar una pared que no existe. Primero construyes la pared, luego la pintas.
 
 En software:
 - No puedes crear el Blueprint de producto si no existe el ApiService (porque el Blueprint lo usa)
 - No puedes crear el middleware si no existe el AuthService (porque el middleware llama al auth)
-- No puedes crear el login si no existe el middleware (porque el login necesita rutas publicas)
+- No puedes crear el login si no existe el middleware (porque el login necesita rutas públicas)
 
-#### Que es una tarea aislada
+#### Qué es una tarea aislada
 
-Una buena tarea tiene estas caracteristicas:
+Una buena tarea tiene estás caracteristicas:
 
 | Caracteristica | Ejemplo bueno | Ejemplo malo |
 |----------------|--------------|-------------|
-| **Especifica** | "Crear api_service.py con metodo listar()" | "Hacer el servicio" |
+| **Especifica** | "Crear api_service.py con método listar()" | "Hacer el servicio" |
 | **Aislada** | "Crear Blueprint de producto" | "Crear todos los CRUDs" |
-| **Testeable** | "Verificar que listar('producto') retorna una lista" | "Verificar que funciona" |
+| **Testeable** | "Verificar qué listar('producto') retorna una lista" | "Verificar qué funciona" |
 | **Pequena** | 30-60 minutos de trabajo | 2 dias de trabajo |
 
-#### Que es paralelizable
+#### Qué es paralelizable
 
-Dos tareas son paralelizables cuando **no dependen una de la otra**. Se pueden hacer al mismo tiempo (o en cualquier orden):
+Dos tareas son paralelizables cuando **no dependen una de la otra**. Se pueden hacer al mismo tiempo (o en cuálquier orden):
 
 ```mermaid
 graph LR
-    subgraph Secuencial["Secuencial (una despues de otra)"]
+    subgraph Secuencial["Secuencial (una después de otra)"]
         S1["Crear ApiService"] --> S2["Crear Blueprint producto"]
     end
 
-    subgraph Paralelo["Paralelo (cualquier orden)"]
+    subgraph Paralelo["Paralelo (cuálquier orden)"]
         P1["Crear Blueprint producto"]
         P2["Crear Blueprint persona"]
         P3["Crear Blueprint empresa"]
@@ -1191,7 +1285,7 @@ Los 7 CRUDs simples son paralelizables entre si (todos usan ApiService pero no d
 
 ### Despues de ejecutar: como revisar el resultado
 
-#### Como leer tasks.md
+#### Cómo leer tasks.md
 
 Cada tarea debe tener:
 
@@ -1199,24 +1293,24 @@ Cada tarea debe tener:
 - [ ] Task N: Titulo descriptivo
   - Depende de: Task X, Task Y
   - Archivo(s): ruta/al/archivo.py
-  - Criterio: Como saber que esta terminada
+  - Criterio: Cómo saber qué está terminada
 ```
 
-#### Verificar el orden logico
+#### Verificar el orden lógico
 
-Preguntate para cada tarea: "Puedo hacer esta tarea si las anteriores no estan hechas?" Si la respuesta es "no", entonces la dependencia esta correcta.
+Preguntate para cada tarea: "Puedo hacer está tarea si las anteriores no están hechas?" Si la respuestá es "no", entonces la dependencia está correcta.
 
 ```mermaid
 graph TB
     T1["1. Estructura Flask + config.py"]
     T2["2. requirements.txt + venv"]
-    T3["3. ApiService generico"]
+    T3["3. ApiService genérico"]
     T4["4. Layout base.html + Bootstrap"]
     T5["5. AuthService (login, roles)"]
     T6["6. Middleware (before_request)"]
     T7["7. Blueprint auth (login/logout)"]
     T8["8. email_service.py (SMTP)"]
-    T9["9. nav_menu.html (menu RBAC)"]
+    T9["9. nav_menu.html (menú RBAC)"]
     T10["10. Blueprint home"]
     T11["11-17. CRUDs simples
     producto, persona, empresa,
@@ -1248,7 +1342,7 @@ graph TB
 #### Ejercicio practico
 
 Busca un error de dependencia en las tareas generadas. Ejemplo:
-- Si la Task 7 (Blueprint auth) aparece antes de la Task 6 (Middleware), eso es un error — el login necesita que existan las rutas publicas definidas en el middleware.
+- Si la Task 7 (Blueprint auth) aparece antes de la Task 6 (Middleware), eso es un error — el login necesita qué existan las rutas públicas definidas en el middleware.
 
 Corrige el orden en tasks.md.
 
@@ -1257,22 +1351,22 @@ Corrige el orden en tasks.md.
 | Problema | Opcion | Que hacer |
 |----------|--------|-----------|
 | El orden de dependencias es incorrecto | **A** (editar) | Reordenar manualmente en tasks.md. Tu conoces las dependencias mejor que la IA |
-| Hay tareas demasiado grandes (ej: "Crear todos los CRUDs") | **A** (editar) | Descomponer en tasks.md: una tarea por Blueprint |
-| Faltan tareas para requisitos de la spec | **B** (ejecutar `/analyze`) | El comando `/analyze` detecta gaps automaticamente. Luego agrega las tareas faltantes |
-| Las tareas no tienen criterios de completitud | **A** (editar) | Agregar a cada tarea una linea "Criterio: como saber que esta terminada" |
+| Hay tareas demasíado grandes (ej: "Crear todos los CRUDs") | **A** (editar) | Descomponer en tasks.md: una tarea por Blueprint |
+| Faltan tareas para requisitos de la spec | **B** (ejecutar `/analyze`) | El comando `/analyze` detecta gaps automáticamente. Luego agrega las tareas faltantes |
+| Las tareas no tienen criterios de completitud | **A** (editar) | Agregar a cada tarea una línea "Criterio: cómo saber qué está terminada" |
 
 ### Competencia adquirida
 
-> **Despues de completar esta fase, ya sabes:**
-> Descomponer un proyecto en tareas manejables, ordenarlas por dependencia e identificar cuales se pueden hacer en paralelo. Esto es lo que hace un **scrum master** o **tech lead** al planificar un sprint.
+> **Despues de completar está fase, ya sabes:**
+> Descomponer un proyecto en tareas manejables, ordenarlas por dependencia e identificar cuáles se pueden hacer en paralelo. Esto es lo que hace un **scrum master** o **tech lead** al planificar un sprint.
 
 ---
 
-## 8. FASE 5: /analyze — La auditoria
+## 8. FASE 5: /analyze — La auditoría
 
-### Antes de ejecutar: conceptos que necesitas entender
+### Antes de ejecutar: conceptos qué necesitas entender
 
-#### Que es consistencia entre documentos
+#### Qué es consistencia entre documentos
 
 Imagina que tu constitution dice "usar Flask" pero tu plan dice "instalar Django". Eso es una **inconsistencia**. El analyze busca este tipo de problemas entre los 4 documentos:
 
@@ -1292,7 +1386,7 @@ graph TB
     SPEC ---|"Cada requisito tiene
     componentes en el plan?"| PLAN
     PLAN ---|"Cada componente tiene
-    tareas asignadas?"| TASKS
+    tareas asígnadas?"| TASKS
     TASKS ---|"Ninguna tarea viola
     las reglas?"| CON
 
@@ -1302,15 +1396,15 @@ graph TB
     style TASKS fill:#f59e0b,stroke:#d97706,color:#fff
 ```
 
-#### Que es un gap
+#### Qué es un gap
 
-Un **gap** es algo que falta. Ejemplos:
+Un **gap** es algo qué falta. Ejemplos:
 
 | Gap | Problema |
 |-----|----------|
-| Requisito sin tarea | La spec pide "recuperar contrasena" pero no hay tarea para implementarla |
-| Tarea sin requisito | Hay una tarea "Crear modulo de reportes" pero la spec nunca pidio reportes |
-| Componente sin plan | El plan menciona email_service.py pero no dice que metodos debe tener |
+| Requisito sin tarea | La spec pide "recuperar contraseña" pero no hay tarea para implementarla |
+| Tarea sin requisito | Hay una tarea "Crear módulo de reportes" pero la spec nunca pidió reportes |
+| Componente sin plan | El plan menciona email_service.py pero no dice que métodos debe tener |
 
 ### Ejecutar el comando
 
@@ -1318,9 +1412,9 @@ Un **gap** es algo que falta. Ejemplos:
 /speckit-analyze
 ```
 
-### Despues de ejecutar: como interpretar el reporte
+### Despues de ejecutar: cómo interpretar el reporte
 
-El reporte mostrara:
+El reporte mostrará:
 - **Gaps:** requisitos sin tareas, tareas sin requisitos
 - **Contradicciones:** reglas violadas, inconsistencias entre documentos
 - **Sugerencias:** mejoras o puntos a clarificar
@@ -1331,37 +1425,37 @@ El reporte mostrara:
 
 | Problema | Opcion | Que hacer |
 |----------|--------|-----------|
-| El analyze no detecto gaps que tu si ves | **A** (editar) | Corregir los archivos (spec, plan, tasks) manualmente con los gaps que encontraste |
+| El analyze no detecto gaps que tu si ves | **A** (editar) | Corregir los archivos (spec, plan, tasks) manualmente con los gaps qué encontraste |
 | El analyze reporta demasiados falsos positivos | **A** (ignorar) | Evaluar cada reporte con criterio. No todo lo que la IA marca como gap es realmente un problema |
 | Despues de corregir, el analyze sigue reportando errores | **B** (re-ejecutar) | Puede ser que los archivos quedaron inconsistentes al editar. Re-ejecutar la fase anterior (ej: `/tasks`) para regenerar |
 
 ### Competencia adquirida
 
-> **Despues de completar esta fase, ya sabes:**
-> Auditar documentacion tecnica y encontrar inconsistencias. Sabes que un proyecto profesional requiere que sus documentos "cuadren" entre si. Esto es lo que hace un **QA analyst** o un **auditor tecnico**.
+> **Despues de completar está fase, ya sabes:**
+> Auditar documentación técnica y encontrar inconsistencias. Sabes que un proyecto profesional requiere qué sus documentos "cuadren" entre si. Esto es lo que hace un **QA analyst** o un **auditor técnico**.
 
 ---
 
 ## 9. FASE 6: /checklist — La lista del inspector
 
-### Antes de ejecutar: conceptos que necesitas entender
+### Antes de ejecutar: conceptos qué necesitas entender
 
-#### Que es un test de aceptacion
+#### Qué es un test de aceptación
 
 | Tipo de test | Quien lo hace | Que verifica | Ejemplo |
 |-------------|---------------|-------------|---------|
-| **Test unitario** | El programador | Que una funcion individual funciona | `listar("producto")` retorna una lista |
-| **Test de integracion** | El programador | Que dos componentes funcionan juntos | El Blueprint de producto puede llamar al ApiService |
-| **Test de aceptacion** | El usuario/cliente | Que la funcionalidad cumple lo que se pidio | "Puedo crear una factura con 3 productos y el total se calcula correctamente" |
+| **Test unitario** | El programador | Que una función individual funciona | `listar("producto")` retorna una lista |
+| **Test de integración** | El programador | Que dos componentes funcionan juntos | El Blueprint de producto puede llamar al ApiService |
+| **Test de aceptación** | El usuario/cliente | Que la funcionalidad cumple lo que se pidió | "Puedo crear una factura con 3 productos y el total se calcula correctamente" |
 
-La checklist es la version escrita de los tests de aceptacion — lo que el "cliente" verificaria.
+La checklist es la versión escrita de los tests de aceptación — lo que el "cliente" verificaría.
 
-#### Que es "Definition of Done"
+#### Qué es "Definition of Done"
 
-Es la respuesta a: **"Cuando podemos decir que esta tarea esta TERMINADA?"**
+Es la respuestá a: **"Cuando podemos decir qué está tarea está TERMINADA?"**
 
-No es solo "el codigo compila". Es:
-- El codigo funciona en el navegador
+No es solo "el código compila". Es:
+- El código funciona en el navegador
 - Pasa los criterios de la checklist
 - Respeta la constitution
 - Esta documentado
@@ -1378,16 +1472,16 @@ Ejemplo de lo que debe generar:
 
 ```markdown
 ## Autenticacion
-- [ ] Al ingresar email y contrasena correctos, redirige a home con flash "Bienvenido"
-- [ ] Al ingresar credenciales incorrectas, muestra flash "Error de autenticacion" en rojo
-- [ ] Al cerrar sesion, redirige a /login y no puede acceder a paginas protegidas
-- [ ] La contrasena se valida: minimo 6 chars, 1 mayuscula, 1 numero
+- [ ] Al ingresar email y contraseña correctos, redirige a home con flash "Bienvenido"
+- [ ] Al ingresar credenciales incorrectas, muestra flash "Error de autenticación" en rojo
+- [ ] Al cerrar sesión, redirige a /login y no puede acceder a páginas protegidas
+- [ ] La contraseña se valida: minimo 6 chars, 1 mayuscula, 1 número
 
 ## CRUD Producto
-- [ ] La tabla muestra codigo, nombre, stock, valorunitario de todos los productos
+- [ ] La tabla muestra código, nombre, stock, valorunitario de todos los productos
 - [ ] Al crear un producto, aparece en la lista con flash "success"
 - [ ] Al editar un producto, los cambios se reflejan en la tabla
-- [ ] Al eliminar un producto, desaparece de la lista con confirmacion previa
+- [ ] Al eliminar un producto, desaparece de la lista con confirmación previa
 
 ## Factura
 - [ ] Se puede seleccionar cliente y vendedor de dropdowns
@@ -1398,30 +1492,30 @@ Ejemplo de lo que debe generar:
 
 #### Ejercicio practico
 
-Marca cuales criterios ya se cumplen en el proyecto existente (FrontFlaskTutorial). Esto te da una idea de cuanto trabajo hay vs cuanto esta hecho.
+Marca cuáles criterios ya se cumplen en el proyecto existente (FrontFlaskTutorial). Esto te da una idea de cuanto trabajo hay vs cuanto está hecho.
 
 #### Si el resultado no cumple tus expectativas
 
 | Problema | Opcion | Que hacer |
 |----------|--------|-----------|
-| Los criterios son demasiado genericos (ej: "el login funciona") | **A** (editar) | Reemplazar por criterios especificos: "Al ingresar email y contrasena correctos, redirige a home con flash 'Bienvenido'" |
-| Faltan criterios para modulos completos | **A** (editar) | Agregar los criterios manualmente. Tu sabes que debe hacer cada modulo |
-| La checklist repite criterios de la spec sin agregar valor | **B** (re-ejecutar) | Re-ejecutar pidiendo: "Generar criterios de aceptacion VERIFICABLES, no repetir la spec" |
+| Los criterios son demasíado genéricos (ej: "el login funciona") | **A** (editar) | Reemplazar por criterios específicos: "Al ingresar email y contraseña correctos, redirige a home con flash 'Bienvenido'" |
+| Faltan criterios para módulos completos | **A** (editar) | Agregar los criterios manualmente. Tu sabes que debe hacer cada módulo |
+| La checklist repite criterios de la spec sin agregar valor | **B** (re-ejecutar) | Re-ejecutar pidiendo: "Generar criterios de aceptación VERIFICABLES, no repetir la spec" |
 
 ### Competencia adquirida
 
-> **Despues de completar esta fase, ya sabes:**
-> Definir criterios de calidad medibles para cada funcionalidad. Sabes la diferencia entre un test unitario, de integracion y de aceptacion. Esto es lo que hace un **QA lead** al definir los criterios de entrega.
+> **Despues de completar está fase, ya sabes:**
+> Definir criterios de calidad medibles para cada funcionalidad. Sabes la diferencia entre un test unitario, de integración y de aceptación. Esto es lo que hace un **QA lead** al definir los criterios de entrega.
 
 ---
 
 ## 10. FASE 7: /implement — Manos a la obra
 
-### Antes de ejecutar: conceptos que necesitas entender
+### Antes de ejecutar: conceptos qué necesitas entender
 
-> **Nota:** El entorno virtual (venv) y las dependencias (flask, requests, pytest) ya los creaste en la Seccion 2. Si no lo hiciste, regresa a la seccion "Crear el entorno virtual de Python" y completala antes de continuar.
+> **Nota:** El entorno virtual (venv) y las dependencias (flask, requests, pytest) ya los creaste en la Sección 2. Si no lo hiciste, regresa a la sección "Crear el entorno virtual de Python" y completala antes de continuar.
 
-Verifica que tu venv esta activo antes de empezar:
+Verifica que tu venv está activo antes de empezar:
 
 ```bash
 # Debes ver (venv) al inicio de tu terminal. Si no:
@@ -1429,7 +1523,7 @@ Verifica que tu venv esta activo antes de empezar:
 # Mac/Linux: source venv/bin/activate
 ```
 
-#### Que es Flask y como arranca
+#### Qué es Flask y como arranca
 
 ```python
 # app.py — esto es TODO lo que necesitas para arrancar
@@ -1444,9 +1538,9 @@ if __name__ == '__main__':
     app.run(port=5300)    # Arrancar en http://localhost:5300
 ```
 
-#### Que es un Blueprint
+#### Qué es un Blueprint
 
-**Analogia:** Un Blueprint es un "modulo enchufable". Como un bloque de LEGO que puedes agregar o quitar sin afectar al resto.
+**Analogía:** Un Blueprint es un "módulo enchufable". Como un bloque de LEGO que puedes agregar o quitar sin afectar al resto.
 
 ```python
 # routes/producto.py — Blueprint independiente
@@ -1468,12 +1562,12 @@ from routes.producto import bp as producto_bp
 app.register_blueprint(producto_bp)     # Listo, /producto funciona
 ```
 
-#### Que es Bootstrap
+#### Qué es Bootstrap
 
-**Analogia:** Es un "kit de CSS listo para usar". En vez de escribir 200 lineas de CSS para que un boton se vea bonito, escribes:
+**Analogía:** Es un "kit de CSS listo para usar". En vez de escribir 200 líneas de CSS para que un botón se vea bonito, escribes:
 
 ```html
-<!-- Sin Bootstrap (tienes que escribir el CSS tu mismo) -->
+<!-- Sin Bootstrap (tienes qué escribir el CSS tu mismo) -->
 <button style="background:blue; color:white; padding:10px; border-radius:5px; border:none; cursor:pointer;">
     Guardar
 </button>
@@ -1491,11 +1585,11 @@ app.register_blueprint(producto_bp)     # Listo, /producto funciona
 ```
 /speckit-implement
 
-Ejecutar solamente las tareas 1 a 5 (estructura del proyecto, config.py, requirements.txt, ApiService generico, layout base.html con Bootstrap).
-Detenerse despues de completarlas para revision.
+Ejecutar solamente las tareas 1 a 5 (estructura del proyecto, config.py, requirements.txt, ApiService genérico, layout base.html con Bootstrap).
+Detenerse después de completarlas para revisión.
 ```
 
-**Que se crea en esta ronda:**
+**Que se crea en está ronda:**
 
 ```mermaid
 graph TB
@@ -1516,17 +1610,17 @@ graph TB
     style Ronda1 fill:#3b82f6,stroke:#1d4ed8,color:#fff
 ```
 
-**Como verificar que funciona:**
+**Cómo verificar qué funciona:**
 
 ```bash
-# 1. Verificar que el venv esta activo (debes ver "(venv)" en tu terminal)
-# Si no esta activo: venv\Scripts\activate (Windows) o source venv/bin/activate (Mac/Linux)
+# 1. Verificar que el venv está activo (debes ver "(venv)" en tu terminal)
+# Si no está activo: venv\Scripts\activate (Windows) o source venv/bin/activate (Mac/Linux)
 
 # 2. Arrancar Flask
 python app.py
 
 # 3. Abrir navegador en http://localhost:5300
-# Deberias ver la pagina base (aunque vacia)
+# Deberias ver la página base (aunque vacia)
 ```
 
 **Prueba critica — ApiService se conecta a la API:**
@@ -1541,7 +1635,7 @@ print(productos)
 # Debe mostrar una lista de productos de la BD
 ```
 
-Si muestra datos, el ApiService funciona. Si da error, la API no esta corriendo o la URL en config.py es incorrecta.
+Si muestra datos, el ApiService funciona. Si da error, la API no está corriendo o la URL en config.py es incorrecta.
 
 ---
 
@@ -1550,11 +1644,11 @@ Si muestra datos, el ApiService funciona. Si da error, la API no esta corriendo 
 ```
 /speckit-implement
 
-Continuar con las tareas 6 a 11 (AuthService, middleware de autenticacion, Blueprint auth con login/logout/cambiar/recuperar contrasena, email_service, nav_menu.html, Blueprint home).
-Detenerse despues para verificar que el login funciona.
+Continuar con las tareas 6 a 11 (AuthService, middleware de autenticación, Blueprint auth con login/logout/cambiar/recuperar contraseña, email_service, nav_menu.html, Blueprint home).
+Detenerse después para verificar que el login funciona.
 ```
 
-**Que se crea en esta ronda:**
+**Que se crea en está ronda:**
 
 ```mermaid
 graph TB
@@ -1566,20 +1660,20 @@ graph TB
         F8["routes/auth.py
         (/login, /logout, /cambiar, /recuperar)"]
         F9["services/email_service.py
-        (SMTP contrasena temporal)"]
+        (SMTP contraseña temporal)"]
         F10["templates/components/nav_menu.html
-        (menu dinamico RBAC)"]
+        (menú dinámico RBAC)"]
         F11["routes/home.py + templates/pages/home.html"]
     end
 
     style Ronda2 fill:#f59e0b,stroke:#d97706,color:#fff
 ```
 
-**Como verificar que funciona:**
+**Cómo verificar qué funciona:**
 
 1. Abrir `http://localhost:5300` — debe redirigir a `/login`
-2. Ingresar `admin@correo.com` con su contrasena — debe redirigir a home con "Bienvenido"
-3. Visitar `/producto` — debe mostrar "Acceso denegado" o la pagina segun los roles del usuario
+2. Ingresar `admin@correo.com` con su contraseña — debe redirigir a home con "Bienvenido"
+3. Visitar `/producto` — debe mostrar "Acceso denegado" o la página según los roles del usuario
 4. Hacer logout — debe redirigir a `/login`
 
 ---
@@ -1590,10 +1684,10 @@ graph TB
 /speckit-implement
 
 Continuar con las tareas 12 a 18 (CRUDs simples: producto, persona, empresa, cliente, vendedor, rol, ruta).
-Detenerse despues para verificar que todos los CRUDs funcionan.
+Detenerse después para verificar qué todos los CRUDs funcionan.
 ```
 
-**Que se crea en esta ronda:**
+**Que se crea en está ronda:**
 
 ```mermaid
 graph TB
@@ -1613,7 +1707,7 @@ graph TB
 
 Cada uno genera 2 archivos: `routes/X.py` + `templates/pages/X.html`
 
-**Como verificar que funciona:**
+**Cómo verificar qué funciona:**
 
 Para cada CRUD (producto, persona, etc.):
 
@@ -1622,7 +1716,7 @@ Para cada CRUD (producto, persona, etc.):
 3. Llenar formulario y guardar — debe aparecer en la tabla con flash verde
 4. Clic en "Editar" — debe mostrar formulario con datos actuales
 5. Modificar y guardar — debe reflejar cambios
-6. Clic en "Eliminar" — debe pedir confirmacion y eliminar
+6. Clic en "Eliminar" — debe pedir confirmación y eliminar
 
 ---
 
@@ -1631,10 +1725,10 @@ Para cada CRUD (producto, persona, etc.):
 ```
 /speckit-implement
 
-Continuar con las tareas 19 a 21 (Blueprint usuario con gestion de roles via stored procedures, Blueprint factura maestro-detalle via stored procedures, tests con pytest).
+Continuar con las tareas 19 a 21 (Blueprint usuario con gestion de roles vía stored procedures, Blueprint factura maestro-detalle vía stored procedures, tests con pytest).
 ```
 
-**Que se crea en esta ronda:**
+**Que se crea en está ronda:**
 
 ```mermaid
 graph TB
@@ -1654,7 +1748,7 @@ graph TB
     style Ronda4 fill:#ef4444,stroke:#dc2626,color:#fff
 ```
 
-**Como verificar que funciona — Factura (la prueba mas completa):**
+**Cómo verificar qué funciona — Factura (la prueba más completa):**
 
 1. Ir a `/factura` — debe listar facturas existentes con totales
 2. Clic en "Nueva factura"
@@ -1663,28 +1757,28 @@ graph TB
 5. Agregar producto PR001 con cantidad 1
 6. Agregar producto PR003 con cantidad 2
 7. Guardar — debe crear la factura y redirigir a la lista
-8. Verificar que el total se calculo correctamente (subtotales + total)
-9. Verificar en `/producto` que el stock de PR001 y PR003 se desconto
+8. Verificar que el total se calculó correctamente (subtotales + total)
+9. Verificar en `/producto` que el stock de PR001 y PR003 se descontó
 
 #### Si el resultado no cumple tus expectativas
 
-El codigo generado es donde MAS vas a necesitar corregir. Recuerda: **trata todo codigo de la IA como codigo de un junior sin revisar.**
+El código generado es donde MAS vas a necesitar corregir. Recuerda: **trata todo código de la IA como código de un junior sin revisar.**
 
 | Problema | Opcion | Que hacer |
 |----------|--------|-----------|
-| El codigo no compila / no ejecuta | **Pedir correccion puntual** | Copiar el error exacto y decirle a la IA: "Este error ocurre al ejecutar. Corregir." No re-generar todo el codigo |
-| El codigo funciona pero viola la constitution (ej: usa Django) | **B** (re-ejecutar la tarea) | Senalar la violacion: "El codigo usa Django pero la constitution dice Flask. Regenerar esta tarea" |
-| El codigo es correcto pero demasiado complejo | **Pedir simplificacion** | "Simplificar este metodo. Eliminar abstracciones innecesarias. KISS." |
-| El codigo tiene bugs sutiles (seguridad, logica) | **A** (editar tu mismo) | **Este es TU trabajo.** La IA no detecta sus propios bugs. Revisarlo linea por linea |
-| Una ronda completa salio mal (todos los archivos incorrectos) | **B** (re-ejecutar la ronda) | Descartar los archivos y re-ejecutar la ronda con un prompt mas especifico |
-| El codigo funciona pero no sigue el estilo educativo (sin comentarios) | **Pedir mejora** | "Agregar docstrings y comentarios explicativos en espanol a cada archivo generado" |
+| El código no compila / no ejecuta | **Pedir corrección puntual** | Copiar el error exacto y decirle a la IA: "Este error ocurre al ejecutar. Corregir." No re-generar todo el código |
+| El código funciona pero viola la constitution (ej: usa Django) | **B** (re-ejecutar la tarea) | Senalar la violación: "El código usa Django pero la constitution dice Flask. Regenerar está tarea" |
+| El código es correcto pero demasíado complejo | **Pedir simplificación** | "Simplificar este método. Eliminar abstracciones innecesarias. KISS." |
+| El código tiene bugs sutiles (seguridad, lógica) | **A** (editar tu mismo) | **Este es TU trabajo.** La IA no detecta sus propios bugs. Revisarlo línea por línea |
+| Una ronda completa salio mal (todos los archivos incorrectos) | **B** (re-ejecutar la ronda) | Descartar los archivos y re-ejecutar la ronda con un prompt más específico |
+| El código funciona pero no sigue el estilo educativo (sin comentarios) | **Pedir mejora** | "Agregar docstrings y comentarios explicativos en español a cada archivo generado" |
 
-> **Importante:** En la fase de implementacion, la correccion se hace **en el codigo**, no en la spec. Esta es la unica fase donde editas codigo directamente (o le pides a la IA que lo corrija). En todas las fases anteriores, la correccion siempre se hace en los documentos (spec, plan, tasks).
+> **Importante:** En la fase de implementación, la corrección se hace **en el código**, no en la spec. Esta es la unica fase donde editas código directamente (o le pides a la IA qué lo corrija). En todas las fases anteriores, la corrección siempre se hace en los documentos (spec, plan, tasks).
 
 ### Competencia adquirida
 
-> **Despues de completar esta fase, ya sabes:**
-> Construir un frontend web completo con autenticacion JWT, control de acceso RBAC, CRUDs genericos, formularios maestro-detalle con stored procedures, y recuperacion de contrasena por email. Esto es lo que hace un **desarrollador full-stack junior-mid** en su dia a dia.
+> **Despues de completar está fase, ya sabes:**
+> Construir un frontend web completo con autenticación JWT, control de acceso RBAC, CRUDs genéricos, formularios maestro-detalle con stored procedures, y recuperación de contraseña por email. Esto es lo que hace un **desarrollador full-stack junior-mid** en su día a día.
 
 ---
 
@@ -1708,20 +1802,20 @@ graph TB
         C1["Requisitos funcionales y no funcionales"]
         C2["CRUD y stored procedures"]
         C3["Flujos de usuario"]
-        C4["Criterios de aceptacion"]
+        C4["Criterios de aceptación"]
     end
 
     subgraph Fase2["FASE 2: Clarify"]
-        D1["Identificar ambiguedades"]
+        D1["Identificar ambigüedades"]
         D2["Hacer preguntas con criterio"]
-        D3["Tomar decisiones de diseno"]
+        D3["Tomar decisiones de diseño"]
     end
 
     subgraph Fase3["FASE 3: Plan"]
         E1["Leer arquitectura de carpetas"]
         E2["APIs REST (GET, POST, PUT, DELETE)"]
         E3["Middleware y template engines"]
-        E4["Dependencias y librerias"]
+        E4["Dependencias y librerías"]
     end
 
     subgraph Fase4["FASE 4: Tasks"]
@@ -1731,15 +1825,15 @@ graph TB
     end
 
     subgraph Fase56["FASES 5-6: Analyze + Checklist"]
-        G1["Auditar documentacion"]
+        G1["Auditar documentación"]
         G2["Encontrar gaps e inconsistencias"]
         G3["Definir criterios de calidad"]
     end
 
     subgraph Fase7["FASE 7: Implement"]
         H1["Configurar proyecto Flask"]
-        H2["Crear servicio generico API"]
-        H3["Implementar autenticacion JWT"]
+        H2["Crear servicio genérico API"]
+        H3["Implementar autenticación JWT"]
         H4["Construir CRUDs completos"]
         H5["Maestro-detalle con SPs"]
         H6["Testing con pytest"]
@@ -1766,7 +1860,7 @@ graph TB
 
 ---
 
-## 12. Que hacer despues
+## 12. Qué hacer después
 
 ### Paso inmediato: comparar con otras IAs
 
@@ -1776,15 +1870,15 @@ Toma los prompts exactos del archivo `02_Comandos_SDD_FrontFlaskSDD.md` y ejecut
 2. **Gemini CLI** (Terminal)
 3. **Cursor** (IDE)
 
-Usa la rubrica de comparacion de la seccion 12 del archivo 02 para evaluar cada resultado.
+Usa la rubrica de comparacion de la sección 12 del archivo 02 para evaluar cada resultado.
 
 ### Paso siguiente: modificar el proyecto
 
-Prueba agregar un modulo nuevo usando SDD. Ejemplo: "Agregar un modulo de reportes que muestre las ventas por vendedor". Ejecuta las 7 fases para este modulo nuevo y observa como SDD te guia.
+Prueba agregar un módulo nuevo usando SDD. Ejemplo: "Agregar un módulo de reportes qué muestre las ventas por vendedor". Ejecuta las 7 fases para este módulo nuevo y observa como SDD te guia.
 
 ### Paso avanzado: aplicar SDD a un proyecto propio
 
-Piensa en un proyecto que quieras construir (una tienda online, un sistema de reservas, un blog). Ejecuta las 7 fases desde cero. El flujo es siempre el mismo:
+Piensa en un proyecto qué quieras construir (una tienda online, un sistema de reservas, un blog). Ejecuta las 7 fases desde cero. El flujo es siempre el mismo:
 
 ```
 constitution → specify → clarify → plan → tasks → analyze → checklist → implement
@@ -1797,31 +1891,31 @@ constitution → specify → clarify → plan → tasks → analyze → checklis
 | Termino | Definicion |
 |---------|-----------|
 | **API** | Application Programming Interface. Conjunto de URLs que un servidor expone para que otros programas le pidan datos o acciones |
-| **BCrypt** | Algoritmo de hash para contrasenas. Convierte "miPassword123" en "$2a$12$3UgI..." de forma irreversible |
-| **Blueprint** | En Flask, un modulo independiente con sus propias rutas y templates que se "enchufa" a la app principal |
-| **Bootstrap** | Libreria CSS que proporciona clases predefinidas para botones, tablas, formularios, etc. |
-| **CRUD** | Create, Read, Update, Delete. Las 4 operaciones basicas sobre datos |
-| **Endpoint** | Una URL especifica de una API. Ejemplo: `GET /api/producto` es un endpoint |
-| **Flask** | Framework web ligero de Python para crear aplicaciones web |
-| **Foreign Key (FK)** | Columna de una tabla que apunta a la clave primaria de otra tabla. Establece relaciones entre tablas |
-| **Framework** | Conjunto de herramientas y convenciones que facilitan el desarrollo de software |
-| **Gap** | Algo que falta entre dos documentos. Ejemplo: un requisito sin tarea asignada |
-| **HTTP** | Protocolo de comunicacion entre navegadores/clientes y servidores web |
-| **Jinja2** | Motor de templates de Python. Permite meter variables y logica dentro de archivos HTML |
+| **BCrypt** | Algoritmo de hash para contraseñas. Convierte "miPassword123" en "$2a$12$3UgI..." de forma irreversible |
+| **Blueprint** | En Flask, un módulo independiente con sus propias rutas y templates que se "enchufa" a la app principal |
+| **Bootstrap** | Libreria CSS qué proporciona clases predefinidas para botónes, tablas, formularios, etc. |
+| **CRUD** | Create, Read, Update, Delete. Las 4 operaciones básicas sobre datos |
+| **Endpoint** | Una URL específica de una API. Ejemplo: `GET /api/producto` es un endpoint |
+| **Flask** | Framework web ligero de Python para crear aplicaciónes web |
+| **Foreign Key (FK)** | Columna de una tabla qué apunta a la clave primaria de otra tabla. Establece relaciones entre tablas |
+| **Framework** | Conjunto de herramientas y convenciones qué fácilitan el desarrollo de software |
+| **Gap** | Algo qué falta entre dos documentos. Ejemplo: un requisito sin tarea asígnada |
+| **HTTP** | Protocolo de comunicación entre navegadores/clientes y servidores web |
+| **Jinja2** | Motor de templates de Python. Permite meter variables y lógica dentro de archivos HTML |
 | **JSON** | JavaScript Object Notation. Formato de texto para intercambiar datos: `{"nombre": "Laptop", "precio": 2500000}` |
-| **JWT** | JSON Web Token. Credencial digital firmada que el servidor entrega al usuario despues del login |
+| **JWT** | JSON Web Token. Credencial digital firmada que el servidor entrega al usuario después del login |
 | **Maestro-detalle** | Patron donde un registro principal (factura) tiene N registros hijos (productos de esa factura) |
-| **Middleware** | Codigo que se ejecuta automaticamente ANTES de cada peticion HTTP |
-| **ORM** | Object-Relational Mapping. Libreria que traduce objetos Python a tablas de BD (no lo usamos) |
-| **Primary Key (PK)** | Columna que identifica de forma unica cada fila de una tabla. Ejemplo: `codigo` en producto |
+| **Middleware** | Código que se ejecuta automáticamente ANTES de cada petición HTTP |
+| **ORM** | Object-Relational Mapping. Libreria qué traduce objetos Python a tablas de BD (no lo usamos) |
+| **Primary Key (PK)** | Columna qué identifica de forma unica cada fila de una tabla. Ejemplo: `código` en producto |
 | **RBAC** | Role-Based Access Control. Sistema de permisos basado en roles |
 | **REST** | Representational State Transfer. Estilo de arquitectura para APIs web usando HTTP |
-| **SDD** | Specification-Driven Development. Desarrollo guiado por especificaciones |
-| **Session** | Datos que Flask guarda para cada usuario entre requests (en una cookie encriptada) |
+| **SDD** | Specification-Driven Development. Desarrollo guiado por especificaciónes |
+| **Session** | Datos qué Flask guarda para cada usuario entre requests (en una cookie encriptada) |
 | **SMTP** | Simple Mail Transfer Protocol. Protocolo para enviar correos electronicos |
 | **Spec Kit** | Toolkit open-source de GitHub para aplicar SDD con agentes de IA |
-| **Stored Procedure (SP)** | Programa guardado en la base de datos que ejecuta multiples operaciones SQL como una sola |
-| **Template** | Archivo HTML con espacios para variables que se llenan dinamicamente |
-| **Transaccion** | Grupo de operaciones en BD que se ejecutan todas o ninguna (todo o nada) |
-| **Trigger** | Programa en la BD que se ejecuta automaticamente cuando se inserta, actualiza o elimina un registro |
-| **venv** | Virtual environment. Entorno aislado de Python donde cada proyecto tiene sus propias librerias |
+| **Stored Procedure (SP)** | Programa guardado en la base de datos qué ejecuta multiples operaciones SQL como una sola |
+| **Template** | Archivo HTML con espacios para variables que se llenan dinámicamente |
+| **Transacción** | Grupo de operaciones en BD que se ejecutan todas o ninguna (todo o nada) |
+| **Trigger** | Programa en la BD que se ejecuta automáticamente cuando se inserta, actualiza o elimina un registro |
+| **venv** | Virtual environment. Entorno aislado de Python donde cada proyecto tiene sus propias librerías |

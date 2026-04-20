@@ -839,6 +839,130 @@ Factura #1 (MAESTRO)
 
 ## 8. Herramientas de Desarrollo
 
+### Claude Code
+
+**Qué es:** La extensión de IA de Anthropic (creadores de Claude) para VS Code. Es un panel de chat dentro del editor donde puedes conversar con la IA, pedirle que genere código, y ejecutar **slash commands** (como los de Spec Kit).
+
+**Analogía:** Si VS Code es tu escritorio de trabajo, Claude Code es tu asistente sentado al lado que puede leer tus archivos, escribir código y ejecutar comandos especializados.
+
+**Dónde se ejecutan los comandos SDD:**
+
+```mermaid
+graph LR
+    subgraph PS["Terminal / PowerShell"]
+        PS1["python --version"]
+        PS2["pip install flask"]
+        PS3["git push"]
+        PS4["dotnet run"]
+    end
+
+    subgraph CC["Panel de Claude Code (VS Code)"]
+        CC1["/speckit-constitution"]
+        CC2["/speckit-specify"]
+        CC3["/speckit-plan"]
+        CC4["/speckit-implement"]
+    end
+
+    style PS fill:#374151,stroke:#111827,color:#FFFFFF
+    style CC fill:#8b5cf6,stroke:#6d28d9,color:#FFFFFF
+```
+
+> **Regla importante:** Los comandos de Spec Kit (`/speckit-*`) se escriben en el panel de Claude Code, **NUNCA en PowerShell**. Si los pegas en PowerShell, da error porque PowerShell los interpreta como comandos del sistema operativo.
+
+**Cómo abrir Claude Code en VS Code:**
+
+1. Presionar `Ctrl+Shift+P` (paleta de comandos)
+2. Escribir "Claude" y seleccionar "Claude Code: Open Chat"
+3. Se abre un panel de chat a la derecha del editor
+
+**Instalación:** Buscar "Claude Code" en las extensiones de VS Code (`Ctrl+Shift+X`) e instalar.
+
+### Spec Kit
+
+**Qué es:** Un toolkit open-source creado por GitHub que proporciona los **slash commands** para el flujo SDD (Spec-Driven Development). Sin Spec Kit instalado, los comandos `/speckit-constitution`, `/speckit-specify`, etc. no existen.
+
+**Analogía:** Si Claude Code es tu asistente, Spec Kit es el "manual de procedimientos" que le enseña al asistente cómo hacer planificación de software paso a paso.
+
+**Qué instala Spec Kit:**
+- Una carpeta `.specify/` con templates para spec, plan y tasks
+- Scripts de configuración para tu asistente de IA (Claude Code, Copilot, Gemini)
+- Slash commands que se registran en tu asistente
+
+**Instalación:**
+
+```bash
+# En la terminal (PowerShell), NO en Claude Code:
+pip install uv
+uvx --from git+https://github.com/github/spec-kit.git specify init .
+```
+
+**Repositorio oficial:** [github.com/github/spec-kit](https://github.com/github/spec-kit)
+
+### Slash Commands / Skills
+
+**Qué es:** Comandos especiales que empiezan con `/` y que ejecutan un flujo predefinido en un asistente de IA. Son atajos que le dicen al asistente "ejecuta este procedimiento específico".
+
+**Analogía:** Es como un botón de "macro" en Excel. En vez de hacer 10 pasos manualmente, presionas un botón y se ejecutan todos.
+
+**Diferentes nombres según la herramienta:**
+
+| Herramienta | Cómo los llama | Ejemplo |
+|-------------|---------------|---------|
+| **Claude Code** | Skills | `/speckit-constitution` |
+| **GitHub Copilot** | Slash commands | `/constitution` |
+| **Gemini CLI** | Slash commands | `/constitution` |
+| **Cursor** | No tiene nativos | Se copia el prompt directamente al chat |
+
+**Los 8 slash commands de Spec Kit:**
+
+| Comando | Qué hace | Fase SDD |
+|---------|---------|----------|
+| `/speckit-constitution` | Define las reglas inmutables del proyecto | Fase 0 |
+| `/speckit-specify` | Genera la especificación de funcionalidades | Fase 1 |
+| `/speckit-clarify` | Identifica ambigüedades y hace preguntas | Fase 2 |
+| `/speckit-plan` | Genera el plan técnico de implementación | Fase 3 |
+| `/speckit-tasks` | Crea tareas ordenadas por dependencia | Fase 4 |
+| `/speckit-analyze` | Valida consistencia entre documentos | Fase 5 |
+| `/speckit-checklist` | Genera criterios de aceptación | Fase 6 |
+| `/speckit-implement` | Genera el código tarea por tarea | Fase 7 |
+
+> **Importante:** Estos comandos solo funcionan dentro del panel de chat de tu asistente de IA (Claude Code, Copilot, etc.), nunca en la terminal del sistema operativo.
+
+### Terminal vs Panel de IA — Dónde va cada cosa
+
+Esta es la confusión más común para principiantes. Hay **dos lugares** donde escribes cosas en VS Code, y cada uno tiene un propósito diferente:
+
+| Aspecto | Terminal (PowerShell) | Panel de Claude Code |
+|---------|----------------------|---------------------|
+| **Dónde está** | Panel inferior de VS Code (`Ctrl+ñ`) | Panel lateral derecho de VS Code |
+| **Qué entiende** | Comandos del sistema operativo | Lenguaje natural + slash commands |
+| **Para qué se usa** | Instalar paquetes, ejecutar Python, Git, arrancar servidores | Generar código, documentación, ejecutar fases SDD |
+| **Ejemplo correcto** | `pip install flask` | `/speckit-constitution` |
+| **Ejemplo incorrecto** | `/speckit-constitution` (da error) | `pip install flask` (no funciona) |
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  VS Code                                                    │
+│  ┌──────────────────────────┐ ┌──────────────────────────┐  │
+│  │                          │ │  CLAUDE CODE (chat)      │  │
+│  │   Editor de código       │ │                          │  │
+│  │   (archivos .py, .html)  │ │  /speckit-constitution   │  │
+│  │                          │ │  /speckit-specify         │  │
+│  │                          │ │  /speckit-plan            │  │
+│  │                          │ │                          │  │
+│  ├──────────────────────────┤ │  Aquí van los comandos   │  │
+│  │  TERMINAL (PowerShell)   │ │  de Spec Kit             │  │
+│  │                          │ │                          │  │
+│  │  pip install flask       │ │                          │  │
+│  │  python app.py           │ │                          │  │
+│  │  git push                │ │                          │  │
+│  │                          │ │                          │  │
+│  │  Aquí van los comandos   │ │                          │  │
+│  │  del sistema operativo   │ │                          │  │
+│  └──────────────────────────┘ └──────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+```
+
 ### pip
 
 **Qué es:** El instalador de paquetes de Python. Es como la "tienda de apps" de Python.
