@@ -59,21 +59,21 @@ Levantar los requisitos funcionales, no funcionales y restricciones del sistema 
 
 ## 2. Metodología Aplicada
 
-Esta entrevista sigue las prácticas del **Business Analysis Body of Knowledge (BABOK v3)** publicado por el [IIBA](https://www.iiba.org/) y el estándar **ISO/IEC/IEEE 29148:2018** para ingeniería de requisitos.
+Esta entrevista sigue las prácticas estándar de análisis de negocio ampliamente divulgadas por la industria (BABOK e ISO/IEC/IEEE 29148), aplicadas según las guías prácticas de acceso libre listadas en la [sección de Referencias](#16-referencias).
 
 ### Técnicas utilizadas
 
-| Técnica | Fuente | Cómo se aplicó |
-|---------|--------|----------------|
-| **Interview Technique** | BABOK §10.25 | Entrevista estructurada con preguntas abiertas, cara a cara |
-| **Brief previo de una página** | aqua-cloud | Documento enviado a Hugo 3 días antes con propósito, temas, duración y consentimiento |
-| **Context Reinstatement** | aqua-cloud | Apertura con "cuénteme cómo fue un día típico la semana pasada" |
-| **Progressive Probing** | aqua-cloud | 5 capas: hechos → proceso → sentimientos → fallos → restricciones |
-| **Open-ended questions** | BABOK §10.25 | Preguntas que no se responden con "sí/no" para elicitar narrativas |
-| **Five W's + H** | Framework clásico | Who, What, Where, When, Why, How |
-| **Follow-up probing** | BABOK §10.25 | "Cuénteme más", "¿a qué se refiere exactamente?" |
-| **Member-checking** | aqua-cloud | Al final, resumen leído a Hugo para confirmación |
-| **Traceability matrix** | IEEE 29148 | Tabla final que mapea cita → requisito → artefacto |
+| Técnica | Fuente (acceso libre) | Cómo se aplicó |
+|---------|----------------------|----------------|
+| **Interview Technique** | [Tyner Blain](https://tynerblain.com/blog/2006/11/21/ten-requirements-gathering-techniques/) | Entrevista estructurada con preguntas abiertas, cara a cara |
+| **Brief previo de una página** | [aqua-cloud](https://aqua-cloud.io/8-essential-strategies-effective-requirements-elicitation/) | Documento enviado a Hugo 3 días antes con propósito, temas, duración y consentimiento |
+| **Context Reinstatement** | [aqua-cloud](https://aqua-cloud.io/8-essential-strategies-effective-requirements-elicitation/) | Apertura con "cuénteme cómo fue un día típico la semana pasada" |
+| **Progressive Probing** | [aqua-cloud](https://aqua-cloud.io/8-essential-strategies-effective-requirements-elicitation/) | 5 capas: hechos → proceso → sentimientos → fallos → restricciones |
+| **Open-ended questions** | [Career Support](https://yourcareersupport.com/elicitation-interview-questions/) | Preguntas que no se responden con "sí/no" para elicitar narrativas |
+| **Five W's + H** | [Career Support](https://yourcareersupport.com/elicitation-interview-questions/) | Who, What, Where, When, Why, How |
+| **Follow-up probing** | [Career Support](https://yourcareersupport.com/elicitation-interview-questions/) | "Cuénteme más", "¿a qué se refiere exactamente?" |
+| **Member-checking** | [aqua-cloud](https://aqua-cloud.io/8-essential-strategies-effective-requirements-elicitation/) | Al final, resumen leído a Hugo para confirmación |
+| **Traceability matrix** | [GeeksforGeeks](https://www.geeksforgeeks.org/software-engineering/software-engineering-requirements-elicitation/) | Tabla final que mapea cita → requisito → artefacto |
 
 ### Por qué estas técnicas
 
@@ -512,7 +512,7 @@ Y que los errores se detecten **antes** de que pasen. Que si yo intento facturar
 
 ## 11. Validation Questions y Member-Checking
 
-> **Técnica:** [BABOK §10.25 Validation](https://www.iiba.org/knowledgehub/business-analysis-body-of-knowledge-babok-guide/10-techniques/10-25-interviews/) — preguntas de cierre que confirman el entendimiento del analista y priorizan.
+> **Técnica:** [Validation questions (Career Support)](https://yourcareersupport.com/elicitation-interview-questions/) — preguntas de cierre que confirman el entendimiento del analista y priorizan.
 
 ### V.1 — ¿Cómo sabremos que el sistema está listo?
 
@@ -594,7 +594,7 @@ Y que los errores se detecten **antes** de que pasen. Que si yo intento facturar
 
 ## 13. Matriz de Trazabilidad
 
-Cada declaración de Hugo se mapea a un requisito formal en `spec.md` y a un artefacto técnico del proyecto. Esto es la práctica recomendada por [ISO/IEC/IEEE 29148:2018](https://ieeexplore.ieee.org/document/8559686/).
+Cada declaración de Hugo se mapea a un requisito formal en `spec.md` y a un artefacto técnico del proyecto. La **matriz de trazabilidad** es una práctica estándar de la ingeniería de requisitos — ver [GeeksforGeeks — Requirements Elicitation](https://www.geeksforgeeks.org/software-engineering/software-engineering-requirements-elicitation/) para el marco conceptual.
 
 | # | Lo que dijo Hugo (cita) | Requisito formal (spec.md) | Artefacto técnico |
 |---|------------------------|---------------------------|-------------------|
@@ -706,28 +706,25 @@ graph TB
 
 ## 16. Referencias
 
-### Estándares y guías profesionales
+Todas las referencias de este documento son de **acceso libre**. Cualquiera puede abrir los enlaces y leer el contenido completo sin pagar ni registrarse.
 
-- **[BABOK® Guide v3 — Technique 10.25 Interviews (IIBA)](https://www.iiba.org/knowledgehub/business-analysis-body-of-knowledge-babok-guide/10-techniques/10-25-interviews/)** — Technique oficial de entrevistas del *Business Analysis Body of Knowledge*.
-- **[ISO/IEC/IEEE 29148:2018 — Systems and software engineering — Life cycle processes — Requirements engineering](https://ieeexplore.ieee.org/document/8559686/)** — Estándar internacional para ingeniería de requisitos.
-- **[IEEE — Requirements Elicitation Follow-Up Question Generation](https://ieeexplore.ieee.org/document/11190382/)** — Investigación sobre generación de preguntas de seguimiento.
+### Técnicas y guías prácticas
 
-### Artículos y guías prácticas
-
-- **[aqua-cloud — 8 Essential Strategies for Effective Requirements Elicitation](https://aqua-cloud.io/8-essential-strategies-effective-requirements-elicitation/)** — Fuente de "progressive probing" y "member-checking".
-- **[Tyner Blain — Ten Requirements Gathering Techniques](https://tynerblain.com/blog/2006/11/21/ten-requirements-gathering-techniques/)** — Resumen de las 10 técnicas BABOK.
-- **[Career Support — What Questions Do I Ask During Requirements Elicitation](https://yourcareersupport.com/elicitation-interview-questions/)** — Framework Five W's + H y templates de preguntas.
-- **[SoftwareTestingHelp — Top 10 Requirements Elicitation Techniques](https://www.softwaretestinghelp.com/requirements-elicitation-techniques/)** — Comparativa de técnicas.
-
-### Investigación académica
-
-- **[EECS481 — Requirements Elicitation: A Survey of Techniques, Approaches, and Tools](https://eecs481.org/readings/requirements.pdf)** — Encuesta académica de técnicas de elicitación.
-- **[ScienceDirect — Requirements elicitation methods based on interviews in comparison](https://www.sciencedirect.com/science/article/abs/pii/S0950584920301282)** — Familia de experimentos comparando métodos de entrevista.
+- **[aqua-cloud — 8 Essential Strategies for Effective Requirements Elicitation](https://aqua-cloud.io/8-essential-strategies-effective-requirements-elicitation/)** — Fuente de las técnicas "progressive probing" (las 5 capas: hechos → proceso → sentimientos → fallos → restricciones) y "member-checking".
+- **[Tyner Blain — Ten Requirements Gathering Techniques](https://tynerblain.com/blog/2006/11/21/ten-requirements-gathering-techniques/)** — Resumen libre y público de las 10 técnicas de elicitación de requisitos, incluyendo entrevistas.
+- **[Career Support — What Questions Do I Ask During Requirements Elicitation](https://yourcareersupport.com/elicitation-interview-questions/)** — Framework Five W's + H (Who, What, Where, When, Why, How) y templates de preguntas abiertas.
+- **[SoftwareTestingHelp — Top 10 Requirements Elicitation Techniques](https://www.softwaretestinghelp.com/requirements-elicitation-techniques/)** — Comparativa completa de técnicas de elicitación.
+- **[GeeksforGeeks — Requirements Elicitation in Software Engineering](https://www.geeksforgeeks.org/software-engineering/software-engineering-requirements-elicitation/)** — Introducción académica al proceso de elicitación.
+- **[NRI — 5 Business Requirements Elicitation and Collaboration Questions](https://nri-na.com/5-critical-elicitation-collaboration-questions/)** — Preguntas críticas de colaboración con stakeholders.
 
 ### Marco legal colombiano referenciado
 
-- **Resolución 042 de 2020 de la DIAN** — Factura electrónica de venta en Colombia.
-- **Estatuto Tributario — Artículo 632** — Conservación de documentos soporte por 5 a 10 años según tipo.
+- **[DIAN — Factura Electrónica (portal oficial)](https://www.dian.gov.co/impuestos/factura-electronica/)** — Información pública sobre facturación electrónica obligatoria en Colombia.
+- **[Estatuto Tributario de Colombia — Artículo 632](https://estatuto.co/632)** — Conservación de documentos soporte por 5 a 10 años según tipo.
+
+### Nota sobre BABOK y estándares ISO/IEEE
+
+Los estándares oficiales del Business Analysis Body of Knowledge (BABOK v3 de IIBA) y el ISO/IEC/IEEE 29148:2018 son **referencias de pago**. Las técnicas usadas en esta entrevista — entrevista estructurada, preguntas abiertas, progressive probing, member-checking, matriz de trazabilidad — son ampliamente divulgadas por las fuentes de acceso libre listadas arriba, que parafrasean y explican esos estándares de manera pública y gratuita.
 
 ---
 
