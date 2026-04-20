@@ -15,17 +15,17 @@ Todos los artefactos están en `specs/001-sistema-ventas-rbac/`.
 
 ```mermaid
 flowchart LR
-    Usuario --HTTP--> Flask[Frontend Flask<br/>FrontFlaskSDD]
-    Flask --ApiService + JWT--> API[API REST<br/>ApiGenericaCsharp]
+    Usuario --HTTP--> FlaskApp[Frontend Flask<br/>FrontFlaskSDD]
+    FlaskApp --ApiService + JWT--> API[API REST<br/>ApiGenericaCsharp]
     API --Dapper--> BD[(MariaDB /<br/>PostgreSQL /<br/>SQL Server)]
-    Flask -.SMTP.-> Gmail[Gmail SMTP<br/>recuperación contraseña]
+    FlaskApp -.SMTP.-> Gmail[Gmail SMTP<br/>recuperación contraseña]
 
-    subgraph Flask [ ]
-        Middleware{{@before_request<br/>RBAC por ruta}}
-        Blueprints[routes/*.py<br/>12 blueprints]
-        Templates[templates/<br/>Jinja2 + Bootstrap 5.3]
-        CSS[static/css/app.css<br/>identidad Zenith]
-        Servicios[services/<br/>ApiService + AuthService]
+    subgraph InternoFlask[Componentes internos de Flask]
+        Middleware[before_request RBAC por ruta]
+        Blueprints[routes - 12 blueprints]
+        Templates[templates Jinja2 + Bootstrap 5.3]
+        CSS[static/css/app.css identidad Zenith]
+        Servicios[services ApiService + AuthService]
     end
 ```
 
