@@ -19,8 +19,9 @@
 - [8. Herramientas de Desarrollo](#8-herramientas-de-desarrollo)
 - [9. Testing](#9-testing)
 - [10. Documentación](#10-documentación)
-- [11. Diagramas](#11-diagramas)
-- [12. Resumen Visual: Cómo se conecta todo](#12-resumen-visual-cómo-se-conecta-todo)
+- [11. Identidad Visual y Manual de Marca](#11-identidad-visual-y-manual-de-marca)
+- [12. Diagramas](#12-diagramas)
+- [13. Resumen Visual: Cómo se conecta todo](#13-resumen-visual-cómo-se-conecta-todo)
 
 ---
 
@@ -1029,7 +1030,131 @@ print("Bloque de código")
 
 ---
 
-## 11. Diagramas
+## 11. Identidad Visual y Manual de Marca
+
+### Qué es un Manual de Marca (Manual de Identidad Visual Corporativa)
+
+**Qué es:** Un documento oficial que define **cómo debe verse** todo lo que produce una empresa: su logo, sus colores, sus fuentes, sus documentos, su sitio web, sus redes sociales, su papelería. Es la "constitución visual" de la marca.
+
+**Analogía:** Imagina que una empresa es una persona. El manual de marca es su "código de vestimenta":
+- Siempre usa estos colores (no otros)
+- Siempre usa esta tipografía (no otra)
+- Su logo se ve así (no de otra forma)
+- En los documentos, el logo va aquí (no en otro lado)
+
+Sin manual de marca, cada diseñador o desarrollador haría las cosas a su manera y la empresa se vería inconsistente — como si cada sucursal fuera de una empresa diferente.
+
+**Qué contiene un manual de marca típico:**
+
+| Sección | Qué define | Ejemplo |
+|---------|-----------|---------|
+| **Logosímbolo** | Cómo se ve el logo, versiones (horizontal, vertical), sobre fondo claro y oscuro | El logo de Zenith tiene un rombo azul con una Z dorada |
+| **Paleta de colores** | Los colores exactos de la marca con códigos HEX, RGB y CMYK | Azul `#0A2647`, Dorado `#E8AA2E` |
+| **Tipografía** | Las fuentes permitidas y sus usos (títulos, cuerpo, datos) | Inter para texto, JetBrains Mono para números |
+| **Iconografía** | Qué librería de iconos usar y cuál icono va en cada sección | Bootstrap Icons: casa para home, caja para producto |
+| **Aplicación web** | Cómo se ven los componentes del sistema (botones, tablas, formularios, alertas) | Botón primario: fondo dorado, texto azul oscuro |
+| **Reglas de uso** | Qué no hacer con la marca (colores prohibidos, distorsiones, tamaños mínimos) | No usar dorado sobre blanco (contraste insuficiente) |
+
+**Por qué importa en el desarrollo de software:**
+
+```mermaid
+graph LR
+    subgraph Sin["Sin manual de marca"]
+        S1["Desarrollador 1
+        usa azul #0000FF"]
+        S2["Desarrollador 2
+        usa azul #336699"]
+        S3["Desarrollador 3
+        usa Arial"]
+        S4["Resultado:
+        app inconsistente"]
+    end
+
+    subgraph Con["Con manual de marca"]
+        C1["Desarrollador 1
+        usa #0A2647"]
+        C2["Desarrollador 2
+        usa #0A2647"]
+        C3["Desarrollador 3
+        usa Inter"]
+        C4["Resultado:
+        app profesional
+        y coherente"]
+    end
+
+    style S4 fill:#ef4444,stroke:#dc2626,color:#fff
+    style C4 fill:#22c55e,stroke:#16a34a,color:#fff
+```
+
+**En nuestro proyecto:** El manual de marca de Zenith Comercial (`Manual_de_Marca_Zenith.md`) define los colores, fuentes, iconos y estilos de todos los componentes del frontend. La constitution lo referencia para que la IA genere código que respete la identidad visual de la empresa.
+
+### Qué es una paleta de colores
+
+**Qué es:** El conjunto de colores oficiales de una marca. Cada color tiene un propósito específico y un código exacto.
+
+| Tipo de color | Propósito | Ejemplo Zenith |
+|--------------|-----------|----------------|
+| **Primario** | El color principal de la marca. Se usa en los elementos más importantes | Azul `#0A2647` — sidebar, encabezados |
+| **Secundario** | El color de acción. Se usa en botones, links, elementos interactivos | Dorado `#E8AA2E` — botones, hover |
+| **Acento** | Un color intermedio para variaciones e interacciones | Azul Medio `#144272` — hover sidebar |
+| **Neutros** | Grises y blancos para fondos, textos y bordes | Blanco `#FFFFFF`, gris `#374151` |
+| **Estados** | Colores que comunican estados del sistema | Verde = éxito, rojo = error, ámbar = advertencia |
+
+### Códigos de color: HEX, RGB, CMYK
+
+Los colores se identifican con códigos exactos para que sean idénticos en cualquier pantalla o impresión:
+
+| Sistema | Formato | Ejemplo (Azul Zenith) | Dónde se usa |
+|---------|---------|----------------------|-------------|
+| **HEX** | 6 caracteres hexadecimales precedidos por # | `#0A2647` | CSS, HTML, diseño web |
+| **RGB** | Rojo, Verde, Azul (0-255 cada uno) | `rgb(10, 38, 71)` | CSS, pantallas |
+| **CMYK** | Cyan, Magenta, Yellow, Key/black (0-100%) | `86, 46, 0, 72` | Impresión en papel |
+
+> **Para el desarrollo web solo necesitas HEX.** RGB se usa a veces en CSS cuando necesitas opacidad (`rgba(10, 38, 71, 0.5)`). CMYK es solo para impresión.
+
+### CSS Custom Properties (Variables CSS)
+
+**Qué es:** Variables definidas en CSS que almacenan valores reutilizables (colores, fuentes, tamaños). Se definen una vez en `:root` y se usan en todo el archivo.
+
+**Por qué son importantes para la identidad visual:** Si necesitas cambiar el color primario de toda la app, cambias UN solo valor en vez de buscar y reemplazar en 50 lugares.
+
+```css
+/* Definir las variables (una vez) */
+:root {
+    --color-primary: #0A2647;
+    --color-secondary: #E8AA2E;
+}
+
+/* Usar las variables (en todo el CSS) */
+.sidebar {
+    background-color: var(--color-primary);   /* Usa #0A2647 */
+}
+.btn-primary {
+    background-color: var(--color-secondary); /* Usa #E8AA2E */
+}
+
+/* Si mañana la empresa cambia de color: */
+/* Solo cambias UNA línea en :root y TODA la app se actualiza */
+```
+
+### Google Fonts
+
+**Qué es:** Un servicio gratuito de Google que hospeda fuentes tipográficas. En vez de descargar las fuentes y agregarlas a tu proyecto, incluyes un link en tu HTML y las fuentes se cargan desde los servidores de Google.
+
+```html
+<!-- En el <head> de base.html -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+```
+
+**Sitio oficial:** [fonts.google.com](https://fonts.google.com/)
+
+**Fuentes que usamos:**
+- **Inter** — [fonts.google.com/specimen/Inter](https://fonts.google.com/specimen/Inter)
+- **JetBrains Mono** — [fonts.google.com/specimen/JetBrains+Mono](https://fonts.google.com/specimen/JetBrains+Mono)
+
+---
+
+## 12. Diagramas
 
 ### Mermaid
 
@@ -1086,7 +1211,7 @@ sequenceDiagram
 
 ---
 
-## 12. Resumen Visual: Cómo se conecta todo
+## 13. Resumen Visual: Cómo se conecta todo
 
 ```mermaid
 graph TB
