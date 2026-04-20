@@ -893,7 +893,9 @@ Patrones qué usaremos:
 
 ### Ejecutar el comando
 
-Ahora si. Abre tu asístente de IA y escribe:
+> **Importante:** Este comando se ejecuta dentro de **Claude Code CLI** (el prompt `❯`), NO en PowerShell. Si todavía no abriste Claude Code CLI, ejecuta `claude` en PowerShell primero (ver sección "Abrir Claude Code CLI" más arriba).
+
+En el prompt `❯` de Claude Code CLI, pega el siguiente prompt y presiona Enter:
 
 ```
 /speckit-constitution
@@ -958,28 +960,127 @@ PRINCIPIOS DE DOCUMENTACIÓN:
 - Diagramás Mermaid en documentación Markdown
 ```
 
-### Despues de ejecutar: como revisar el resultado
+### Qué pasa cuando ejecutas el comando
 
-La IA generara un archivo `constitution.md`. Abrelo y verifica con está checklist:
+Claude Code CLI va a hacer varias cosas. Esto es lo que verás paso a paso:
+
+**1. Pregunta de permiso para ejecutar un script de Git:**
+
+```
+Bash command
+  bash .specify/extensions/git/scripts/bash/initialize-repo.sh 2>&1
+  Run git initialize-repo script
+
+This command requires approval
+Do you want to proceed?
+❯ 1. Yes
+  2. Yes, and don't ask again for: bash *
+  3. No
+```
+
+Selecciona `1. Yes`. Claude Code pide permiso antes de ejecutar cualquier comando del sistema.
+
+> **Qué significan las 3 opciones:**
+>
+> | Opción | Significado |
+> |--------|------------|
+> | **1. Yes** | Aprueba SOLO esta acción. La próxima vez vuelve a preguntar |
+> | **2. Yes, and don't ask again** | Aprueba esta y todas las similares sin volver a preguntar |
+> | **3. No** | Rechaza la acción |
+>
+> Para el tutorial usa siempre `1. Yes` — así revisas cada acción antes de aprobarla. Eso es parte del rol del Desarrollador con IA.
+
+**2. Claude trabaja generando el archivo (1-2 minutos):**
+
+```
+● Git already initialized — skipping. Proceeding with constitution update.
+· Running… (1m 14s · ↓ 1.3k tokens)
+```
+
+Espera. No toques nada mientras trabaja.
+
+**3. Pregunta de permiso para guardar el archivo:**
+
+```
+Write(.specify\memory\constitution.md)
+  Do you want to make this edit to constitution.md?
+  ❯ 1. Yes
+    2. Yes, allow all edits during this session (shift+tab)
+    3. No
+```
+
+Selecciona `1. Yes`. Esto guarda el archivo `constitution.md` que generó.
+
+> **Qué significan las 3 opciones:**
+>
+> | Opción | Significado |
+> |--------|------------|
+> | **1. Yes** | Aprueba SOLO esta edición. La próxima vez que quiera editar otro archivo, vuelve a preguntar |
+> | **2. Yes, allow all edits during this session** | Aprueba todas las ediciones sin preguntar hasta que cierres Claude Code CLI |
+> | **3. No** | Rechaza la edición. El archivo no se guarda |
+
+**4. Resultado final:**
+
+Cuando termina, verás un resumen como este:
+
+```
+Resumen Final
+
+Nueva versión: 1.0.0 (ratificación inicial)
+
+Principios ratificados:
+- I. Consumo Exclusivo de API REST (sin ORM)
+- II. Arquitectura Blueprint + Servicios Genéricos
+- III. Seguridad JWT + RBAC + Borrado Lógico
+- IV. Identidad Visual Zenith (No Bootstrap por Defecto)
+- V. Código en Español, Server-Side Rendering y Documentación Tutorial
+
+Secciones añadidas: Restricciones Técnicas y de Seguridad · Flujo de Desarrollo y Calidad · Governance
+```
+
+Y al final sugiere un hook opcional de Git para hacer commit:
+
+```
+Extension Hooks
+Optional Hook: git
+Command: /speckit-git-commit
+Description: Auto-commit after constitution update
+```
+
+Este hook es opcional — puedes ignorarlo y hacer el commit manualmente después.
+
+**5. El archivo generado:**
+
+El archivo se guarda en `.specify/memory/constitution.md`. Ábrelo en VS Code para revisarlo.
+
+### Después de ejecutar: cómo revisar el resultado
+
+La IA generó el archivo `.specify/memory/constitution.md`. Ábrelo y verifica con esta checklist:
 
 #### Checklist de revisión
 
-- [ ] **Tecnologias correctas:** Menciona Flask, Jinja2, Bootstrap 5, Python 3.12?
-- [ ] **Sin ORM:** Dice explicitamente que no se usa SQLAlchemy ni acceso directo a BD?
-- [ ] **Blueprint:** Menciona el patrón Blueprint para organizar módulos?
-- [ ] **Servicio genérico:** Menciona ApiService centralizado?
-- [ ] **JWT + BCrypt + RBAC:** Menciona los 3 conceptos de seguridad?
-- [ ] **Espanol:** Dice que el código y comentarios son en español?
-- [ ] **Sin React/Vue:** Dice que no se usa JavaScript frameworks?
-- [ ] **Tests reales:** Dice que los tests son contra la API real, no mocks?
+- [ ] **Tecnologías correctas:** ¿Menciona Flask, Jinja2, Bootstrap 5, Python 3.12?
+- [ ] **Sin ORM:** ¿Dice explícitamente que no se usa SQLAlchemy ni acceso directo a BD?
+- [ ] **Blueprint:** ¿Menciona el patrón Blueprint para organizar módulos?
+- [ ] **Servicio genérico:** ¿Menciona ApiService centralizado?
+- [ ] **JWT + BCrypt + RBAC:** ¿Menciona los 3 conceptos de seguridad?
+- [ ] **Borrado lógico:** ¿Dice que las facturas se anulan en vez de borrarse?
+- [ ] **Colores Zenith:** ¿Menciona #0A2647, #E8AA2E, #144272?
+- [ ] **Inter + JetBrains Mono:** ¿Menciona las fuentes tipográficas?
+- [ ] **Español:** ¿Dice que el código y comentarios son en español?
+- [ ] **Sin React/Vue:** ¿Dice que no se usa JavaScript frameworks?
+- [ ] **Tests reales:** ¿Dice que los tests son contra la API real, no mocks?
+- [ ] **Manual de marca:** ¿Referencia el Manual_de_Marca_Zenith.md?
 
-#### Errores comunes y como corregirlos
+#### Errores comunes y cómo corregirlos
 
-| Error | Causa | Solucion |
+| Error | Causa | Solución |
 |-------|-------|----------|
-| La IA incluyo Django | No leyo bien los principios | Editar constitution.md y cambiar Django por Flask. O re-ejecutar con más enfasís |
-| Faltan principios de seguridad | El prompt fue muy largo y la IA se salto partes | Re-ejecutar solo la sección de seguridad |
-| El archivo está en inglés | No específicaste el idioma | Agregar al prompt: "Todo el documento debe estar en español" |
+| La IA incluyó Django | No leyó bien los principios | **Opción A:** Editar constitution.md y cambiar Django por Flask |
+| Faltan principios de seguridad | El prompt fue muy largo y la IA se saltó partes | **Opción B:** Re-ejecutar con más énfasis en la sección de seguridad |
+| El archivo está en inglés | No especificaste el idioma | **Opción A:** Agregar al archivo manualmente o re-ejecutar |
+| No menciona los colores Zenith | La IA ignoró la sección de identidad visual | **Opción A:** Agregar manualmente los colores y fuentes |
+| Falta algo que sí pediste en el prompt | La IA omitió algún punto | **Opción A:** Agregar manualmente lo que falta. Tú eres el dueño del documento |
 
 #### Ejercicio practico
 
