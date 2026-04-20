@@ -1764,88 +1764,140 @@ Los 7 CRUDs simples son paralelizables entre si (todos usan ApiService pero no d
 
 ### Ejecutar el comando
 
+> **Importante:** Este comando se ejecuta en el prompt `❯` de Claude Code CLI. No necesita prompt adicional.
+
 ```
 /speckit-tasks
 ```
 
-(No necesita prompt adicional — lee `spec.md` y `plan.md`)
+### Qué pasa cuando ejecutas el comando
 
-### Despues de ejecutar: como revisar el resultado
+Claude Code CLI va a:
+
+1. **Pedir permiso para ejecutar un script** de verificación de prerrequisitos. Selecciona `1. Yes`.
+2. **Trabajar 3-5 minutos** leyendo spec, plan, data-model y contracts para generar las tareas.
+3. **Pedir permiso para guardar** `tasks.md`. Selecciona `1. Yes`.
+4. **Mostrar un resumen** con el número total de tareas, fases y tareas paralelizables.
+
+### Después de ejecutar: cómo revisar el resultado
+
+La IA genera el archivo `specs/001-.../tasks.md`. Es el más largo de todos los artefactos — puede tener 80+ tareas.
 
 #### Cómo leer tasks.md
 
-Cada tarea debe tener:
+Las tareas están organizadas por **fases** que corresponden a las historias de usuario:
+
+| Fase | Contenido | Tareas |
+|------|-----------|--------|
+| **Phase 1: Setup** | Estructura de carpetas, requirements.txt, .env, .gitignore | T001-T005 |
+| **Phase 2: Foundational** | config, ApiService, AuthService, middleware, layout Zenith, componentes | T006-T021 |
+| **Phase 3: US1 — Login + RBAC** | AuthService, auth/home blueprints, middleware activo | T022-T032 |
+| **Phase 4: US2 — Facturación** | Blueprint factura + SPs + templates maestro-detalle | T033-T041 |
+| **Phase 5: US3 — 7 CRUDs** | Producto, Persona, Empresa, Cliente, Vendedor, Rol, Ruta | T042-T057 |
+| **Phase 6: US4 — Usuarios/Permisos** | Blueprints usuario + rutarol vía SPs | T058-T066 |
+| **Phase 7: US5 — Contraseñas** | Cambio + recuperación SMTP | T067-T073 |
+| **Phase 8: Polish** | Mermaid, docstrings, seguridad cookies, cobertura | T074-T080 |
+
+Cada tarea tiene el formato:
 
 ```markdown
-- [ ] Task N: Titulo descriptivo
-  - Depende de: Task X, Task Y
-  - Archivo(s): ruta/al/archivo.py
-  - Criterio: Cómo saber qué está terminada
+- [ ] T001 [P] [US1] Descripción con ruta exacta del archivo
 ```
+
+Donde:
+- `[P]` = Paralelizable (se puede hacer al mismo tiempo que otras marcadas con [P])
+- `[US1]` = Historia de usuario a la que pertenece
+
+> **Tests primero:** Observa que en cada historia, las tareas de **tests se escriben ANTES** que la implementación. Esto es TDD (Test-Driven Development) — primero escribes el test que falla, luego escribes el código que lo hace pasar.
+
+> **Checkpoints:** Al final de cada fase hay un checkpoint que indica qué se puede verificar de forma independiente. Ejemplo: "US1 completa. El MVP ya es desplegable."
+
+> **MVP sugerido:** La IA puede sugerir cuáles fases forman el MVP (Minimum Viable Product). Ejemplo: "Phase 1 + Phase 2 + Phase 3 = 32 tareas. Entrega autenticación + RBAC funcional."
 
 #### Verificar el orden lógico
 
-Preguntate para cada tarea: "Puedo hacer está tarea si las anteriores no están hechas?" Si la respuestá es "no", entonces la dependencia está correcta.
-
 ```mermaid
 graph TB
-    T1["1. Estructura Flask + config.py"]
-    T2["2. requirements.txt + venv"]
-    T3["3. ApiService genérico"]
-    T4["4. Layout base.html + Bootstrap"]
-    T5["5. AuthService (login, roles)"]
-    T6["6. Middleware (before_request)"]
-    T7["7. Blueprint auth (login/logout)"]
-    T8["8. email_service.py (SMTP)"]
-    T9["9. nav_menu.html (menú RBAC)"]
-    T10["10. Blueprint home"]
-    T11["11-17. CRUDs simples
-    producto, persona, empresa,
-    cliente, vendedor, rol, ruta"]
-    T18["18. Blueprint usuario + SPs"]
-    T19["19. Blueprint factura + SPs"]
-    T20["20. Tests"]
+    P1["Phase 1: Setup
+    T001-T005
+    Estructura + dependencias"]
+    P2["Phase 2: Foundational
+    T006-T021
+    Servicios + layout + middleware"]
+    P3["Phase 3: US1 Login+RBAC
+    T022-T032
+    MVP"]
+    P4["Phase 4: US2 Facturas
+    T033-T041
+    Maestro-detalle"]
+    P5["Phase 5: US3 CRUDs
+    T042-T057
+    7 catálogos"]
+    P6["Phase 6: US4 Usuarios
+    T058-T066
+    Admin + permisos"]
+    P7["Phase 7: US5 Contraseñas
+    T067-T073
+    Cambio + recuperación"]
+    P8["Phase 8: Polish
+    T074-T080
+    Docs + seguridad"]
 
-    T1 --> T2 --> T3
-    T3 --> T4
-    T3 --> T5
-    T4 --> T6
-    T5 --> T6
-    T6 --> T7
-    T7 --> T8
-    T6 --> T9
-    T9 --> T10
-    T10 --> T11
-    T11 --> T18
-    T18 --> T19
-    T19 --> T20
+    P1 --> P2
+    P2 --> P3
+    P3 --> P4
+    P3 --> P5
+    P3 --> P6
+    P3 --> P7
+    P4 --> P8
+    P5 --> P8
+    P6 --> P8
+    P7 --> P8
 
-    style T1 fill:#3b82f6,stroke:#1d4ed8,color:#fff
-    style T3 fill:#10b981,stroke:#059669,color:#fff
-    style T6 fill:#f59e0b,stroke:#d97706,color:#fff
-    style T19 fill:#ef4444,stroke:#dc2626,color:#fff
+    style P1 fill:#3b82f6,stroke:#1d4ed8,color:#fff
+    style P2 fill:#10b981,stroke:#059669,color:#fff
+    style P3 fill:#f59e0b,stroke:#d97706,color:#fff
+    style P4 fill:#ef4444,stroke:#dc2626,color:#fff
+    style P5 fill:#8b5cf6,stroke:#6d28d9,color:#fff
+    style P8 fill:#6366f1,stroke:#4f46e5,color:#fff
 ```
 
-#### Ejercicio practico
+> **Nota:** Las fases 4, 5, 6 y 7 son independientes entre sí (se pueden hacer en cualquier orden después de la fase 3). Todas convergen en la fase 8 (Polish).
+
+#### Checklist de revisión
+
+- [ ] ¿Cada historia de usuario (US1-US5) tiene sus propias tareas?
+- [ ] ¿Las tareas de tests aparecen ANTES de la implementación en cada historia?
+- [ ] ¿Cada tarea tiene la ruta exacta del archivo que se debe crear/modificar?
+- [ ] ¿Las tareas paralelizables están marcadas con `[P]`?
+- [ ] ¿Hay checkpoints al final de cada fase?
+- [ ] ¿La Phase 2 (Foundational) bloquea todas las historias? (debe ser así)
+- [ ] ¿Los 16 SPs están referenciados en las tareas correspondientes?
+- [ ] ¿El layout Zenith (colores, fuentes, iconos) tiene tarea específica?
+- [ ] ¿Hay tarea para registrar cada Blueprint en `app.py`?
+- [ ] ¿La fase de Polish incluye docstrings, Mermaid y seguridad de cookies?
+
+#### Ejercicio práctico
 
 Busca un error de dependencia en las tareas generadas. Ejemplo:
-- Si la Task 7 (Blueprint auth) aparece antes de la Task 6 (Middleware), eso es un error — el login necesita qué existan las rutas públicas definidas en el middleware.
+- Si la tarea de crear `routes/auth.py` aparece antes de la tarea de crear `services/auth_service.py`, eso es un error — el Blueprint necesita el servicio.
 
-Corrige el orden en tasks.md.
+Si encuentras un error, corrige el orden en tasks.md manualmente.
 
 #### Si el resultado no cumple tus expectativas
 
-| Problema | Opcion | Que hacer |
+| Problema | Opción | Qué hacer |
 |----------|--------|-----------|
-| El orden de dependencias es incorrecto | **A** (editar) | Reordenar manualmente en tasks.md. Tu conoces las dependencias mejor que la IA |
-| Hay tareas demasíado grandes (ej: "Crear todos los CRUDs") | **A** (editar) | Descomponer en tasks.md: una tarea por Blueprint |
-| Faltan tareas para requisitos de la spec | **B** (ejecutar `/analyze`) | El comando `/analyze` detecta gaps automáticamente. Luego agrega las tareas faltantes |
-| Las tareas no tienen criterios de completitud | **A** (editar) | Agregar a cada tarea una línea "Criterio: cómo saber qué está terminada" |
+| El orden de dependencias es incorrecto | **A** (editar) | Reordenar manualmente en tasks.md |
+| Hay tareas demasiado grandes | **A** (editar) | Descomponer: una tarea por archivo |
+| Faltan tareas para requisitos de la spec | Ejecutar `/speckit-analyze` | Detecta gaps automáticamente |
+| Los tests no están antes de la implementación | **A** (editar) | Mover los tests antes. TDD es obligatorio |
+| No hay checkpoints entre fases | **A** (editar) | Agregar un checkpoint al final de cada fase |
 
 ### Competencia adquirida
 
-> **Despues de completar está fase, ya sabes:**
-> Descomponer un proyecto en tareas manejables, ordenarlas por dependencia e identificar cuáles se pueden hacer en paralelo. Esto es lo que hace un **scrum master** o **tech lead** al planificar un sprint.
+> **Después de completar esta fase, ya sabes:**
+> Descomponer un proyecto de 80 tareas en fases ordenadas por dependencia, identificar tareas paralelizables, leer un plan TDD (tests primero) y entender qué es un MVP. Esto es lo que hace un **scrum master** o **tech lead** al planificar un sprint.
 
 ---
 
