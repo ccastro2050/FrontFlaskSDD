@@ -696,6 +696,62 @@ dir .specify
 
 **Si pegas el prompt de `/speckit-constitution` directamente en PowerShell, da error.** PowerShell interpreta cada línea como un comando del sistema operativo. Los comandos SDD van dentro de Claude Code (ya sea en el CLI o en la extensión de VS Code).
 
+### Ramas de Git: Spec Kit crea ramas automáticamente
+
+> **Importante:** A partir de la Fase 1 (`/speckit-specify`), Spec Kit crea una **rama de Git** para la feature. Esto significa que tus cambios ya no van directamente a `main` sino a una rama como `001-sistema-ventas-rbac`.
+
+**¿Qué es una rama de Git?**
+
+Una rama es como una "copia paralela" de tu proyecto. Puedes hacer cambios en la rama sin afectar la versión principal (`main`). Cuando estés satisfecho con los cambios, los "fusionas" (merge) de vuelta a `main`.
+
+```mermaid
+graph LR
+    M1["main
+    (versión principal)"]
+    F1["001-sistema-ventas-rbac
+    (rama de feature)"]
+    M2["main
+    (con los cambios)"]
+
+    M1 -->|"Spec Kit crea rama"| F1
+    F1 -->|"git merge"| M2
+```
+
+**¿Cómo saber en qué rama estás?**
+
+```bash
+# En PowerShell:
+git branch
+# La rama actual tiene un * al lado
+# Ejemplo:
+#   * 001-sistema-ventas-rbac
+#     main
+```
+
+**¿Cómo pasar los cambios a main?**
+
+Después de cada fase (o cuando quieras), fusiona la rama a main y haz push:
+
+```bash
+# 1. Guardar cambios en la rama actual
+git add .
+git commit -m "tu mensaje"
+
+# 2. Cambiar a main
+git checkout main
+
+# 3. Fusionar la rama de feature a main
+git merge 001-sistema-ventas-rbac
+
+# 4. Subir a GitHub
+git push origin main
+
+# 5. Volver a la rama de feature para seguir trabajando
+git checkout 001-sistema-ventas-rbac
+```
+
+> **Cuándo mergear a main:** Después de cada fase completada (constitution, specify, plan, tasks) o al final de todas las fases. Lo importante es que main tenga la versión más reciente para que GitHub esté actualizado.
+
 ### Abrir Claude Code CLI (primera vez)
 
 La primera vez que abres Claude Code CLI, te hace varias preguntas de configuración. Las siguientes veces se abre directamente.
@@ -1947,31 +2003,77 @@ Un **gap** es algo qué falta. Ejemplos:
 
 ### Ejecutar el comando
 
+> **Importante:** Este comando se ejecuta en el prompt `❯` de Claude Code CLI. No necesita prompt adicional.
+
 ```
 /speckit-analyze
 ```
 
-### Despues de ejecutar: cómo interpretar el reporte
+### Qué pasa cuando ejecutas el comando
 
-El reporte mostrará:
-- **Gaps:** requisitos sin tareas, tareas sin requisitos
-- **Contradicciones:** reglas violadas, inconsistencias entre documentos
-- **Sugerencias:** mejoras o puntos a clarificar
+1. **Pide permiso** para ejecutar un script de verificación. Selecciona `1. Yes`.
+2. **Piensa 1-3 minutos** — verás mensajes como "Thinking", "Lollygagging", "Consulting the rubber duck". Es normal, está procesando muchos archivos.
+3. **Genera un reporte** con findings clasificados por severidad.
 
-**Accion:** Corrige cada gap y contradiccion directamente en los archivos correspondientes. Luego re-ejecuta `/analyze` hasta que no haya errores.
+### Después de ejecutar: cómo interpretar el reporte
+
+El reporte clasifica cada hallazgo (finding) por **severidad**:
+
+| Severidad | Significado | Acción |
+|-----------|------------|--------|
+| **CRITICAL** | Viola un principio de la constitution. Bloquea el implement | Corregir ANTES de implementar |
+| **HIGH** | Requisito sin tarea o cobertura incompleta | Agregar tareas o expandir existentes |
+| **MEDIUM** | Edge case sin test, ambigüedad menor | Corregir cuando se pueda |
+| **LOW** | Inconsistencia de texto, duplicación aceptable | Ajustar si hay tiempo |
+
+Y cada finding tiene:
+
+| Campo | Ejemplo |
+|-------|---------|
+| **ID** | C1, G1, G2, A1, I1... |
+| **Category** | Constitution Alignment, Coverage Gap, Ambiguity, Inconsistency, Duplication |
+| **Severity** | CRITICAL, HIGH, MEDIUM, LOW |
+| **Location(s)** | Archivos y líneas donde está el problema |
+| **Summary** | Qué encontró |
+| **Recommendation** | Cómo solucionarlo |
+
+Al final del reporte hay una **tabla de cobertura** que muestra qué porcentaje de requisitos funcionales (FR) y criterios de éxito (SC) tienen tareas asignadas.
+
+#### Conversación con Claude Code CLI para corregir
+
+> **Esto es clave:** Después de que el analyze termina, el prompt `❯` vuelve a aparecer. No solo puedes ejecutar otro slash command — puedes **conversar** con Claude Code CLI para pedirle que corrija los findings.
+
+Ejemplo real:
+
+```
+❯ Sí, propón las ediciones concretas para C1, G1 y G2
+```
+
+Claude Code te muestra los diffs exactos (qué buscar y qué reemplazar en tasks.md) y te pregunta si quieres aplicarlos. Si dices "sí", los aplica automáticamente.
+
+> **Esto es parte del rol del Desarrollador con IA:** No solo ejecutas comandos — conversas con la IA para refinar los resultados. Le pides que proponga soluciones, revisas las propuestas y decides cuáles aplicar.
+
+#### Checklist de revisión del analyze
+
+- [ ] ¿Hay 0 findings CRITICAL? (si hay alguno, hay que resolverlo antes de implementar)
+- [ ] ¿Los findings HIGH tienen recomendación concreta?
+- [ ] ¿La cobertura FR es 100%?
+- [ ] ¿La cobertura SC buildable es ≥90%?
+- [ ] ¿Las correcciones propuestas son coherentes con la constitution?
 
 #### Si el resultado no cumple tus expectativas
 
-| Problema | Opcion | Que hacer |
+| Problema | Opción | Qué hacer |
 |----------|--------|-----------|
-| El analyze no detecto gaps que tu si ves | **A** (editar) | Corregir los archivos (spec, plan, tasks) manualmente con los gaps qué encontraste |
-| El analyze reporta demasiados falsos positivos | **A** (ignorar) | Evaluar cada reporte con criterio. No todo lo que la IA marca como gap es realmente un problema |
-| Despues de corregir, el analyze sigue reportando errores | **B** (re-ejecutar) | Puede ser que los archivos quedaron inconsistentes al editar. Re-ejecutar la fase anterior (ej: `/tasks`) para regenerar |
+| El analyze no detectó gaps que tú sí ves | **A** (editar) | Corregir los archivos (spec, plan, tasks) manualmente |
+| El analyze reporta demasiados falsos positivos | Evaluar con criterio | No todo lo que marca es un problema real |
+| Después de corregir, el analyze sigue reportando errores | Re-ejecutar `/speckit-analyze` | Confirma que las correcciones cerraron los findings |
+| Las correcciones propuestas no te convencen | Conversar | Escribe en el prompt `❯` qué no te gusta y pide alternativas |
 
 ### Competencia adquirida
 
-> **Despues de completar está fase, ya sabes:**
-> Auditar documentación técnica y encontrar inconsistencias. Sabes que un proyecto profesional requiere qué sus documentos "cuadren" entre si. Esto es lo que hace un **QA analyst** o un **auditor técnico**.
+> **Después de completar esta fase, ya sabes:**
+> Auditar documentación técnica, interpretar reportes de consistencia con severidades, y conversar con la IA para pedirle correcciones concretas. Sabes que un CRITICAL bloquea todo y que la cobertura de requisitos debe ser 100%. Esto es lo que hace un **QA analyst** o **auditor técnico**.
 
 ---
 
