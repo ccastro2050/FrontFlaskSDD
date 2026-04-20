@@ -571,15 +571,81 @@ Choose your AI assistant:
 ```
 Usa las flechas arriba/abajo para llegar a `claude (Claude Code)` y presiona Enter.
 
-> **Si da error "claude not found":** Significa que Claude Code CLI no se instaló correctamente en el Paso 2. Verifica con `claude --version`. Si no funciona, cierra y abre PowerShell y reintenta.
+> **Si da error "claude not found":** Significa que Claude Code CLI no se instaló correctamente en el paso anterior. Verifica con `claude --version`. Si no funciona, cierra y abre PowerShell y reintenta.
+
+**Paso 3 — Resultado esperado:**
+
+Si todo salió bien, deberías ver algo como esto:
+
+```
+Selected AI assistant: claude
+Selected script type: ps
+Initialize Specify Project
+├── ● Check required tools (ok)
+├── ● Select AI assistant (claude)
+├── ● Select script type (ps)
+├── ● Install integration (Claude Code)
+├── ● Install shared infrastructure (scripts (ps) + templates)
+├── ○ Ensure scripts executable
+├── ● Constitution setup (copied from template)
+├── ● Install git extension (existing repo detected; extension installed)
+├── ● Install bundled workflow (speckit installed)
+└── ● Finalize (project ready)
+
+Project ready.
+```
+
+Luego aparece una **advertencia de seguridad**:
+
+```
+Agent Folder Security
+Some agents may store credentials, auth tokens, or other
+identifying and private artifacts in the agent folder within
+your project.
+Consider adding .claude/ (or parts of it) to .gitignore to
+prevent accidental credential leakage.
+```
+
+Esto significa que la carpeta `.claude/` puede contener credenciales que no deben subirse a GitHub. Por eso la agregamos al `.gitignore` en el paso anterior.
+
+Luego aparecen los **próximos pasos** con los comandos disponibles:
+
+```
+Next Steps
+1. You're already in the project directory!
+2. Start Claude in this project directory; spec-kit skills
+   were installed to .claude/skills
+3. Start using skills with your AI agent:
+   3.1 /speckit-constitution - Establish project principles
+   3.2 /speckit-specify - Create baseline specification
+   3.3 /speckit-plan - Create implementation plan
+   3.4 /speckit-tasks - Generate actionable tasks
+   3.5 /speckit-implement - Execute implementation
+```
+
+Y los **skills opcionales** (de mejora de calidad):
+
+```
+Enhancement Skills
+○ /speckit-clarify (optional) - Ask structured questions to
+  de-risk ambiguous areas before planning
+○ /speckit-analyze (optional) - Cross-artifact consistency &
+  alignment report
+○ /speckit-checklist (optional) - Generate quality checklists
+  to validate requirements completeness
+```
+
+> **¿Qué significa todo esto?** Que Spec Kit instaló los skills (comandos) en la carpeta `.claude/skills` y que ahora puedes usarlos dentro de Claude Code CLI. Los 5 skills principales son obligatorios (constitution → specify → plan → tasks → implement) y los 3 opcionales (clarify, analyze, checklist) mejoran la calidad del resultado.
 
 **Paso 4 — Verificar que Spec Kit se instaló:**
 
-Deberías ver una nueva carpeta `.specify/` en tu proyecto:
+Deberías ver nuevas carpetas `.specify/` y `.claude/` en tu proyecto:
 
 ```
 FrontFlaskSDD/
-├── .specify/               # Carpeta de Spec Kit (templates, scripts, config)
+├── .claude/                # Claude Code (skills, configuración)
+│   └── skills/             # Los slash commands de Spec Kit
+├── .specify/               # Spec Kit (templates, scripts, config)
 │   ├── templates/
 │   ├── scripts/
 │   └── config.yaml
