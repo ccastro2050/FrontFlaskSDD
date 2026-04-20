@@ -1240,36 +1240,228 @@ pytest==9.0.3
 
 **Qué es:** El framework de testing más popular de Python. Permite escribir tests simples y expresivos.
 
-**Ejemplo:**
-
-```python
-# tests/test_ejemplo.py
-def test_suma():
-    assert 2 + 2 == 4       # Pasa: 2+2 sí es 4
-
-def test_resta():
-    assert 10 - 3 == 7      # Pasa: 10-3 sí es 7
-```
-
-**Ejecutar tests:**
-
-```bash
-pytest                       # Ejecutar todos los tests
-pytest tests/test_auth.py    # Ejecutar solo un archivo
-pytest -v                    # Ver detalle de cada test
-```
-
 **Instalación:** `pip install pytest`
 
 **Sitio oficial:** [docs.pytest.org](https://docs.pytest.org/)
 
+### Anatomía de un test — Qué contiene un archivo de test
+
+Un archivo de test tiene funciones que verifican que el código hace lo que se espera. Cada función es un "caso de prueba":
+
+```python
+# tests/unit/test_validadores_contrasena.py
+"""
+Tests unitarios para la función validar_contrasena_nueva.
+Cada función test_ verifica UN comportamiento específico.
+"""
+
+def test_contrasena_muy_corta():
+    """Una contraseña de menos de 6 caracteres debe ser rechazada."""
+    resultado = validar_contrasena_nueva("Ab1")
+    assert resultado is not None          # assert = "afirmo que esto es verdad"
+    assert "6 caracteres" in resultado    # El mensaje debe indicar el motivo
+
+def test_contrasena_sin_mayuscula():
+    """Una contraseña sin mayúsculas debe ser rechazada."""
+    resultado = validar_contrasena_nueva("abc123")
+    assert resultado is not None
+    assert "mayúscula" in resultado
+
+def test_contrasena_sin_numero():
+    """Una contraseña sin números debe ser rechazada."""
+    resultado = validar_contrasena_nueva("Abcdef")
+    assert resultado is not None
+    assert "número" in resultado
+
+def test_contrasena_valida():
+    """Una contraseña que cumple todas las reglas debe ser aceptada."""
+    resultado = validar_contrasena_nueva("Abc123")
+    assert resultado is None              # None = sin errores = válida
+```
+
+**Anatomía de cada test:**
+
+| Parte | Ejemplo | Qué es |
+|-------|---------|--------|
+| **Nombre** | `test_contrasena_muy_corta` | Siempre empieza con `test_`. Describe qué verifica |
+| **Docstring** | `"""Una contraseña de menos de 6...```""` | Explicación en español de qué se prueba |
+| **Acción** | `resultado = validar_contrasena_nueva("Ab1")` | Ejecuta la función que quieres probar |
+| **Aserción** | `assert resultado is not None` | Verifica que el resultado sea el esperado |
+
+> **`assert`** es la palabra clave de Python para "afirmo que esto es verdad". Si la afirmación es falsa, el test **falla**. Si es verdadera, el test **pasa**.
+
+### Test de integración — Ejemplo real del proyecto
+
+Un test de integración prueba que el frontend se conecta correctamente a la API real:
+
+```python
+# tests/integration/test_producto.py
+"""
+Tests de integración para el CRUD de producto.
+Estos tests llaman a la API REAL (no mocks).
+La API debe estar corriendo en localhost:5035.
+"""
+
+def test_listar_productos(client):
+    """Al visitar /productos, debe mostrar la tabla con datos."""
+    # 1. Hacer login primero (simula un usuario autenticado)
+    client.post('/login', data={'email': 'admin@zenith.test', 'contrasena': 'Admin123'})
+
+    # 2. Visitar la página de productos
+    respuesta = client.get('/productos')
+
+    # 3. Verificar que respondió 200 (OK)
+    assert respuesta.status_code == 200
+
+    # 4. Verificar que el HTML contiene datos de productos
+    html = respuesta.data.decode('utf-8')
+    assert 'PR001' in html          # El código del producto aparece
+    assert 'Laptop' in html         # El nombre del producto aparece
+
+def test_crear_producto(client):
+    """Al enviar el formulario de crear, el producto debe aparecer en la lista."""
+    client.post('/login', data={'email': 'admin@zenith.test', 'contrasena': 'Admin123'})
+
+    # Crear un producto de prueba
+    respuesta = client.post('/productos/nuevo', data={
+        'codigo': 'TEST01',
+        'nombre': 'Producto Test',
+        'stock': '10',
+        'valorunitario': '50000'
+    }, follow_redirects=True)
+
+    assert respuesta.status_code == 200
+    assert 'Producto Test' in respuesta.data.decode('utf-8')
+```
+
+### Cómo leer un resultado de pytest
+
+Cuando ejecutas `pytest -v`, ves algo como esto:
+
+```
+tests/unit/test_validadores_contrasena.py::test_contrasena_muy_corta PASSED
+tests/unit/test_validadores_contrasena.py::test_contrasena_sin_mayuscula PASSED
+tests/unit/test_validadores_contrasena.py::test_contrasena_sin_numero PASSED
+tests/unit/test_validadores_contrasena.py::test_contrasena_valida PASSED
+tests/integration/test_producto.py::test_listar_productos PASSED
+tests/integration/test_producto.py::test_crear_producto FAILED
+
+====== 5 passed, 1 failed in 3.2s ======
+```
+
+| Resultado | Qué significa | Qué hacer |
+|-----------|--------------|-----------|
+| **PASSED** ✅ | El test pasó — el código hace lo que se espera | Nada. Está bien |
+| **FAILED** ❌ | El test falló — el código NO hace lo que se espera | Leer el error, encontrar el bug y corregirlo |
+| **ERROR** ⚠️ | El test no pudo ejecutarse (error de importación, archivo faltante) | Revisar que el archivo existe y que las importaciones están correctas |
+| **SKIPPED** ⏭️ | El test se saltó (marcado con `@pytest.mark.skip`) | Normal si hay tests que necesitan condiciones especiales |
+
+**Cuando un test falla, pytest muestra:**
+
+```
+FAILED tests/integration/test_producto.py::test_crear_producto
+    AssertionError: assert 'Producto Test' in '<html>...'
+    El HTML no contiene "Producto Test" — el producto no se creó.
+```
+
+Eso te dice: qué archivo falló, qué línea, qué se esperaba y qué ocurrió realmente.
+
+### Ejecutar tests
+
+```bash
+# Ejecutar TODOS los tests
+pytest
+
+# Ejecutar con detalle (ver cada test por nombre)
+pytest -v
+
+# Ejecutar solo un archivo
+pytest tests/unit/test_validadores_contrasena.py
+
+# Ejecutar solo tests de integración
+pytest tests/integration/ -v
+
+# Ejecutar excluyendo tests de performance (que son lentos)
+pytest -m "not performance"
+
+# Ver solo los tests que fallaron (útil cuando hay muchos)
+pytest --tb=short
+```
+
+### TDD — Test-Driven Development (Tests primero)
+
+**Qué es:** Una práctica donde escribes el test **ANTES** del código. Primero defines qué debe hacer el código (el test), y luego escribes el código que hace pasar el test.
+
+**Analogía:** Es como escribir las preguntas del examen antes de estudiar. Si sabes qué preguntas van a hacer, estudias exactamente lo necesario.
+
+```mermaid
+graph LR
+    T1["1. Escribir el test
+    (define qué debe hacer)"]
+    T2["2. Ejecutar — FALLA
+    (el código no existe aún)"]
+    T3["3. Escribir el código
+    (el mínimo para pasar)"]
+    T4["4. Ejecutar — PASA
+    (el test verifica que funciona)"]
+    T5["5. Refactorizar
+    (mejorar sin romper)"]
+
+    T1 --> T2 --> T3 --> T4 --> T5
+    T5 -->|"Siguiente test"| T1
+
+    style T2 fill:#ef4444,stroke:#dc2626,color:#fff
+    style T4 fill:#22c55e,stroke:#16a34a,color:#fff
+```
+
+**En nuestro proyecto:** Los tasks.md están organizados con TDD — en cada historia de usuario, las tareas de tests aparecen **ANTES** de las tareas de implementación. Ejemplo:
+
+```
+Phase 3: US1 — Login + RBAC
+- [ ] T022 [P] [US1] Escribir tests/integration/test_auth.py    ← TEST PRIMERO
+- [ ] T023 [P] [US1] Escribir tests/integration/test_rbac.py    ← TEST PRIMERO
+- [ ] T024 [US1] Implementar AuthService.login(...)              ← CÓDIGO DESPUÉS
+- [ ] T025 [US1] Implementar AuthService.cargar_roles_y_rutas(...)
+...
+```
+
+### Cómo la IA genera y ejecuta los tests durante /speckit-implement
+
+Durante la implementación, Claude Code CLI:
+
+1. **Lee las tareas de test** del tasks.md (ej: T022, T023)
+2. **Genera los archivos de test** (ej: `tests/integration/test_auth.py`)
+3. **Implementa el código** que debe pasar esos tests (ej: `services/auth_service.py`)
+4. **Ejecuta pytest automáticamente** para verificar
+5. **Si un test falla**, lee el error, modifica el código y re-ejecuta
+6. **Repite** hasta que todos los tests pasen
+
+Verás en la terminal mensajes como:
+
+```
+● Bash(pytest tests/unit -v)
+  ⎿  8 passed in 1.2s
+
+● Bash(pytest tests/integration/test_auth.py -v)
+  ⎿  5 passed, 1 failed
+
+● Fixing test_login_credenciales_invalidas...
+  ⎿  Modified services/auth_service.py
+
+● Bash(pytest tests/integration/test_auth.py -v)
+  ⎿  6 passed in 2.1s
+```
+
+> **Esto es el ciclo TDD automatizado:** La IA escribe test → ejecuta → falla → corrige código → ejecuta → pasa. Es exactamente lo que haría un programador humano, pero más rápido.
+
 ### Test unitario vs Test de integración vs Test de aceptación
 
-| Tipo | Qué verifica | Quién lo hace | Ejemplo |
-|------|-------------|---------------|---------|
-| **Unitario** | Una función individual funciona | Programador | `listar("producto")` retorna una lista |
-| **Integración** | Dos componentes funcionan juntos | Programador | El Blueprint de producto llama al ApiService y obtiene datos |
-| **Aceptación** | La funcionalidad cumple lo que pidió el usuario | Usuario/QA | "Puedo crear una factura con 3 productos y el total se calcula bien" |
+| Tipo | Qué verifica | Quién lo hace | Ejemplo en nuestro proyecto |
+|------|-------------|---------------|---------------------------|
+| **Unitario** | Una función individual funciona | Programador / IA | `test_contrasena_muy_corta()` — verifica que `validar_contrasena_nueva("Ab1")` rechaza |
+| **Integración** | Dos componentes funcionan juntos contra la API real | Programador / IA | `test_listar_productos()` — verifica que `/productos` llama a la API y renderiza HTML |
+| **Aceptación** | La funcionalidad cumple lo que pidió el usuario | Usuario / QA | "Puedo crear una factura con 3 productos y el total se calcula correctamente" |
+| **Performance** | El sistema cumple tiempos de respuesta | Programador / IA | `test_login_menor_5s()` — verifica que el login tarda menos de 5 segundos (SC-002) |
 
 ### Mocks vs Tests reales
 
@@ -1278,7 +1470,7 @@ pytest -v                    # Ver detalle de cada test
 | **Mock** | Simula la API sin llamarla realmente | Rápido, no necesita API corriendo | No detecta errores reales de la API |
 | **Test real** | Llama a la API real | Detecta errores reales | Más lento, necesita API + BD corriendo |
 
-**En nuestro proyecto:** Usamos tests reales (contra la API real) porque los mocks pueden enmascarar bugs reales.
+**En nuestro proyecto:** La constitution (Principio V) dice "tests de integración contra la API real, no mocks". Esto significa que para correr los tests, la API debe estar corriendo en `localhost:5035` con la BD configurada.
 
 ---
 

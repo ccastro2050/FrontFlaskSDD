@@ -2285,6 +2285,48 @@ Abre `http://127.0.0.1:5000` en el navegador y prueba:
 3. **CRUDs:** Probar listar, crear, editar, eliminar en Productos, Personas, etc.
 4. **Facturas:** Crear, ver detalle, anular
 
+### Qué pasa con los tests durante la implementación
+
+Durante `/speckit-implement`, la IA no solo genera código — también genera y ejecuta **tests automáticamente**. Esto es parte del flujo TDD (Test-Driven Development) que definimos en los tasks.
+
+**Lo que verás en la terminal de Claude Code CLI:**
+
+```
+● Bash(pytest tests/unit -v)
+  ⎿  8 passed in 1.2s                    ← Tests unitarios pasaron
+
+● Bash(pytest tests/integration/test_auth.py -v)
+  ⎿  5 passed, 1 failed                  ← Un test de integración falló
+
+● Fixing test_login_credenciales_invalidas...
+  ⎿  Modified services/auth_service.py    ← La IA corrige el código
+
+● Bash(pytest tests/integration/test_auth.py -v)
+  ⎿  6 passed in 2.1s                    ← Ahora todos pasan
+```
+
+**El ciclo que repite la IA:**
+
+1. Escribe el test (define qué debe hacer el código)
+2. Ejecuta → **FALLA** (el código aún no existe o tiene bug)
+3. Escribe/corrige el código
+4. Ejecuta → **PASA**
+5. Siguiente test
+
+Este ciclo se repite decenas de veces durante la implementación. Por eso tarda 20-30 minutos.
+
+**Resultado final:**
+
+Al terminar, la IA muestra un resumen como:
+
+```
+Tests totales: 75 ✅ 0 ❌ (incluyendo 2 de performance)
+```
+
+Esto significa que los 75 tests pasaron. Si alguno falla, la IA intenta corregirlo. Si no puede, lo reporta como pendiente.
+
+> **Para más detalle sobre qué es un test, cómo leer los resultados de pytest y qué es TDD:** Consulta la sección "Testing" en el [Glosario de Conceptos (03)](03_Glosario_Conceptos.md#9-testing).
+
 ### Los errores son normales — cómo corregirlos
 
 > **Lección importante:** El código generado por la IA **NUNCA** funciona perfecto a la primera. Siempre hay errores que hay que corregir. Esto es normal y esperado — es parte del trabajo del Desarrollador con IA.
